@@ -13,12 +13,14 @@ export default function ProductCard({ product }: { product: Product }) {
     <div className="product-card group bg-white/40 backdrop-blur-sm border border-[#5c1a25]/10 overflow-hidden">
       {/* Image container */}
       <div className="relative aspect-square overflow-hidden bg-[#f5f0ea]">
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-700"
-        />
+        <Link href={`/product/${product.id}`} className="absolute inset-0 z-0">
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+        </Link>
 
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">

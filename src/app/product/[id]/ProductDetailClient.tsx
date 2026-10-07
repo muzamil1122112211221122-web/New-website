@@ -10,8 +10,10 @@ export default function ProductDetailClient({ product }: { product: any }) {
   const [adding, setAdding] = useState(false);
   const [added, setAdded] = useState(false);
 
-  const images = [product.image, ...(product.images || [])];
+  const images = Array.from(new Set([product.image, ...(product.images || [])]));
   const [activeImage, setActiveImage] = useState(images[0]);
+  const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
+  const [isZooming, setIsZooming] = useState(false);
 
   const handleAdd = () => {
     setAdding(true);
@@ -23,14 +25,21 @@ export default function ProductDetailClient({ product }: { product: any }) {
     }, 500);
   };
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    setZoomPos({ x, y });
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
         
         {/* Left: Images */}
         <div className="flex flex-col-reverse md:flex-row gap-4">
-          <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible no-scrollbar">
-            {images.map((img, i) => (
+          <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible no-scrollbar pb-2 md:pb-0">
+            {images.map((img: any, i) => (
               <button
                 key={i}
                 onClick={() => setActiveImage(img)}
@@ -40,8 +49,20 @@ export default function ProductDetailClient({ product }: { product: any }) {
               </button>
             ))}
           </div>
-          <div className="relative aspect-square flex-1 bg-white/40 border border-[#5c1a25]/10">
-            <Image src={activeImage} alt={product.name} fill className="object-cover" priority />
+          <div 
+            className="relative aspect-square flex-1 bg-white/40 border border-[#5c1a25]/10 overflow-hidden cursor-crosshair group"
+            onMouseEnter={() => setIsZooming(true)}
+            onMouseLeave={() => setIsZooming(false)}
+            onMouseMove={handleMouseMove}
+          >
+            <Image 
+              src={activeImage} 
+              alt={product.name} 
+              fill 
+              className={`object-cover transition-transform duration-200 ease-out ${isZooming ? 'scale-150' : 'scale-100'}`} 
+              style={{ transformOrigin: `${zoomPos.x}% ${zoomPos.y}%` }}
+              priority 
+            />
             {product.is_best_seller && (
               <span className="absolute top-4 left-4 bg-[#c9a96e] text-white px-3 py-1 text-xs tracking-wider uppercase font-medium">Best Seller</span>
             )}
