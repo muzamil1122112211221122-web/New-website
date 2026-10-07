@@ -393,16 +393,33 @@ export default function AdminDashboard() {
             <form onSubmit={handleSaveProduct} className="p-6 overflow-y-auto space-y-4">
               <div className="flex gap-6">
                 <div className="w-40 flex flex-col gap-2">
-                  <div className="aspect-square bg-gray-100 rounded-lg relative overflow-hidden border">
-                    {editingProduct.image && <Image src={editingProduct.image} alt="preview" fill className="object-cover" />}
+                  <label className="block text-xs font-bold text-gray-500 uppercase">Product Images</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {editingProduct.images?.map((imgUrl: string, idx: number) => (
+                      <div key={idx} className="aspect-square bg-gray-100 rounded relative overflow-hidden border group">
+                        <Image src={imgUrl} alt="preview" fill className="object-cover" />
+                        <button type="button" onClick={() => {
+                          const newImgs = [...(editingProduct.images || [])];
+                          newImgs.splice(idx, 1);
+                          setEditingProduct({...editingProduct, images: newImgs, image: newImgs[0] || ''});
+                        }} className="absolute inset-0 bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                          <X size={16} />
+                        </button>
+                      </div>
+                    ))}
+                    <label className="aspect-square bg-gray-50 border border-dashed rounded flex flex-col items-center justify-center cursor-pointer text-gray-400 hover:text-[#5c1a25] hover:bg-gray-100 transition-colors">
+                      <Plus size={20} />
+                      <span className="text-[10px] uppercase font-bold mt-1">Add</span>
+                      <input type="file" accept="image/*" className="hidden" onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if(file) handleImageUpload(file, (b64) => {
+                          const newImgs = [...(editingProduct.images || []), b64];
+                          setEditingProduct({...editingProduct, images: newImgs, image: newImgs[0] || ''});
+                        });
+                      }} />
+                    </label>
                   </div>
-                  <label className="bg-gray-100 border text-center py-1.5 rounded cursor-pointer text-sm hover:bg-gray-200">
-                    Upload Photo
-                    <input type="file" accept="image/*" className="hidden" onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if(file) handleImageUpload(file, (b64) => setEditingProduct({...editingProduct, image: b64, images: [b64]}));
-                    }} />
-                  </label>
+                  <p className="text-[10px] text-gray-400 leading-tight">First image will be the primary thumbnail.</p>
                 </div>
                 <div className="flex-1 space-y-4">
                   <div>

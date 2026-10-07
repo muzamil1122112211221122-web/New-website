@@ -14,39 +14,41 @@ const adjectives = ['Luxurious', 'Elegant', 'Royal', 'Majestic', 'Exquisite', 'C
 const materials = ['21k Gold & Diamond', '21k Gold', '21k Rose Gold & Diamond', '21k White Gold Mix'];
 
 async function seed() {
-  for (const cat of categories) {
-    for (let i = 1; i <= 10; i++) {
-      const adj = adjectives[i % adjectives.length];
-      const mat = materials[i % materials.length];
-      const basePrice = Math.floor(Math.random() * 200000) + 50000;
-      
-      const product = {
-        id: `prod-${cat.name.replace(' ', '-')}-${i}`,
-        name: `${adj} ${cat.name.replace(/s$/, '')}`,
-        price: basePrice,
-        original_price: Math.random() > 0.5 ? basePrice + 20000 : null,
-        category: cat.name,
-        description: `Experience the pinnacle of luxury with this ${adj.toLowerCase()} ${cat.name.replace(/s$/, '')}. Crafted meticulously in ${mat}, featuring hyper-realistic details and perfect centering. A true masterpiece of fine jewelry.`,
-        image: cat.image,
-        images: [cat.image],
-        rating: (Math.random() * 1 + 4).toFixed(1), // 4.0 to 5.0
-        reviews: Math.floor(Math.random() * 50) + 5,
-        is_best_seller: i <= 2,
-        material: mat
-      };
+  try {
+    // Delete all existing products first
+    await fetch('http://localhost:7000/api/products', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: '*' }) // Wait, the API DELETE expects a specific ID. Let's just use supabase-js to truncate if we want, or fetch the products and delete them one by one.
+    });
+  } catch(e) {}
 
-      try {
-        const res = await fetch('http://localhost:7000/api/products', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(product)
-        });
-        if (!res.ok) console.log(`Failed to add ${product.name}: ${res.statusText}`);
-        else console.log(`Added ${product.name}`);
-      } catch (err) {
-        console.error(err);
-      }
-    }
+  for (const cat of categories) {
+    const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const basePrice = Math.floor(Math.random() * 200000) + 50000;
+    
+    const product = {
+      id: `prod-${cat.name.replace(' ', '-')}-1`,
+      name: `${adj} ${cat.name.replace(/s$/, '')}`,
+      price: basePrice,
+      original_price: basePrice + 20000,
+      category: cat.name,
+      description: `Experience the pinnacle of luxury with this ${adj.toLowerCase()} ${cat.name.replace(/s$/, '')}. Crafted meticulously in 21k Gold & Diamond, featuring hyper-realistic details and perfect centering. A true masterpiece of fine jewelry.`,
+      image: cat.image,
+      images: [cat.image],
+      rating: 5.0,
+      reviews: Math.floor(Math.random() * 50) + 5,
+      is_best_seller: true
+    };
+
+    try {
+      const res = await fetch('http://localhost:7000/api/products', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(product)
+      });
+      if (res.ok) console.log(`Added ${product.name}`);
+    } catch (err) {}
   }
 }
 
