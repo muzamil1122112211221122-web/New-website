@@ -9,6 +9,12 @@ export default function LoadingScreen() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // Start preloading canvas frames in background
+    for (let i = 0; i < 240; i++) {
+      const img = new window.Image();
+      img.src = `/frames2/ezgif-frame-${String(i + 1).padStart(3, '0')}.jpg`;
+    }
+
     // Animate progress bar
     const interval = setInterval(() => {
       setProgress((p) => {

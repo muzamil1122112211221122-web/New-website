@@ -22,15 +22,15 @@ export default function ProductCard({ product }: { product: Product }) {
 
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
-          {product.isNew && (
+          {(product.isNew || product.is_new) && (
             <span className="badge bg-[#5c1a25] text-[#EFE9E1]">New</span>
           )}
-          {product.isBestSeller && (
+          {(product.isBestSeller || product.is_best_seller) && (
             <span className="badge bg-[#c9a96e] text-white">Best Seller</span>
           )}
-          {product.originalPrice && (
+          {(product.originalPrice || product.original_price) && (
             <span className="badge bg-red-500 text-white">
-              {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% Off
+              {Math.round((((product.originalPrice || product.original_price) - product.price) / (product.originalPrice || product.original_price)) * 100)}% Off
             </span>
           )}
         </div>
@@ -92,14 +92,14 @@ export default function ProductCard({ product }: { product: Product }) {
             <Star
               key={i}
               size={11}
-              className={i < Math.floor(product.rating) ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'}
+              className={i < Math.floor(product.rating || 5) ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'}
             />
           ))}
           <span
             className="text-[#5c1a25]/40 ml-1.5"
             style={{ fontFamily: 'Optima, sans-serif', fontSize: '10px' }}
           >
-            ({product.reviews})
+            ({product.reviews || 0})
           </span>
         </div>
 
@@ -115,12 +115,12 @@ export default function ProductCard({ product }: { product: Product }) {
           >
             Rs. {product.price.toLocaleString()}
           </span>
-          {product.originalPrice && (
+          {(product.originalPrice || product.original_price) && (
             <span
               className="text-[#5c1a25]/35 line-through"
               style={{ fontFamily: 'Optima, sans-serif', fontSize: '12px' }}
             >
-              Rs. {product.originalPrice.toLocaleString()}
+              Rs. {(product.originalPrice || product.original_price).toLocaleString()}
             </span>
           )}
         </div>
