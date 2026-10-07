@@ -1,26 +1,204 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #EFE9E1;
+  --secondary: #5c1a25;
+  --secondary-dark: #3e1019;
+  --secondary-light: #7a2535;
+  --gold: #c9a96e;
+  --gold-light: #e8d5a3;
+  --dark: #1a0a0d;
+  --text: #2c1810;
+  --font-optima: 'Optima Nova LT Pro', 'Optima', 'Gill Sans MT', Calibri, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Optima Nova LT Pro @font-face ──────────────────────────── */
+@font-face {
+  font-family: 'Optima Nova LT Pro';
+  src: local('Optima Nova LT Pro Light'), local('OptimaNovLTPro-Light'),
+       url('/fonts/OptimaNovLTPro-Light.otf') format('opentype');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Optima Nova LT Pro';
+  src: local('Optima Nova LT Pro Regular'), local('OptimaNovLTPro-Regular'),
+       url('/fonts/OptimaNovLTPro-Regular.otf') format('opentype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Optima Nova LT Pro';
+  src: local('Optima Nova LT Pro Medium'), local('OptimaNovLTPro-Medium'),
+       url('/fonts/OptimaNovLTPro-Medium.otf') format('opentype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Optima Nova LT Pro';
+  src: local('Optima Nova LT Pro Bold'), local('OptimaNovLTPro-Bold'),
+       url('/fonts/OptimaNovLTPro-Bold.otf') format('opentype');
+  font-weight: 600; font-style: normal; font-display: swap;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
+/* ── Global — Optima Nova, weight slightly reduced ─────────── */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Optima Nova LT Pro', 'Optima', var(--font-josefin), 'Gill Sans MT', Calibri, sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  letter-spacing: 0.025em;
+  background-color: var(--primary);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Optima Nova LT Pro', 'Optima', var(--font-josefin), 'Gill Sans MT', Calibri, sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
+}
+
+p, span, li, label {
+  font-family: 'Optima Nova LT Pro', 'Optima', var(--font-josefin), 'Gill Sans MT', Calibri, sans-serif;
+  font-weight: 300;
+}
+
+/* ── Utility classes ────────────────────────────────────────── */
+.font-playfair  { font-family: var(--font-playfair), var(--font-optima), serif; }
+.font-cormorant { font-family: var(--font-cormorant), var(--font-optima), serif; }
+.font-optima    { font-family: var(--font-optima); }
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--primary); }
+::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 2px; }
+
+/* ── Gold divider ───────────────────────────────────────────── */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ── Section heading ────────────────────────────────────────── */
+.section-heading {
+  font-family: var(--font-optima);
+  color: var(--secondary);
+  font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+  font-weight: 400;          /* slightly lighter than 600/700 was before */
+  letter-spacing: 0.05em;
+}
+
+/* ── Product card ───────────────────────────────────────────── */
+.product-card {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.4s ease;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 50px rgba(92, 26, 37, 0.12);
+}
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.btn-primary {
+  background: var(--secondary);
+  color: var(--primary);
+  border: 1px solid var(--secondary);
+  padding: 12px 32px;
+  font-family: var(--font-optima);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-align: center;
+}
+.btn-primary:hover { background: transparent; color: var(--secondary); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--secondary);
+  border: 1px solid var(--secondary);
+  padding: 12px 32px;
+  font-family: var(--font-optima);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-align: center;
+}
+.btn-outline:hover { background: var(--secondary); color: var(--primary); }
+
+/* ── Badge ──────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 2px;
+  font-family: var(--font-optima);
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ── Form input ─────────────────────────────────────────────── */
+.form-input {
+  background: white;
+  border: 1px solid #d8cfc5;
+  padding: 10px 14px;
+  font-family: var(--font-optima);
+  font-size: 14px;
+  font-weight: 300;
+  width: 100%;
+  transition: border-color 0.2s;
+  outline: none;
+  border-radius: 1px;
+  letter-spacing: 0.02em;
+}
+.form-input:focus { border-color: var(--secondary); }
+
+/* ── Marquee ────────────────────────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 22s linear infinite; }
+
+/* ── Fade in up ─────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up { animation: fadeInUp 0.9s ease forwards; }
+
+/* ── Shimmer ────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.shimmer-text {
+  background: linear-gradient(90deg, var(--secondary) 25%, var(--gold) 50%, var(--secondary) 75%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ── Scrollbar thin ─────────────────────────────────────────── */
+.scrollbar-thin::-webkit-scrollbar { width: 3px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: #f5f0ea; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 2px; }
+
+/* Hide scrollbar for carousels */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+::selection { background-color: #5c1a25; color: #EFE9E1; }
+::-moz-selection { background-color: #5c1a25; color: #EFE9E1; }

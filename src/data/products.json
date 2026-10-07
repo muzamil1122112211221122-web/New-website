@@ -1,0 +1,135 @@
+[
+  {
+    "id": "n1",
+    "name": "Diamond Choker Set",
+    "category": "necklaces",
+    "price": 125000,
+    "originalPrice": 150000,
+    "image": "/p2.jpg",
+    "images": [
+      "/p2.jpg",
+      "/p3.jpg"
+    ],
+    "description": "Exquisite diamond choker with matching earrings, perfect for special occasions.",
+    "material": "21K Gold",
+    "weight": "18.4g",
+    "isBestSeller": true,
+    "isNew": false,
+    "rating": 5,
+    "reviews": 18
+  },
+  {
+    "id": "e1",
+    "name": "Pearl Drop Earrings",
+    "category": "earrings",
+    "price": 18000,
+    "originalPrice": null,
+    "image": "/p3.jpg",
+    "images": [
+      "/p3.jpg",
+      "/p4.jpg"
+    ],
+    "description": "Elegant freshwater pearl drop earrings in gold setting.",
+    "material": "18K Gold",
+    "weight": "3.1g",
+    "isBestSeller": false,
+    "isNew": true,
+    "rating": 4.8,
+    "reviews": 12
+  },
+  {
+    "id": "b1",
+    "name": "Kundan Bangle Set",
+    "category": "bracelets",
+    "price": 72000,
+    "originalPrice": 85000,
+    "image": "/p4.jpg",
+    "images": [
+      "/p4.jpg",
+      "/p5.jpg"
+    ],
+    "description": "Traditional kundan work bangles with intricate floral motifs.",
+    "material": "22K Gold",
+    "weight": "42g",
+    "isBestSeller": true,
+    "isNew": false,
+    "rating": 4.7,
+    "reviews": 31
+  },
+  {
+    "id": "r2",
+    "name": "Floral Engagement Ring",
+    "category": "rings",
+    "price": 62000,
+    "originalPrice": null,
+    "image": "/p5.jpg",
+    "images": [
+      "/p5.jpg",
+      "/p6.jpg"
+    ],
+    "description": "Beautifully crafted floral engagement ring with gemstone centre.",
+    "material": "22K Gold",
+    "weight": "6.8g",
+    "isBestSeller": false,
+    "isNew": true,
+    "rating": 4.9,
+    "reviews": 8
+  },
+  {
+    "id": "n2",
+    "name": "Bridal Haar Necklace",
+    "category": "necklaces",
+    "price": 210000,
+    "originalPrice": 250000,
+    "image": "/p6.jpg",
+    "images": [
+      "/p6.jpg",
+      "/p7.jpg"
+    ],
+    "description": "Grand bridal haar necklace with polki work, ideal for weddings.",
+    "material": "22K Gold",
+    "weight": "55g",
+    "isBestSeller": true,
+    "isNew": false,
+    "rating": 5,
+    "reviews": 15
+  },
+  {
+    "id": "e2",
+    "name": "Jhumka Earrings",
+    "category": "earrings",
+    "price": 28000,
+    "originalPrice": null,
+    "image": "/p7.jpg",
+    "images": [
+      "/p7.jpg",
+      "/p8.jpg"
+    ],
+    "description": "Classic Pakistani jhumka earrings with meenakari work.",
+    "material": "21K Gold",
+    "weight": "8.2g",
+    "isBestSeller": false,
+    "isNew": false,
+    "rating": 4.6,
+    "reviews": 22
+  },
+  {
+    "id": "b2",
+    "name": "Tennis Bracelet",
+    "category": "bracelets",
+    "price": 55000,
+    "originalPrice": 65000,
+    "image": "/p8.jpg",
+    "images": [
+      "/p8.jpg",
+      "/p1.jpg"
+    ],
+    "description": "Elegant diamond tennis bracelet, perfect for everyday luxury.",
+    "material": "18K Gold",
+    "weight": "7.5g",
+    "isBestSeller": false,
+    "isNew": true,
+    "rating": 4.8,
+    "reviews": 9
+  }
+]

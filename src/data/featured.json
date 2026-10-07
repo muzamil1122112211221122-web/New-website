@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Rings",
+    "image": "/p1.jpg",
+    "count": 45,
+    "href": "/collections?cat=rings",
+    "desc": "From solitaires to stacked bands"
+  },
+  {
+    "name": "Necklaces",
+    "image": "/p2.jpg",
+    "count": 38,
+    "href": "/collections?cat=necklaces",
+    "desc": "Chokers, chains & bridal haars"
+  },
+  {
+    "name": "Earrings",
+    "image": "/p3.jpg",
+    "count": 62,
+    "href": "/collections?cat=earrings",
+    "desc": "Studs, drops & classic jhumkas"
+  },
+  {
+    "name": "Bracelets",
+    "image": "/p4.jpg",
+    "count": 29,
+    "href": "/collections?cat=bracelets",
+    "desc": "Bangles, cuffs & tennis sets"
+  }
+]
