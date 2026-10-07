@@ -19,6 +19,7 @@ const navLinks = [
       { label: 'Bracelets', href: '/collections?cat=bracelets' },
       { label: 'Bangles', href: '/collections?cat=bangles' },
       { label: 'Pendants', href: '/collections?cat=pendants' },
+      { label: 'Nose Pins', href: '/collections?cat=nose%20pins' },
     ],
   },
   { label: 'About', href: '/about' },
