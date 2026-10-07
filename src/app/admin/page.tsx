@@ -64,18 +64,16 @@ export default function AdminDashboard() {
   const fetchAll = useCallback(async () => {
     setLoading(true);
     try {
-      const [resO, resP, resF] = await Promise.all([
+      const [resO, resP, resF, resR] = await Promise.all([
         fetch('/api/orders').catch(() => null),
         fetch('/api/products').catch(() => null),
-        fetch('/api/featured').catch(() => null)
+        fetch('/api/featured').catch(() => null),
+        fetch('/api/reviews').catch(() => null)
       ]);
       if (resO) setOrders((await resO.json()).orders || []);
       if (resP) setProducts(await resP.json());
       if (resF) setFeatured(await resF.json());
-      try {
-        const savedRev = localStorage.getItem('ijc_reviews');
-        if (savedRev) setReviews(JSON.parse(savedRev));
-      } catch {}
+      if (resR) setReviews(await resR.json());
     } catch { /* ignore */ }
     setLoading(false);
   }, []);
@@ -97,16 +95,15 @@ export default function AdminDashboard() {
     if (!editingProduct) return;
     const isNew = !products.find(p => p.id === editingProduct.id);
     const updatedProducts = isNew ? [editingProduct, ...products] : products.map(p => p.id === editingProduct.id ? editingProduct : p);
-    await fetch('/api/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(updatedProducts) });
+    await fetch('/api/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(editingProduct) });
     setProducts(updatedProducts);
     setShowProductModal(false);
   };
 
   const handleDeleteProduct = async (id: string) => {
     if (!confirm('Delete this product?')) return;
-    const updated = products.filter(p => p.id !== id);
-    await fetch('/api/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(updated) });
-    setProducts(updated);
+    await fetch('/api/products', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) });
+    setProducts(products.filter(p => p.id !== id));
   };
 
   const handleSaveFeatured = async () => {
@@ -120,11 +117,10 @@ export default function AdminDashboard() {
     reader.readAsDataURL(file);
   };
 
-  const handleDeleteReview = (id: string) => {
+  const handleDeleteReview = async (id: string) => {
     if (!confirm('Delete this review?')) return;
-    const updated = reviews.filter(r => r.id !== id);
-    setReviews(updated);
-    try { localStorage.setItem('ijc_reviews', JSON.stringify(updated)); } catch {}
+    await fetch('/api/reviews', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) });
+    setReviews(reviews.filter(r => r.id !== id));
   };
 
   const handleLogin = (e: React.FormEvent) => {

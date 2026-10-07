@@ -1,24 +1,21 @@
-import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-
-const dataFile = path.join(process.cwd(), 'src', 'data', 'featured.json');
+import { NextRequest, NextResponse } from 'next/server';
+import { supabaseAdmin } from '@/lib/supabase-server';
 
 export async function GET() {
-  try {
-    const data = fs.readFileSync(dataFile, 'utf8');
-    return NextResponse.json(JSON.parse(data));
-  } catch (err) {
-    return NextResponse.json({ error: 'Failed to read featured' }, { status: 500 });
-  }
+  const { data, error } = await supabaseAdmin.from('featured_collections').select('*').order('sort_order', { ascending: true });
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  return NextResponse.json(data ?? []);
 }
 
-export async function POST(req: Request) {
-  try {
-    const featured = await req.json();
-    fs.writeFileSync(dataFile, JSON.stringify(featured, null, 2));
-    return NextResponse.json({ success: true });
-  } catch (err) {
-    return NextResponse.json({ error: 'Failed to write featured' }, { status: 500 });
+export async function POST(req: NextRequest) {
+  const collections = await req.json();
+  // Delete all and reinsert (full replace)
+  await supabaseAdmin.from('featured_collections').delete().neq('id', '');
+  if (collections.length > 0) {
+    const { error } = await supabaseAdmin.from('featured_collections').insert(
+      collections.map((c: any, i: number) => ({ ...c, sort_order: i }))
+    );
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   }
+  return NextResponse.json({ success: true });
 }

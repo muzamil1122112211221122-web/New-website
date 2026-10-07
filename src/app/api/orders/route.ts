@@ -1,8 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { ordersStore } from '@/lib/store';
+import { supabaseAdmin } from '@/lib/supabase-server';
 
 export async function GET() {
-  const orders = ordersStore.getAll();
+  const { data, error } = await supabaseAdmin
+    .from('orders')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) return NextResponse.json({ success: false, message: error.message }, { status: 500 });
+  // Map snake_case to camelCase for admin panel compatibility
+  const orders = (data ?? []).map(o => ({
+    id: o.id,
+    orderNumber: o.order_number,
+    customerName: o.customer_name,
+    customerPhone: o.customer_phone,
+    customerEmail: o.customer_email,
+    address: o.address,
+    city: o.city,
+    items: o.items,
+    total: o.total,
+    notes: o.notes,
+    status: o.status,
+    createdAt: o.created_at,
+  }));
   return NextResponse.json({ success: true, orders });
 }
 
@@ -15,25 +34,28 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'Missing required fields' }, { status: 400 });
     }
 
-    const orderNumber = ordersStore.getNextOrderNumber();
-    const order = {
-      id: `order-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-      orderNumber,
-      customerName,
-      customerPhone,
-      customerEmail: customerEmail || '',
+    // Generate order number
+    const { count } = await supabaseAdmin.from('orders').select('*', { count: 'exact', head: true });
+    const orderNumber = `IJC-${String((count ?? 0) + 1001).padStart(4, '0')}`;
+    const id = `order-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+
+    const { error } = await supabaseAdmin.from('orders').insert({
+      id,
+      order_number: orderNumber,
+      customer_name: customerName,
+      customer_phone: customerPhone,
+      customer_email: customerEmail || '',
       address,
       city,
       items,
       total,
       notes: notes || '',
-      status: 'pending' as const,
-      createdAt: new Date().toISOString(),
-    };
+      status: 'pending',
+    });
 
-    ordersStore.add(order);
+    if (error) return NextResponse.json({ success: false, message: error.message }, { status: 500 });
 
-    return NextResponse.json({ success: true, orderNumber, orderId: order.id });
+    return NextResponse.json({ success: true, orderNumber, orderId: id });
   } catch (err) {
     console.error('Order creation error:', err);
     return NextResponse.json({ success: false, message: 'Server error' }, { status: 500 });

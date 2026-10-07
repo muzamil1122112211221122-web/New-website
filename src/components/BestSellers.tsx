@@ -1,9 +1,19 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { products } from '@/data/products';
 import ProductCard from './ProductCard';
 
 export default function BestSellers() {
+  const [products, setProducts] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch('/api/products').then(r => r.json()).then(data => {
+      if (Array.isArray(data)) setProducts(data);
+    }).catch(() => {});
+  }, []);
+
   const bestSellers = products.filter((p) => p.isBestSeller).slice(0, 4);
 
   return (

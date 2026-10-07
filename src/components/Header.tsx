@@ -7,7 +7,6 @@ import { ShoppingBag, Menu, X, Search, ChevronDown } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import CartDrawer from './CartDrawer';
 import { useRouter } from 'next/navigation';
-import { products } from '@/data/products';
 
 const navLinks = [
   {
@@ -34,10 +33,15 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const { count, setIsOpen } = useCart();
   const router = useRouter();
+  const [products, setProducts] = useState<any[]>([]);
 
   const searchResults = searchQuery.trim() === '' ? [] : products.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   useEffect(() => {
+    fetch('/api/products').then(r => r.json()).then(data => {
+      if (Array.isArray(data)) setProducts(data);
+    }).catch(() => {});
+    
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);

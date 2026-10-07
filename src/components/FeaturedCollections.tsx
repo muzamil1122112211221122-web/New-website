@@ -1,10 +1,18 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import collectionsData from '@/data/featured.json';
-
-const collections = collectionsData;
 
 export default function FeaturedCollections() {
+  const [collections, setCollections] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch('/api/featured').then(r => r.json()).then(data => {
+      if (Array.isArray(data)) setCollections(data);
+    }).catch(() => {});
+  }, []);
+
   return (
     <section className="py-20 px-6 lg:px-10 bg-[#EFE9E1]">
       <div className="max-w-7xl mx-auto">

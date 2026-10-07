@@ -4,7 +4,6 @@ import { useState, useEffect, Suspense } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
-import { products } from '@/data/products';
 import { SlidersHorizontal, X } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 
@@ -17,12 +16,16 @@ function CollectionsContent() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [sortBy, setSortBy] = useState('default');
   const [showFilters, setShowFilters] = useState(false);
+  const [products, setProducts] = useState<any[]>([]);
 
   useEffect(() => {
     if (catParam) {
       const match = categories.find(c => c.toLowerCase() === catParam.toLowerCase());
       if (match) setActiveCategory(match);
     }
+    fetch('/api/products').then(res => res.json()).then(data => {
+      if (Array.isArray(data)) setProducts(data);
+    }).catch(() => {});
   }, [catParam]);
 
   const filtered = products

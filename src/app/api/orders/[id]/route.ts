@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { ordersStore } from '@/lib/store';
+import { supabaseAdmin } from '@/lib/supabase-server';
 
 export async function PATCH(
   req: NextRequest,
@@ -8,10 +8,8 @@ export async function PATCH(
   try {
     const { status } = await req.json();
     const { id } = await context.params;
-    const updated = ordersStore.updateStatus(id, status);
-    if (!updated) {
-      return NextResponse.json({ success: false, message: 'Order not found' }, { status: 404 });
-    }
+    const { error } = await supabaseAdmin.from('orders').update({ status }).eq('id', id);
+    if (error) return NextResponse.json({ success: false, message: error.message }, { status: 500 });
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ success: false, message: 'Server error' }, { status: 500 });

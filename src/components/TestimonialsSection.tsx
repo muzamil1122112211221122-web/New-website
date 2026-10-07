@@ -47,6 +47,16 @@ export default function TestimonialsSection() {
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
+  // Load reviews from Supabase
+  useEffect(() => {
+    fetch('/api/reviews')
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data)) setCustomReviews(data);
+      })
+      .catch(() => {});
+  }, []);
+
   // Carousel drag
   const scrollRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
@@ -102,13 +112,6 @@ export default function TestimonialsSection() {
 
   const [form, setForm] = useState({ name: '', city: '', rating: 5, text: '', image: null as string | null });
 
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('ijc_reviews');
-      if (saved) setCustomReviews(JSON.parse(saved));
-    } catch { /* ignore */ }
-  }, []);
-
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -117,14 +120,31 @@ export default function TestimonialsSection() {
     reader.readAsDataURL(file);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.text.trim()) return;
     setSubmitting(true);
-    const review: Review = { id: `cr-${Date.now()}`, name: form.name.trim(), city: form.city.trim() || 'Pakistan', rating: form.rating, text: form.text.trim(), initials: form.name.trim().slice(0, 2).toUpperCase(), image: form.image };
-    const updated = [review, ...customReviews];
-    setCustomReviews(updated);
-    try { localStorage.setItem('ijc_reviews', JSON.stringify(updated)); } catch { /* ignore */ }
+    const review = {
+      name: form.name.trim(),
+      city: form.city.trim() || 'Pakistan',
+      rating: form.rating,
+      text: form.text.trim(),
+      initials: form.name.trim().slice(0, 2).toUpperCase(),
+      image: form.image
+    };
+    try {
+      const res = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(review),
+      });
+      const data = await res.json();
+      if (data && !data.error) {
+        setCustomReviews([data, ...customReviews]);
+      }
+    } catch {
+      // ignore
+    }
     setForm({ name: '', city: '', rating: 5, text: '', image: null });
     setShowForm(false);
     setSubmitting(false);
