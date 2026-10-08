@@ -68,42 +68,69 @@ export default function HeroCanvas() {
     };
     setSize();
 
-    // ── Pinned canvas scrub ──────────────────────────────────
-    const st = ScrollTrigger.create({
-      trigger: container,
-      start: 'top top',
-      end: `+=${window.innerHeight * 1.5}`,   // 150vh — quick finish
-      pin: true,
-      anticipatePin: 1,
-      scrub: 0.4,
-      onUpdate: (self) => {
-        const idx = Math.round(self.progress * (FRAME_COUNT - 1));
-        obj.frame = idx;
-        const img = images[idx];
-        if (img) drawCover(ctx, img, canvas.width, canvas.height);
-      },
-    });
+    // ── GSAP MatchMedia for Desktop vs Mobile ──────────────────────────────────
+    let mm = gsap.matchMedia();
 
-    // ── Overlay text fade on scroll ──────────────────────────
-    const tl = gsap.timeline({
-      scrollTrigger: {
+    mm.add("(min-width: 769px)", () => {
+      // Desktop: Scroll-based pinning and scrub
+      const st = ScrollTrigger.create({
         trigger: container,
         start: 'top top',
-        end: `+=${window.innerHeight * 0.8}`,
-        scrub: 0.8,
-      },
+        end: `+=${window.innerHeight * 1.5}`,
+        pin: true,
+        anticipatePin: 1,
+        scrub: 0.4,
+        onUpdate: (self) => {
+          const idx = Math.round(self.progress * (FRAME_COUNT - 1));
+          obj.frame = idx;
+          const img = images[idx];
+          if (img) drawCover(ctx, img, canvas.width, canvas.height);
+        },
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: 'top top',
+          end: `+=${window.innerHeight * 0.8}`,
+          scrub: 0.8,
+        },
+      });
+
+      [labelRef, titleRef, subtitleRef, ctaRef].forEach((r, i) => {
+        if (r.current) tl.to(r.current, { opacity: 0, y: -35, ease: 'power2.in' }, i * 0.05);
+      });
+
+      return () => {
+        st.kill();
+        tl.kill();
+      };
     });
 
-    [labelRef, titleRef, subtitleRef, ctaRef].forEach((r, i) => {
-      if (r.current) tl.to(r.current, { opacity: 0, y: -35, ease: 'power2.in' }, i * 0.05);
+    mm.add("(max-width: 768px)", () => {
+      // Mobile: Autoplay like a video (no pinning, normal scroll)
+      const anim = gsap.to(obj, {
+        frame: FRAME_COUNT - 1,
+        duration: 8,
+        repeat: -1, // Infinite loop
+        yoyo: true, // Smooth back and forth
+        ease: "none",
+        onUpdate: () => {
+          const idx = Math.round(obj.frame);
+          const img = images[idx];
+          if (img) drawCover(ctx, img, canvas.width, canvas.height);
+        }
+      });
+
+      return () => {
+        anim.kill();
+      };
     });
 
     window.addEventListener('resize', setSize);
     return () => {
       window.removeEventListener('resize', setSize);
-      st.kill();
-      tl.scrollTrigger?.kill();
-      tl.kill();
+      mm.revert();
     };
   }, []);
 
@@ -182,8 +209,8 @@ export default function HeroCanvas() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+      {/* Scroll indicator (desktop only) */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2">
         <div className="w-5 h-8 border border-white/30 rounded-full flex items-start justify-center pt-1.5">
           <div className="w-0.5 h-2 bg-white/50 rounded-full animate-bounce" />
         </div>
