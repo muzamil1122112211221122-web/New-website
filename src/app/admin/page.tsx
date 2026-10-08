@@ -374,6 +374,29 @@ export default function AdminDashboard() {
               <p className="text-sm text-gray-400">Real-time overview of your business</p>
             </div>
 
+            {/* Growth Graph */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <h3 className="font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                <TrendingUp size={18} className="text-[#5c1a25]" /> Sales Growth (Last 7 Days)
+              </h3>
+              <div className="h-[300px] w-full">
+                {typeof window !== 'undefined' && (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
+                      <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#888' }} dy={10} />
+                      <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#888' }} tickFormatter={(val) => `Rs. ${val.toLocaleString()}`} />
+                      <Tooltip
+                        formatter={(value: number) => [`Rs. ${value.toLocaleString()}`, 'Sales']}
+                        contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                      />
+                      <Line type="monotone" dataKey="sales" stroke="#5c1a25" strokeWidth={3} dot={{ r: 4, fill: '#c9a96e', strokeWidth: 0 }} activeDot={{ r: 6, fill: '#c9a96e', strokeWidth: 0 }} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                )}
+              </div>
+            </div>
+
             {/* Stat Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               <StatCard icon={DollarSign} label="Total Revenue" value={`Rs. ${totalRevenue.toLocaleString()}`} sub="From delivered orders" color="bg-green-50 text-green-600" />
@@ -428,30 +451,6 @@ export default function AdminDashboard() {
                   ))}
                   {orders.length === 0 && <p className="text-gray-400 text-sm text-center py-4">No orders yet</p>}
                 </div>
-              </div>
-            </div>
-
-            {/* Growth Graph */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-              <h3 className="font-semibold text-gray-900 mb-6 flex items-center gap-2">
-                <TrendingUp size={18} className="text-[#5c1a25]" /> Sales Growth (Last 7 Days)
-              </h3>
-              <div className="h-[300px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
-                    <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#888' }} dy={10} />
-                    <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#888' }} tickFormatter={(val) => `Rs. ${val.toLocaleString()}`} />
-                    <Tooltip
-                      formatter={(value: number) => [`Rs. ${value.toLocaleString()}`, 'Sales']}
-                      contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                    />
-                    <Line type="monotone" dataKey="sales" stroke="#5c1a25" strokeWidth={3} dot={{ r: 4, fill: '#c9a96e', strokeWidth: 0 }} activeDot={{ r: 6, fill: '#c9a96e', strokeWidth: 0 }} />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
             {/* Category Breakdown */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
               <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2"><BarChart2 size={18} className="text-[#5c1a25]" /> Order Status Breakdown</h3>
@@ -633,7 +632,10 @@ export default function AdminDashboard() {
                       <tr key={r.id} className="hover:bg-gray-50/50">
                         <td className="p-4"><div className="font-semibold text-gray-900">{r.name}</div><div className="text-xs text-gray-500">{r.city}</div></td>
                         <td className="p-4"><div className="text-xs text-gray-500 max-w-[100px] truncate" title={r.product_id}>{r.product_id || 'N/A'}</div></td>
-                        <td className="p-4 max-w-md"><p className="text-sm text-gray-700 line-clamp-2">{r.text}</p></td>
+                        <td className="p-4 max-w-md">
+                          <p className="text-sm text-gray-700 line-clamp-2">{r.text}</p>
+                          {r.image && <div className="mt-2 text-xs text-blue-500 font-medium">Has Image</div>}
+                        </td>
                         <td className="p-4"><span className="font-bold text-[#c9a96e]">{'★'.repeat(r.rating)}</span></td>
                         <td className="p-4 text-right"><button onClick={() => handleDeleteReview(r.id)} className="text-red-500 hover:bg-red-50 p-2 rounded"><Trash2 size={16} /></button></td>
                       </tr>

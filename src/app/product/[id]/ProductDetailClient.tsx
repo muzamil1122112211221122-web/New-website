@@ -17,7 +17,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
 
   const [reviews, setReviews] = useState<any[]>([]);
   const [reviewsLoading, setReviewsLoading] = useState(true);
-  const [newReview, setNewReview] = useState({ name: '', city: '', rating: 5, text: '' });
+  const [newReview, setNewReview] = useState({ name: '', city: '', rating: 5, text: '', image: null as string | null });
   const [submittingReview, setSubmittingReview] = useState(false);
   const [reviewSubmitted, setReviewSubmitted] = useState(false);
 
@@ -37,6 +37,29 @@ export default function ProductDetailClient({ product }: { product: any }) {
     };
     fetchReviews();
   }, [product.id]);
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = document.createElement('img');
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX_WIDTH = 800;
+        const scaleSize = MAX_WIDTH / img.width;
+        canvas.width = MAX_WIDTH;
+        canvas.height = img.height * scaleSize;
+        const ctx = canvas.getContext('2d');
+        ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
+        const base64 = canvas.toDataURL('image/jpeg', 0.7);
+        setNewReview({ ...newReview, image: base64 });
+      };
+      img.src = event.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleReviewSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -180,30 +203,8 @@ export default function ProductDetailClient({ product }: { product: any }) {
         <h2 className="font-playfair text-2xl text-[#5c1a25] mb-8">Customer Reviews</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Reviews List */}
-          <div className="lg:col-span-2 space-y-6">
-            {reviewsLoading ? (
-              <p className="text-[#5c1a25]/50">Loading reviews...</p>
-            ) : reviews.length === 0 ? (
-              <p className="text-[#5c1a25]/50">No reviews yet. Be the first to review this product!</p>
-            ) : (
-              reviews.map(review => (
-                <div key={review.id} className="bg-white/40 border border-[#5c1a25]/10 p-6">
-                  <div className="flex items-center gap-1 mb-2">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} size={12} className={i < review.rating ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'} />
-                    ))}
-                  </div>
-                  <h4 className="font-playfair text-lg text-[#5c1a25] font-medium">{review.name}</h4>
-                  <p className="text-xs text-[#5c1a25]/50 mb-3">{review.city}</p>
-                  <p className="font-cormorant text-[#5c1a25]/80">{review.text}</p>
-                </div>
-              ))
-            )}
-          </div>
-
-          {/* Add Review Form */}
-          <div className="bg-white/60 p-6 border border-[#5c1a25]/10 h-fit">
+          {/* Add Review Form (Left) */}
+          <div className="lg:col-span-1 bg-white/60 p-6 border border-[#5c1a25]/10 h-fit">
             <h3 className="font-playfair text-xl text-[#5c1a25] mb-6">Write a Review</h3>
             {reviewSubmitted ? (
               <p className="text-green-600 font-medium">Thank you for your review!</p>
@@ -224,24 +225,62 @@ export default function ProductDetailClient({ product }: { product: any }) {
                     ))}
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">Name</label>
-                    <input required type="text" value={newReview.name} onChange={e => setNewReview({ ...newReview, name: e.target.value })} className="w-full border border-[#5c1a25]/20 p-2 text-sm bg-transparent outline-none focus:border-[#c9a96e]" />
-                  </div>
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">City</label>
-                    <input required type="text" value={newReview.city} onChange={e => setNewReview({ ...newReview, city: e.target.value })} className="w-full border border-[#5c1a25]/20 p-2 text-sm bg-transparent outline-none focus:border-[#c9a96e]" />
-                  </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">Name</label>
+                  <input required type="text" value={newReview.name} onChange={e => setNewReview({ ...newReview, name: e.target.value })} className="w-full border border-[#5c1a25]/20 p-2 text-sm bg-transparent outline-none focus:border-[#c9a96e]" />
+                </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">City</label>
+                  <input required type="text" value={newReview.city} onChange={e => setNewReview({ ...newReview, city: e.target.value })} className="w-full border border-[#5c1a25]/20 p-2 text-sm bg-transparent outline-none focus:border-[#c9a96e]" />
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">Review</label>
                   <textarea required rows={4} value={newReview.text} onChange={e => setNewReview({ ...newReview, text: e.target.value })} className="w-full border border-[#5c1a25]/20 p-2 text-sm bg-transparent outline-none focus:border-[#c9a96e] resize-none" />
                 </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">Attach Image (Optional)</label>
+                  <input type="file" accept="image/*" onChange={handleImageUpload} className="w-full text-sm text-[#5c1a25]/70 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-xs file:uppercase file:tracking-wider file:bg-[#5c1a25]/10 file:text-[#5c1a25] hover:file:bg-[#5c1a25]/20" />
+                  {newReview.image && (
+                    <div className="mt-2">
+                      <Image src={newReview.image} alt="Preview" width={100} height={100} className="object-cover border border-[#5c1a25]/20" />
+                    </div>
+                  )}
+                </div>
                 <button type="submit" disabled={submittingReview} className="w-full bg-[#5c1a25] text-[#EFE9E1] py-3 text-xs tracking-[0.2em] uppercase hover:bg-[#7a2535] transition-colors disabled:opacity-50">
                   {submittingReview ? 'Submitting...' : 'Submit Review'}
                 </button>
               </form>
+            )}
+          </div>
+
+          {/* Reviews List (Right) */}
+          <div className="lg:col-span-2 space-y-6">
+            {reviewsLoading ? (
+              <p className="text-[#5c1a25]/50">Loading reviews...</p>
+            ) : reviews.length === 0 ? (
+              <p className="text-[#5c1a25]/50">No reviews yet. Be the first to review this product!</p>
+            ) : (
+              reviews.map(review => (
+                <div key={review.id} className="bg-white/40 border border-[#5c1a25]/10 p-6 flex flex-col md:flex-row gap-6">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-1 mb-2">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star key={i} size={12} className={i < review.rating ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'} />
+                      ))}
+                    </div>
+                    <h4 className="font-playfair text-lg text-[#5c1a25] font-medium">{review.name}</h4>
+                    <p className="text-xs text-[#5c1a25]/50 mb-3">{review.city}</p>
+                    <p className="font-cormorant text-[#5c1a25]/80">{review.text}</p>
+                  </div>
+                  {review.image && (
+                    <div className="flex-shrink-0">
+                      <div className="relative w-24 h-24 border border-[#5c1a25]/10 bg-white">
+                        <Image src={review.image} alt="Review attachment" fill className="object-cover" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))
             )}
           </div>
         </div>

@@ -83,22 +83,7 @@ export default function ProductCard({ product }) {
           </h3>
         </Link>
 
-        {/* Stars */}
-        <div className="flex items-center gap-0.5 mb-3">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star
-              key={i}
-              size={11}
-              className={i < Math.floor(product.rating || 5) ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'}
-            />
-          ))}
-          <span
-            className="text-[#5c1a25]/40 ml-1.5"
-            style={{ fontFamily: 'Optima, sans-serif', fontSize: '10px' }}
-          >
-            ({product.reviews || 0})
-          </span>
-        </div>
+
 
         {/* Price */}
         <div className="flex items-center gap-2">
