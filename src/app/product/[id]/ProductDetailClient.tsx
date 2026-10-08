@@ -78,12 +78,14 @@ export default function ProductDetailClient({ product }: { product: any }) {
             {product.name}
           </h1>
 
-          <div className="flex items-center gap-1 mb-6">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} size={14} className={i < Math.floor(product.rating || 5) ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'} />
-            ))}
-            <span className="text-[#5c1a25]/50 text-sm ml-2">({product.reviews || 0} reviews)</span>
-          </div>
+          {(product.reviews > 0) && (
+            <div className="flex items-center gap-1 mb-6">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} size={14} className={i < Math.floor(product.rating || 5) ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'} />
+              ))}
+              <span className="text-[#5c1a25]/50 text-sm ml-2">({product.reviews} reviews)</span>
+            </div>
+          )}
 
           <div className="flex items-end gap-3 mb-8">
             <span className="font-playfair text-2xl text-[#5c1a25] font-semibold">
