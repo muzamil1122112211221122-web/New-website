@@ -7,8 +7,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+import { usePathname } from 'next/navigation';
+
 export default function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+
   useEffect(() => {
+    // Disable smooth scrolling on admin pages to allow native inner-div scrolling
+    if (pathname?.startsWith('/admin')) return;
+
     const lenis = new Lenis({
       duration: 1.4,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -28,7 +35,7 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
     return () => {
       lenis.destroy();
     };
-  }, []);
+  }, [pathname]);
 
   return <>{children}</>;
 }

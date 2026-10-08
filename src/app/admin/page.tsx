@@ -788,7 +788,7 @@ export default function AdminDashboard() {
       {/* ── ORDER DETAIL MODAL ── */}
       {selectedOrder && (
         <div className="fixed inset-0 bg-black/60 z-[200] flex items-center justify-center p-4 sm:p-6" onClick={() => setSelectedOrder(null)}>
-          <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-full" onClick={e => e.stopPropagation()}>
+          <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-full overflow-hidden" onClick={e => e.stopPropagation()}>
             <div className="p-6 border-b flex justify-between items-center bg-gray-50 shrink-0">
               <div>
                 <h2 className="text-xl font-bold text-gray-900">{selectedOrder.orderNumber}</h2>
