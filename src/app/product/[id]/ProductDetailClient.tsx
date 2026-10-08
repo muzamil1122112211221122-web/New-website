@@ -118,7 +118,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
           <div className="mt-10 pt-6 border-t border-[#5c1a25]/10 space-y-3">
             <div className="flex items-center gap-4 text-sm text-[#5c1a25]/70">
               <span className="w-24 font-medium uppercase text-xs tracking-wider">Material</span>
-              <span>{product.material || '22k Gold'}</span>
+              <span>{product.material || '21k Gold'}</span>
             </div>
             <div className="flex items-center gap-4 text-sm text-[#5c1a25]/70">
               <span className="w-24 font-medium uppercase text-xs tracking-wider">Shipping</span>

@@ -14,7 +14,7 @@ export default function BestSellers() {
     }).catch(() => {});
   }, []);
 
-  const bestSellers = products.filter((p) => p.isBestSeller).slice(0, 4);
+  const bestSellers = products.filter((p) => p.isBestSeller || p.is_best_seller).slice(0, 4);
 
   return (
     <section className="py-20 px-6 lg:px-10" style={{ background: 'linear-gradient(135deg, #f5f0ea 0%, #EFE9E1 100%)' }}>

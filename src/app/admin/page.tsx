@@ -263,7 +263,7 @@ export default function AdminDashboard() {
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-playfair text-[#5c1a25]">Product Management</h2>
               <button onClick={() => {
-                setEditingProduct({ id: 'p-'+Date.now(), name: '', category: 'rings', price: 0, originalPrice: null, image: '', images: [], description: '', material: '22K Gold', weight: '', isBestSeller: false, isNew: true, rating: 5, reviews: 0 });
+                setEditingProduct({ id: 'p-'+Date.now(), name: '', category: 'rings', price: 0, originalPrice: null, image: '', images: [], description: '', material: '21k Gold', weight: '', isBestSeller: false, isNew: true, rating: 5, reviews: 0 });
                 setShowProductModal(true);
               }} className="bg-[#5c1a25] text-white px-4 py-2 rounded flex items-center gap-2 text-sm">
                 <Plus size={16} /> Add Product
@@ -448,7 +448,7 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2 mt-2">
-                    <input type="checkbox" id="bestSeller" checked={editingProduct.isBestSeller} onChange={e => setEditingProduct({...editingProduct, isBestSeller: e.target.checked})} className="w-4 h-4 accent-[#5c1a25]" />
+                    <input type="checkbox" id="bestSeller" checked={editingProduct.isBestSeller || editingProduct.is_best_seller} onChange={e => setEditingProduct({...editingProduct, isBestSeller: e.target.checked, is_best_seller: e.target.checked})} className="w-4 h-4 accent-[#5c1a25]" />
                     <label htmlFor="bestSeller" className="text-sm font-semibold text-gray-700 cursor-pointer">Mark as Top Seller</label>
                   </div>
                   <div>
