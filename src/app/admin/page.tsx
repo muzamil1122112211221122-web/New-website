@@ -451,6 +451,9 @@ export default function AdminDashboard() {
                   ))}
                   {orders.length === 0 && <p className="text-gray-400 text-sm text-center py-4">No orders yet</p>}
                 </div>
+              </div>
+            </div>
+
             {/* Category Breakdown */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
               <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2"><BarChart2 size={18} className="text-[#5c1a25]" /> Order Status Breakdown</h3>
