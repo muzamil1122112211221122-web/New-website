@@ -51,6 +51,46 @@ export default function Header() {
   return (
     <>
       <CartDrawer />
+      
+      {/* Mobile Nav Drawer */}
+      <div className={`fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} onClick={() => setMobileOpen(false)} />
+      <div className={`fixed top-0 left-0 bottom-0 w-[80%] max-w-sm bg-[#EFE9E1] z-[100] shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] lg:hidden flex flex-col ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="flex items-center justify-between p-6 border-b border-[#5c1a25]/10">
+          <span className="font-playfair text-xl text-[#5c1a25] tracking-widest">IJC</span>
+          <button onClick={() => setMobileOpen(false)} className="text-[#5c1a25] hover:text-[#5c1a25]/60">
+            <X size={24} />
+          </button>
+        </div>
+        <div className="flex-1 overflow-y-auto px-6 py-6 flex flex-col gap-6">
+          {navLinks.map((link) => (
+            <div key={link.label}>
+              <Link
+                href={link.href}
+                className="block text-[#5c1a25] pb-2 border-b border-[#5c1a25]/10 uppercase"
+                style={{ fontFamily: "'Optima Nova LT Pro', Optima, var(--font-playfair), serif", fontSize: '14px', fontWeight: 500, letterSpacing: '0.25em' }}
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </Link>
+              {link.sub && (
+                <div className="pl-4 mt-3 flex flex-col gap-3">
+                  {link.sub.map((s) => (
+                    <Link
+                      key={s.label}
+                      href={s.href}
+                      className="text-[#5c1a25]/60 hover:text-[#5c1a25] uppercase transition-colors"
+                      style={{ fontFamily: "'Optima Nova LT Pro', Optima, 'Gill Sans MT', sans-serif", fontSize: '11px', letterSpacing: '0.2em' }}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {s.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Search Overlay */}
       <div className={`fixed inset-0 bg-[#EFE9E1]/95 z-[60] backdrop-blur-sm transition-all duration-500 ${showSearch ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
@@ -263,54 +303,6 @@ export default function Header() {
             style={{ background: 'linear-gradient(90deg, transparent, #c9a96e 30%, #c9a96e 70%, transparent)' }}
           />
 
-          {/* Mobile Nav Drawer */}
-          <div className={`fixed inset-0 z-50 bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} onClick={() => setMobileOpen(false)} />
-          <div className={`fixed top-0 left-0 bottom-0 w-[80%] max-w-sm bg-[#EFE9E1] z-50 shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] lg:hidden flex flex-col ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-            <div className="flex items-center justify-between p-6 border-b border-[#5c1a25]/10">
-              <span className="font-playfair text-xl text-[#5c1a25] tracking-widest">IJC</span>
-              <button onClick={() => setMobileOpen(false)} className="text-[#5c1a25] hover:text-[#5c1a25]/60">
-                <X size={24} />
-              </button>
-            </div>
-            <div className="flex-1 overflow-y-auto px-6 py-6 flex flex-col gap-6">
-              {navLinks.map((link) => (
-                <div key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="block text-[#5c1a25] pb-2 border-b border-[#5c1a25]/10 uppercase"
-                    style={{
-                      fontFamily: "'Optima Nova LT Pro', Optima, var(--font-playfair), serif",
-                      fontSize: '14px',
-                      fontWeight: 500,
-                      letterSpacing: '0.25em',
-                    }}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                  {link.sub && (
-                    <div className="pl-4 mt-3 flex flex-col gap-3">
-                      {link.sub.map((s) => (
-                        <Link
-                          key={s.label}
-                          href={s.href}
-                          className="text-[#5c1a25]/60 hover:text-[#5c1a25] uppercase transition-colors"
-                          style={{
-                            fontFamily: "'Optima Nova LT Pro', Optima, 'Gill Sans MT', sans-serif",
-                            fontSize: '11px',
-                            letterSpacing: '0.2em',
-                          }}
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          {s.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
         </header>
       </div>
     </>
