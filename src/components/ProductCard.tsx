@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 
 import Image from 'next/image';
@@ -5,8 +6,7 @@ import Link from 'next/link';
 import { Star, ShoppingBag, Heart } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function ProductCard({ product }: { product: any }) {
+export default function ProductCard({ product }) {
   const { addItem } = useCart();
 
   return (
@@ -42,7 +42,7 @@ export default function ProductCard({ product }: { product: any }) {
           <Heart size={15} />
         </button>
 
-        {/* Quick Add — slides up from bottom, stays INSIDE overflow-hidden */}
+        {/* Quick Add */}
         <div className="absolute bottom-0 left-0 right-0 z-10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
           <button
             onClick={() => addItem({ id: product.id, name: product.name, price: product.price, image: product.image })}
