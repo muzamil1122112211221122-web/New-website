@@ -2,13 +2,20 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { createClient } from '@supabase/supabase-js';
 import {
-  Package, Phone, MapPin, User, Clock, CheckCircle,
+  Package, Phone, Clock, CheckCircle,
   Truck, XCircle, RefreshCw, ShoppingBag, TrendingUp,
   DollarSign, X, Plus, Edit, Trash2, Image as ImageIcon,
   Star, MessageSquare, BookOpen, BarChart2, ArrowUpRight,
-  ArrowDownLeft, AlertCircle, Eye, EyeOff
+  ArrowDownLeft, Eye, EyeOff, Wifi, WifiOff
 } from 'lucide-react';
+
+// Supabase client (anon key — only reading real-time events)
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://glvdbjkvkhuhssutkmpb.supabase.co',
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+);
 
 type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
 type Tab = 'dashboard' | 'orders' | 'custom-orders' | 'products' | 'featured' | 'reviews' | 'ledger';
@@ -59,6 +66,7 @@ export default function AdminDashboard() {
   const [pin, setPin] = useState('');
   const [authError, setAuthError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isLive, setIsLive] = useState(false);
 
   const [tab, setTab] = useState<Tab>('dashboard');
   const [orders, setOrders] = useState<Order[]>([]);
@@ -68,6 +76,7 @@ export default function AdminDashboard() {
   const [customOrders, setCustomOrders] = useState<CustomOrder[]>([]);
   const [ledger, setLedger] = useState<LedgerEntry[]>([]);
   const [loading, setLoading] = useState(true);
+  const [newAlert, setNewAlert] = useState<string | null>(null);
 
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [selectedCustomOrder, setSelectedCustomOrder] = useState<CustomOrder | null>(null);
@@ -98,6 +107,66 @@ export default function AdminDashboard() {
   }, []);
 
   useEffect(() => { fetchAll(); }, [fetchAll]);
+
+  // ── Real-time Supabase Subscriptions ──
+  useEffect(() => {
+    if (authStep !== 'authenticated') return;
+
+    const showAlert = (msg: string) => {
+      setNewAlert(msg);
+      setTimeout(() => setNewAlert(null), 5000);
+    };
+
+    const channel = supabase
+      .channel('admin-realtime')
+      // New / updated orders
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'orders' }, (payload) => {
+        const row = payload.new as any;
+        setOrders(prev => {
+          if (prev.find(o => o.id === row.id)) return prev;
+          return [{ ...row, orderNumber: row.order_number, customerName: row.customer_name, customerPhone: row.customer_phone, customerEmail: row.customer_email, createdAt: row.created_at }, ...prev];
+        });
+        showAlert(`🛍️ New order from ${row.customer_name}!`);
+      })
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'orders' }, (payload) => {
+        const row = payload.new as any;
+        setOrders(prev => prev.map(o => o.id === row.id ? { ...o, status: row.status } : o));
+      })
+      // New enquiries/custom orders
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'custom_orders' }, (payload) => {
+        const row = payload.new as CustomOrder;
+        setCustomOrders(prev => {
+          if (prev.find(c => c.id === row.id)) return prev;
+          return [row, ...prev];
+        });
+        showAlert(`💬 New enquiry from ${row.name}!`);
+      })
+      // Product changes
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'products' }, (payload) => {
+        const row = payload.new as any;
+        setProducts(prev => prev.find(p => p.id === row.id) ? prev : [row, ...prev]);
+      })
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'products' }, (payload) => {
+        const row = payload.new as any;
+        setProducts(prev => prev.map(p => p.id === row.id ? row : p));
+      })
+      .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'products' }, (payload) => {
+        setProducts(prev => prev.filter(p => p.id !== (payload.old as any).id));
+      })
+      // Ledger changes
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'ledger' }, (payload) => {
+        const row = payload.new as LedgerEntry;
+        setLedger(prev => prev.find(l => l.id === row.id) ? prev : [row, ...prev]);
+      })
+      .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'ledger' }, (payload) => {
+        setLedger(prev => prev.filter(l => l.id !== (payload.old as any).id));
+      })
+      .subscribe((status) => {
+        setIsLive(status === 'SUBSCRIBED');
+      });
+
+    return () => { supabase.removeChannel(channel); };
+  }, [authStep]);
 
   // Stats
   const totalRevenue = orders.filter(o => o.status === 'delivered').reduce((s, o) => s + o.total, 0);
@@ -256,10 +325,23 @@ export default function AdminDashboard() {
             </button>
           ))}
         </div>
-        <div className="p-4 border-t border-white/10">
-          <p className="text-[10px] text-white/30 tracking-widest">Logged in as Admin</p>
+        <div className="p-4 border-t border-white/10 flex items-center justify-between">
+          <p className="text-[10px] text-white/30 tracking-widest">Admin</p>
+          <div className={`flex items-center gap-1.5 text-[10px] font-bold ${isLive ? 'text-green-400' : 'text-white/30'}`}>
+            <span className={`w-2 h-2 rounded-full ${isLive ? 'bg-green-400 animate-pulse' : 'bg-white/20'}`} />
+            {isLive ? 'LIVE' : 'OFFLINE'}
+          </div>
         </div>
       </div>
+
+      {/* Toast Alert */}
+      {newAlert && (
+        <div className="fixed top-6 right-6 z-[100] bg-[#5c1a25] text-white px-5 py-3.5 rounded-xl shadow-2xl flex items-center gap-3 text-sm font-medium animate-bounce-in max-w-xs">
+          <span className="text-lg">{newAlert.split(' ')[0]}</span>
+          <span>{newAlert.slice(newAlert.indexOf(' ')+1)}</span>
+          <button onClick={() => setNewAlert(null)} className="ml-2 text-white/60 hover:text-white"><X size={14}/></button>
+        </div>
+      )}
 
       {/* Main */}
       <div className="flex-1 overflow-y-auto p-6 md:p-8 h-screen">
