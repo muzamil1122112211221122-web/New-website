@@ -6,12 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const optima = "'Optima Nova LT Pro', Optima, 'Gill Sans MT', sans-serif";
 
-const fixedReviews = [
-  { id: 'f1', name: 'Sana Rehman',   city: 'Lahore',     rating: 5, text: 'Absolutely stunning bridal set! The quality is incomparable. Everyone at my wedding loved my jewelry. IJC exceeded my expectations for sure!', initials: 'SR', image: null as string | null },
-  { id: 'f2', name: 'Ahmed Malik',   city: 'Karachi',    rating: 5, text: 'Custom ring for my fiancé purchased and the people were really very cooperative. The ring looked even better than what I had expected. Totally worth it!', initials: 'AM', image: null as string | null },
-  { id: 'f3', name: 'Nadia Hussain', city: 'Islamabad',  rating: 5, text: "The workmanship that comes from IJC is impeccable. I've been purchasing from them for years now and have yet to find fault with any of their orders. A+ company!", initials: 'NH', image: null as string | null },
-  { id: 'f4', name: 'Bilal Khan',    city: 'Faisalabad', rating: 5, text: 'There is certainty in the gold purity while the designs are forever classic. I purchased the necklace set for my mother on her anniversary, and she loves it.', initials: 'BK', image: null as string | null },
-];
+const fixedReviews: { id: string; name: string; city: string; rating: number; text: string; initials: string; image: string | null }[] = [];
 
 interface Review { id: string; name: string; city: string; rating: number; text: string; initials: string; image: string | null; }
 

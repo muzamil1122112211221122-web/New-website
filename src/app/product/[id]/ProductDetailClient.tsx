@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { ShoppingBag, Star, Heart, CheckCircle } from 'lucide-react';
+import { ShoppingBag, Star, CheckCircle } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
 export default function ProductDetailClient({ product }: { product: any }) {
@@ -100,20 +100,16 @@ export default function ProductDetailClient({ product }: { product: any }) {
             {product.description || "Exquisitely crafted to perfection. A timeless piece that speaks volumes of elegance and luxury."}
           </p>
 
-          <div className="flex gap-4">
-            <button
-              onClick={handleAdd}
-              disabled={adding || added}
-              className="flex-1 bg-[#5c1a25] text-[#EFE9E1] py-4 flex items-center justify-center gap-2 hover:bg-[#7a2535] transition-all disabled:opacity-80 disabled:cursor-not-allowed"
-              style={{ fontFamily: "'Optima Nova LT Pro', Optima, sans-serif", fontSize: '11px', letterSpacing: '0.2em' }}
-            >
-              {added ? <CheckCircle size={18} /> : <ShoppingBag size={18} />}
-              {added ? 'ADDED TO CART' : adding ? 'ADDING...' : 'ADD TO CART'}
-            </button>
-            <button className="w-14 h-14 flex items-center justify-center border border-[#5c1a25]/20 text-[#5c1a25] hover:bg-[#5c1a25] hover:text-white transition-colors">
-              <Heart size={20} />
-            </button>
-          </div>
+          {/* Add to Cart only — no wishlist button */}
+          <button
+            onClick={handleAdd}
+            disabled={adding || added}
+            className="w-full bg-[#5c1a25] text-[#EFE9E1] py-4 flex items-center justify-center gap-2 hover:bg-[#7a2535] transition-all disabled:opacity-80 disabled:cursor-not-allowed"
+            style={{ fontFamily: "'Optima Nova LT Pro', Optima, sans-serif", fontSize: '11px', letterSpacing: '0.2em' }}
+          >
+            {added ? <CheckCircle size={18} /> : <ShoppingBag size={18} />}
+            {added ? 'ADDED TO CART' : adding ? 'ADDING...' : 'ADD TO CART'}
+          </button>
 
           <div className="mt-10 pt-6 border-t border-[#5c1a25]/10 space-y-3">
             <div className="flex items-center gap-4 text-sm text-[#5c1a25]/70">

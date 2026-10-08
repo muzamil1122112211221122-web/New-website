@@ -37,11 +37,6 @@ export default function ProductCard({ product }) {
           )}
         </div>
 
-        {/* Wishlist */}
-        <button className="absolute top-3 right-3 z-10 p-2 bg-white/80 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-[#5c1a25] hover:text-white text-[#5c1a25]">
-          <Heart size={15} />
-        </button>
-
         {/* Quick Add */}
         <div className="absolute bottom-0 left-0 right-0 z-10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
           <button
