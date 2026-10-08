@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ShoppingBag, Star, CheckCircle } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
@@ -14,6 +14,55 @@ export default function ProductDetailClient({ product }: { product: any }) {
   const [activeImage, setActiveImage] = useState(images[0]);
   const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
   const [isZooming, setIsZooming] = useState(false);
+
+  const [reviews, setReviews] = useState<any[]>([]);
+  const [reviewsLoading, setReviewsLoading] = useState(true);
+  const [newReview, setNewReview] = useState({ name: '', city: '', rating: 5, text: '' });
+  const [submittingReview, setSubmittingReview] = useState(false);
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await fetch(`/api/reviews?productId=${product.id}`);
+        if (res.ok) {
+          const data = await res.json();
+          setReviews(data);
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setReviewsLoading(false);
+      }
+    };
+    fetchReviews();
+  }, [product.id]);
+
+  const handleReviewSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmittingReview(true);
+    try {
+      const reviewPayload = {
+        ...newReview,
+        product_id: product.id,
+        initials: newReview.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()
+      };
+      const res = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reviewPayload)
+      });
+      if (res.ok) {
+        setReviewSubmitted(true);
+        const data = await res.json();
+        setReviews([data, ...reviews]);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setSubmittingReview(false);
+    }
+  };
 
   const handleAdd = () => {
     setAdding(true);
@@ -78,12 +127,12 @@ export default function ProductDetailClient({ product }: { product: any }) {
             {product.name}
           </h1>
 
-          {(product.reviews > 0) && (
+          {(reviews.length > 0) && (
             <div className="flex items-center gap-1 mb-6">
               {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} size={14} className={i < Math.floor(product.rating || 5) ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'} />
+                <Star key={i} size={14} className={i < Math.floor(reviews.reduce((sum: number, r: any) => sum + r.rating, 0) / reviews.length) ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'} />
               ))}
-              <span className="text-[#5c1a25]/50 text-sm ml-2">({product.reviews} reviews)</span>
+              <span className="text-[#5c1a25]/50 text-sm ml-2">({reviews.length} reviews)</span>
             </div>
           )}
 
@@ -122,6 +171,78 @@ export default function ProductDetailClient({ product }: { product: any }) {
               <span className="w-24 font-medium uppercase text-xs tracking-wider">Shipping</span>
               <span>Free nationwide delivery in 3-5 days</span>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Reviews Section */}
+      <div className="mt-20 border-t border-[#5c1a25]/10 pt-12">
+        <h2 className="font-playfair text-2xl text-[#5c1a25] mb-8">Customer Reviews</h2>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {/* Reviews List */}
+          <div className="lg:col-span-2 space-y-6">
+            {reviewsLoading ? (
+              <p className="text-[#5c1a25]/50">Loading reviews...</p>
+            ) : reviews.length === 0 ? (
+              <p className="text-[#5c1a25]/50">No reviews yet. Be the first to review this product!</p>
+            ) : (
+              reviews.map(review => (
+                <div key={review.id} className="bg-white/40 border border-[#5c1a25]/10 p-6">
+                  <div className="flex items-center gap-1 mb-2">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} size={12} className={i < review.rating ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'} />
+                    ))}
+                  </div>
+                  <h4 className="font-playfair text-lg text-[#5c1a25] font-medium">{review.name}</h4>
+                  <p className="text-xs text-[#5c1a25]/50 mb-3">{review.city}</p>
+                  <p className="font-cormorant text-[#5c1a25]/80">{review.text}</p>
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* Add Review Form */}
+          <div className="bg-white/60 p-6 border border-[#5c1a25]/10 h-fit">
+            <h3 className="font-playfair text-xl text-[#5c1a25] mb-6">Write a Review</h3>
+            {reviewSubmitted ? (
+              <p className="text-green-600 font-medium">Thank you for your review!</p>
+            ) : (
+              <form onSubmit={handleReviewSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">Rating</label>
+                  <div className="flex items-center gap-1">
+                    {[1, 2, 3, 4, 5].map(num => (
+                      <button
+                        key={num}
+                        type="button"
+                        onClick={() => setNewReview({ ...newReview, rating: num })}
+                        className="p-1 focus:outline-none"
+                      >
+                        <Star size={20} className={num <= newReview.rating ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'} />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">Name</label>
+                    <input required type="text" value={newReview.name} onChange={e => setNewReview({ ...newReview, name: e.target.value })} className="w-full border border-[#5c1a25]/20 p-2 text-sm bg-transparent outline-none focus:border-[#c9a96e]" />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">City</label>
+                    <input required type="text" value={newReview.city} onChange={e => setNewReview({ ...newReview, city: e.target.value })} className="w-full border border-[#5c1a25]/20 p-2 text-sm bg-transparent outline-none focus:border-[#c9a96e]" />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">Review</label>
+                  <textarea required rows={4} value={newReview.text} onChange={e => setNewReview({ ...newReview, text: e.target.value })} className="w-full border border-[#5c1a25]/20 p-2 text-sm bg-transparent outline-none focus:border-[#c9a96e] resize-none" />
+                </div>
+                <button type="submit" disabled={submittingReview} className="w-full bg-[#5c1a25] text-[#EFE9E1] py-3 text-xs tracking-[0.2em] uppercase hover:bg-[#7a2535] transition-colors disabled:opacity-50">
+                  {submittingReview ? 'Submitting...' : 'Submit Review'}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>
