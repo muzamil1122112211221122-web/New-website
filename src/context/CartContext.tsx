@@ -28,10 +28,10 @@ const CartContext = createContext<CartContextType | null>(null);
 
 function getSessionId(): string {
   if (typeof window === 'undefined') return '';
-  let sid = localStorage.getItem('ijc_session_id');
+  let sid = localStorage.getItem('IC_session_id');
   if (!sid) {
     sid = crypto.randomUUID();
-    localStorage.setItem('ijc_session_id', sid);
+    localStorage.setItem('IC_session_id', sid);
   }
   return sid;
 }

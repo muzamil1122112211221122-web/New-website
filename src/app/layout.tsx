@@ -6,7 +6,7 @@ import LoadingScreen from "@/components/LoadingScreen";
 import PageTransition from "@/components/PageTransition";
 
 export const metadata: Metadata = {
-  title: "IJC – Ijaz Casting & Jewellery Centre",
+  title: "IC – Ijaz Casting & Jewellery Centre",
   description: "Pakistan's finest jewellery craftsmanship since decades. Custom rings, necklaces, bangles and more.",
 };
 

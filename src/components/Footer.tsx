@@ -23,7 +23,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
               <div className="relative w-14 h-14">
-                <Image src="/logo.png" alt="IJC Logo" fill className="object-contain brightness-200" />
+                <Image src="/logo.png" alt="IC Logo" fill className="object-contain brightness-200" />
               </div>
             </div>
             <h3
@@ -210,7 +210,7 @@ export default function Footer() {
             className="text-[#EFE9E1]/30"
             style={{ ...optima, fontSize: '11px', fontWeight: 300, letterSpacing: '0.08em' }}
           >
-            © {new Date().getFullYear()} Ijaz Casting &amp; Jewellery Centre (IJC). All rights reserved.
+            © {new Date().getFullYear()} Ijaz Casting &amp; Jewellery Centre (IC). All rights reserved.
           </p>
           <p
             className="text-[#c9a96e]/50 uppercase tracking-widest"

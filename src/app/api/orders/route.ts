@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
     // Generate order number
     const { count } = await supabaseAdmin.from('orders').select('*', { count: 'exact', head: true });
-    const orderNumber = `IJC-${String((count ?? 0) + 1001).padStart(4, '0')}`;
+    const orderNumber = `IC-${String((count ?? 0) + 1001).padStart(4, '0')}`;
     const id = `order-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 
     const { error } = await supabaseAdmin.from('orders').insert({

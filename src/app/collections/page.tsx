@@ -48,7 +48,7 @@ function CollectionsContent() {
         <div className="bg-[#5c1a25] py-16 px-6 text-center relative overflow-hidden">
           <div className="absolute inset-0 opacity-5"
             style={{ backgroundImage: 'repeating-linear-gradient(45deg, #c9a96e 0, #c9a96e 1px, transparent 0, transparent 50%)', backgroundSize: '20px 20px' }} />
-          <p className="font-optima text-[#c9a96e] tracking-[0.4em] uppercase text-sm mb-3 relative">IJC</p>
+          <p className="font-optima text-[#c9a96e] tracking-[0.4em] uppercase text-sm mb-3 relative">IC</p>
           <h1 className="font-playfair text-[#EFE9E1] text-4xl md:text-5xl font-bold relative">Our Collections</h1>
           <p className="font-optima text-[#EFE9E1]/60 mt-3 text-base relative">Handcrafted excellence in every piece</p>
         </div>

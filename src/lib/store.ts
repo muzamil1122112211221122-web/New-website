@@ -25,14 +25,14 @@ export interface Order {
 // Global store (persisted in memory for the server lifetime)
 declare global {
   // eslint-disable-next-line no-var
-  var __ijcOrders: Order[] | undefined;
+  var __ICOrders: Order[] | undefined;
 }
 
-if (!global.__ijcOrders) {
-  global.__ijcOrders = [
+if (!global.__ICOrders) {
+  global.__ICOrders = [
     {
       id: 'demo-1',
-      orderNumber: 'IJC-0001',
+      orderNumber: 'IC-0001',
       customerName: 'Ahmed Ali',
       customerPhone: '0300-1234567',
       customerEmail: 'ahmed@example.com',
@@ -46,7 +46,7 @@ if (!global.__ijcOrders) {
     },
     {
       id: 'demo-2',
-      orderNumber: 'IJC-0002',
+      orderNumber: 'IC-0002',
       customerName: 'Fatima Zahra',
       customerPhone: '0321-9876543',
       customerEmail: 'fatima@example.com',
@@ -64,20 +64,20 @@ if (!global.__ijcOrders) {
 }
 
 export const ordersStore = {
-  getAll: (): Order[] => global.__ijcOrders ?? [],
+  getAll: (): Order[] => global.__ICOrders ?? [],
   add: (order: Order): void => {
-    if (!global.__ijcOrders) global.__ijcOrders = [];
-    global.__ijcOrders.unshift(order);
+    if (!global.__ICOrders) global.__ICOrders = [];
+    global.__ICOrders.unshift(order);
   },
   updateStatus: (id: string, status: Order['status']): boolean => {
-    const idx = (global.__ijcOrders ?? []).findIndex((o) => o.id === id);
+    const idx = (global.__ICOrders ?? []).findIndex((o) => o.id === id);
     if (idx === -1) return false;
-    global.__ijcOrders![idx].status = status;
+    global.__ICOrders![idx].status = status;
     return true;
   },
   getNextOrderNumber: (): string => {
-    const orders = global.__ijcOrders ?? [];
+    const orders = global.__ICOrders ?? [];
     const num = orders.length + 1;
-    return `IJC-${String(num).padStart(4, '0')}`;
+    return `IC-${String(num).padStart(4, '0')}`;
   },
 };

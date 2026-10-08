@@ -49,7 +49,7 @@ export default function LoadingScreen() {
             <div className="relative w-40 h-40 mb-8 opacity-90">
               <Image
                 src="/logo.png"
-                alt="IJC"
+                alt="IC"
                 fill
                 className="object-contain"
                 priority

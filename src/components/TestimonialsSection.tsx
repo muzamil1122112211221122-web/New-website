@@ -7,9 +7,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 const optima = "'Optima Nova LT Pro', Optima, 'Gill Sans MT', sans-serif";
 
 const fixedReviews: { id: string; name: string; city: string; rating: number; text: string; initials: string; image: string | null }[] = [
-  { id: 'f1', name: 'Sana Rehman',   city: 'Lahore',     rating: 5, text: 'Absolutely stunning bridal set! The quality is incomparable. Everyone at my wedding loved my jewelry. IJC exceeded my expectations for sure!', initials: 'SR', image: null },
+  { id: 'f1', name: 'Sana Rehman',   city: 'Lahore',     rating: 5, text: 'Absolutely stunning bridal set! The quality is incomparable. Everyone at my wedding loved my jewelry. IC exceeded my expectations for sure!', initials: 'SR', image: null },
   { id: 'f2', name: 'Ahmed Malik',   city: 'Karachi',    rating: 4.5, text: 'Custom ring for my fiancé purchased and the people were really very cooperative. The ring looked even better than what I had expected. Totally worth it!', initials: 'AM', image: null },
-  { id: 'f3', name: 'Nadia Hussain', city: 'Islamabad',  rating: 5, text: "The workmanship that comes from IJC is impeccable. I've been purchasing from them for years now and have yet to find fault with any of their orders. A+ company!", initials: 'NH', image: null },
+  { id: 'f3', name: 'Nadia Hussain', city: 'Islamabad',  rating: 5, text: "The workmanship that comes from IC is impeccable. I've been purchasing from them for years now and have yet to find fault with any of their orders. A+ company!", initials: 'NH', image: null },
   { id: 'f4', name: 'Bilal Khan',    city: 'Faisalabad', rating: 4.5, text: 'There is certainty in the gold purity while the designs are forever classic. I purchased the necklace set for my mother on her anniversary, and she loves it.', initials: 'BK', image: null },
 ];
 
@@ -242,7 +242,7 @@ export default function TestimonialsSection() {
                         {form.text.split(/\s+/).filter(Boolean).length}/150 words
                       </span>
                     </div>
-                    <textarea required className="form-input resize-none h-24" placeholder="Share your experience with IJC (Max 150 words)..." value={form.text} onChange={(e) => {
+                    <textarea required className="form-input resize-none h-24" placeholder="Share your experience with IC (Max 150 words)..." value={form.text} onChange={(e) => {
                       const words = e.target.value.split(/\s+/).filter(Boolean);
                       if (words.length <= 150 || e.target.value.length < form.text.length) {
                         setForm((f) => ({ ...f, text: e.target.value }));

@@ -339,7 +339,7 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-[#EFE9E1] flex items-center justify-center p-6">
       <div className="bg-white max-w-md w-full p-8 rounded-xl shadow-2xl border border-[#5c1a25]/10">
         <div className="text-center mb-8">
-          <h1 className="font-playfair text-3xl text-[#5c1a25] mb-2">IJC Admin Panel</h1>
+          <h1 className="font-playfair text-3xl text-[#5c1a25] mb-2">IC Admin Panel</h1>
           <p className="text-sm text-gray-500 tracking-widest uppercase">Secure Login</p>
         </div>
         <form onSubmit={handleLogin} className="space-y-5">
@@ -397,7 +397,7 @@ export default function AdminDashboard() {
       {/* Sidebar */}
       <div className="w-full md:w-64 bg-[#5c1a25] text-[#EFE9E1] flex-shrink-0 flex flex-col shadow-xl">
         <div className="p-6 border-b border-white/10">
-          <h1 className="font-playfair text-2xl tracking-widest text-[#c9a96e]">IJC ADMIN</h1>
+          <h1 className="font-playfair text-2xl tracking-widest text-[#c9a96e]">IC ADMIN</h1>
           <p className="text-[10px] text-white/40 tracking-widest mt-1 uppercase">Ijaz Casting & Jewellery Centre</p>
         </div>
         <div className="flex-1 py-4 flex flex-col gap-0.5">

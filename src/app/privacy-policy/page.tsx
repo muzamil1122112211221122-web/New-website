@@ -11,7 +11,7 @@ export default function PrivacyPolicyPage() {
             Privacy Policy
           </h1>
           <p className="font-optima text-[#EFE9E1]/45 mt-2 tracking-[0.35em] text-xs uppercase">
-            IJC — Ijaz Casting &amp; Jewellery Centre
+            IC — Ijaz Casting &amp; Jewellery Centre
           </p>
         </div>
         <div className="max-w-3xl mx-auto px-6 py-16 space-y-8">
@@ -46,7 +46,7 @@ export default function PrivacyPolicyPage() {
             },
             {
               title: 'Contact Us',
-              body: 'For any privacy-related concerns, contact us at 03216004630 (WhatsApp) or email info@ijcjewellery.pk. We will respond within 2 business days.',
+              body: 'For any privacy-related concerns, contact us at 03216004630 (WhatsApp) or email info@ICjewellery.pk. We will respond within 2 business days.',
             },
           ].map(({ title, body }) => (
             <div key={title} className="pb-6 border-b border-[#5c1a25]/10 last:border-0">

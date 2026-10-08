@@ -8,7 +8,7 @@ export default function ReturnPolicyPage() {
       <main className="pt-24 min-h-screen bg-[#EFE9E1]">
         <div className="bg-[#5c1a25] py-14 text-center">
           <h1 className="text-[#EFE9E1] font-light tracking-widest" style={{ fontSize: '2.4rem' }}>Return &amp; Exchange Policy</h1>
-          <p className="text-[#EFE9E1]/45 mt-2 tracking-[0.35em] text-xs uppercase font-optima font-light">IJC — Ijaz Casting &amp; Jewellery Centre</p>
+          <p className="text-[#EFE9E1]/45 mt-2 tracking-[0.35em] text-xs uppercase font-optima font-light">IC — Ijaz Casting &amp; Jewellery Centre</p>
         </div>
         <div className="max-w-3xl mx-auto px-6 py-16 space-y-8">
           {[

@@ -10,12 +10,12 @@ export default function AboutPage() {
       <main className="pt-24">
         {/* Hero */}
         <div className="relative h-72 md:h-96 overflow-hidden">
-          <Image src="/p6.jpg" alt="About IJC" fill className="object-cover" />
+          <Image src="/p6.jpg" alt="About IC" fill className="object-cover" />
           <div className="absolute inset-0 bg-[#1a0a0d]/70" />
           <div className="relative z-10 h-full flex items-center justify-center text-center px-6">
             <div>
               <p className="font-optima text-[#c9a96e] tracking-[0.4em] uppercase text-sm mb-3">Our Story</p>
-              <h1 className="font-playfair text-[#EFE9E1] text-4xl md:text-6xl font-bold mb-4">About IJC</h1>
+              <h1 className="font-playfair text-[#EFE9E1] text-4xl md:text-6xl font-bold mb-4">About IC</h1>
               <div className="h-px w-20 bg-[#c9a96e] mx-auto" />
             </div>
           </div>
@@ -28,7 +28,7 @@ export default function AboutPage() {
             <h2 className="section-heading mb-6">Ijaz Casting & Jewellery Centre</h2>
             <div className="gold-divider w-24 mx-auto mb-8" />
             <p className="font-optima text-[#5c1a25]/80 text-lg leading-relaxed mb-5">
-              For over two and a half decades, Ijaz Casting & Jewellery Centre (IJC) has been synonymous with 
+              For over two and a half decades, Ijaz Casting & Jewellery Centre (IC) has been synonymous with 
               uncompromising quality, timeless designs, and masterful craftsmanship in Pakistan&apos;s jewellery industry.
             </p>
             <p className="font-optima text-[#5c1a25]/70 text-base leading-relaxed">

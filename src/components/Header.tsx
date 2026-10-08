@@ -54,7 +54,7 @@ export default function Header() {
       <div className={`fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} onClick={() => setMobileOpen(false)} />
       <div className={`fixed top-0 left-0 bottom-0 w-[80%] max-w-sm bg-[#EFE9E1] z-[100] shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] lg:hidden flex flex-col ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex items-center justify-between p-6 border-b border-[#5c1a25]/10">
-          <span className="font-playfair text-xl text-[#5c1a25] tracking-widest">IJC</span>
+          <span className="font-playfair text-xl text-[#5c1a25] tracking-widest">IC</span>
           <button onClick={() => setMobileOpen(false)} className="text-[#5c1a25] hover:text-[#5c1a25]/60">
             <X size={24} />
           </button>
@@ -195,7 +195,7 @@ export default function Header() {
               {/* Logo */}
               <Link href="/" className={`flex items-center gap-2.5 group transition-transform duration-500 origin-center ${scrolled ? 'scale-95' : 'scale-100'}`}>
                 <div className="relative w-9 h-9">
-                  <Image src="/logo.png" alt="IJC Logo" fill className="object-contain" priority />
+                  <Image src="/logo.png" alt="IC Logo" fill className="object-contain" priority />
                 </div>
                 <div className="hidden sm:block">
                   <div
