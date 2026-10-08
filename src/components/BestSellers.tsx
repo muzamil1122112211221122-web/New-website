@@ -7,11 +7,13 @@ import ProductCard from './ProductCard';
 
 export default function BestSellers() {
   const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/products').then(r => r.json()).then(data => {
       if (Array.isArray(data)) setProducts(data);
-    }).catch(() => {});
+      setLoading(false);
+    }).catch(() => setLoading(false));
   }, []);
 
   const bestSellers = products.filter((p) => p.isBestSeller || p.is_best_seller).slice(0, 4);
@@ -35,9 +37,19 @@ export default function BestSellers() {
 
         {/* Products Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {bestSellers.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {loading ? (
+            Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="animate-pulse">
+                <div className="bg-[#5c1a25]/10 aspect-square w-full mb-3" />
+                <div className="bg-[#5c1a25]/10 h-4 w-3/4 mb-2" />
+                <div className="bg-[#5c1a25]/10 h-4 w-1/2" />
+              </div>
+            ))
+          ) : (
+            bestSellers.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))
+          )}
         </div>
       </div>
     </section>
