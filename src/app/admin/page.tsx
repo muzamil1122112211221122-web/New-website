@@ -760,7 +760,7 @@ export default function AdminDashboard() {
                   <div>
                     <label className="block text-xs font-bold text-gray-500 uppercase">Category</label>
                     <select className="w-full border rounded p-2 mt-1 text-sm" value={editingProduct.category} onChange={e => setEditingProduct({...editingProduct, category: e.target.value})}>
-                      {['rings','necklaces','earrings','bracelets','bangles','pendants','nose pins'].map(c => (
+                      {['rings','necklaces','earrings','bangles','nose pins'].map(c => (
                         <option key={c} value={c}>{c.charAt(0).toUpperCase()+c.slice(1)}</option>
                       ))}
                     </select>

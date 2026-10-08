@@ -7,7 +7,7 @@ import ProductCard from '@/components/ProductCard';
 import { SlidersHorizontal, X } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 
-const categories = ['All', 'Rings', 'Necklaces', 'Earrings', 'Bracelets', 'Bangles', 'Pendants', 'Nose Pins'];
+const categories = ['All', 'Rings', 'Necklaces', 'Earrings', 'Bangles', 'Nose Pins'];
 
 function CollectionsContent() {
   const searchParams = useSearchParams();

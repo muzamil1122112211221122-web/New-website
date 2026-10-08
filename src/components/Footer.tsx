@@ -103,9 +103,7 @@ export default function Footer() {
                 { label: 'Rings', href: '/collections?cat=rings' },
                 { label: 'Necklaces', href: '/collections?cat=necklaces' },
                 { label: 'Earrings', href: '/collections?cat=earrings' },
-                { label: 'Bracelets', href: '/collections?cat=bracelets' },
                 { label: 'Bangles', href: '/collections?cat=bangles' },
-                { label: 'Pendants', href: '/collections?cat=pendants' },
               ].map((c) => (
                 <li key={c.label}>
                   <Link

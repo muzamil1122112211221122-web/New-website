@@ -7,7 +7,7 @@ import PageTransition from "@/components/PageTransition";
 
 export const metadata: Metadata = {
   title: "IJC – Ijaz Casting & Jewellery Centre",
-  description: "Pakistan's finest jewellery craftsmanship since decades. Custom rings, necklaces, bracelets and more.",
+  description: "Pakistan's finest jewellery craftsmanship since decades. Custom rings, necklaces, bangles and more.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
