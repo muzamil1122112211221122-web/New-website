@@ -173,11 +173,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
             <span className="font-playfair text-2xl text-[#5c1a25] font-semibold">
               {product.price === 0 ? "Get info on WhatsApp" : `Rs. ${product.price.toLocaleString()}`}
             </span>
-            {product.original_price && (
-              <span className="text-lg text-[#5c1a25]/40 line-through mb-0.5">
-                Rs. {product.original_price.toLocaleString()}
-              </span>
-            )}
+            
           </div>
 
           <p className="font-cormorant text-[#5c1a25]/80 text-lg mb-8 leading-relaxed">

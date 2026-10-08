@@ -30,11 +30,7 @@ export default function ProductCard({ product }) {
           {(product.isBestSeller || product.is_best_seller) && (
             <span className="badge bg-[#c9a96e] text-white">Best Seller</span>
           )}
-          {(product.originalPrice || product.original_price) && (
-            <span className="badge bg-red-500 text-white">
-              {Math.round((((product.originalPrice || product.original_price) - product.price) / (product.originalPrice || product.original_price)) * 100)}% Off
-            </span>
-          )}
+          
         </div>
 
         {/* Quick Add */}
@@ -97,14 +93,7 @@ export default function ProductCard({ product }) {
           >
             {product.price === 0 ? "Get info on WhatsApp" : `Rs. ${product.price.toLocaleString()}`}
           </span>
-          {(product.originalPrice || product.original_price) && (
-            <span
-              className="text-[#5c1a25]/35 line-through"
-              style={{ fontFamily: 'Optima, sans-serif', fontSize: '12px' }}
-            >
-              Rs. {(product.originalPrice || product.original_price).toLocaleString()}
-            </span>
-          )}
+          
         </div>
       </div>
     </div>
