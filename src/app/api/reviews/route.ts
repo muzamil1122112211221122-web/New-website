@@ -18,6 +18,9 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const review = await req.json();
+  if (!review.id) {
+    review.id = crypto.randomUUID();
+  }
   const { data, error } = await supabaseAdmin.from('reviews').insert(review).select().single();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json(data);
