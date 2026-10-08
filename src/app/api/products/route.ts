@@ -23,6 +23,8 @@ export async function POST(req: NextRequest) {
   // Also clean up any other camelCase fields that might cause issues if they don't exist in DB
   delete product.isNew;
   delete product.weight;
+  delete product.material;
+  delete product.reviews;
 
   const { data, error } = await supabaseAdmin.from('products').upsert(product).select().single();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });

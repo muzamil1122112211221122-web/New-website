@@ -207,8 +207,13 @@ export default function AdminDashboard() {
     e.preventDefault();
     if (!editingProduct) return;
     const isNew = !products.find(p => p.id === editingProduct.id);
-    await fetch('/api/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(editingProduct) });
-    setProducts(isNew ? [editingProduct, ...products] : products.map(p => p.id === editingProduct.id ? editingProduct : p));
+    const res = await fetch('/api/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(editingProduct) });
+    const data = await res.json();
+    if (!res.ok || data.error) {
+      alert('Error saving product: ' + (data.error || 'Unknown error'));
+      return;
+    }
+    setProducts(isNew ? [data, ...products] : products.map(p => p.id === editingProduct.id ? data : p));
     setShowProductModal(false);
   };
 
