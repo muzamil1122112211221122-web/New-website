@@ -211,8 +211,18 @@ export default function TestimonialsSection() {
                     </div>
                   </div>
                   <div>
-                    <label style={{ fontFamily: optima, fontSize: '9px', fontWeight: 400, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#5c1a25', display: 'block', marginBottom: '6px' }}>Your Review *</label>
-                    <textarea required className="form-input resize-none h-24" placeholder="Share your experience with IJC..." value={form.text} onChange={(e) => setForm((f) => ({ ...f, text: e.target.value }))} />
+                    <div className="flex justify-between items-end mb-2">
+                      <label style={{ fontFamily: optima, fontSize: '9px', fontWeight: 400, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#5c1a25', display: 'block' }}>Your Review *</label>
+                      <span className={`text-[10px] ${form.text.split(/\s+/).filter(Boolean).length > 150 ? 'text-red-500' : 'text-[#5c1a25]/50'}`}>
+                        {form.text.split(/\s+/).filter(Boolean).length}/150 words
+                      </span>
+                    </div>
+                    <textarea required className="form-input resize-none h-24" placeholder="Share your experience with IJC (Max 150 words)..." value={form.text} onChange={(e) => {
+                      const words = e.target.value.split(/\s+/).filter(Boolean);
+                      if (words.length <= 150 || e.target.value.length < form.text.length) {
+                        setForm((f) => ({ ...f, text: e.target.value }));
+                      }
+                    }} />
                   </div>
                   <div>
                     <label style={{ fontFamily: optima, fontSize: '9px', fontWeight: 400, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#5c1a25', display: 'block', marginBottom: '6px' }}>Photo (optional)</label>
@@ -272,7 +282,11 @@ export default function TestimonialsSection() {
                   </div>
                 )}
                 <p className="mt-3 mb-5 flex-1" style={{ fontFamily: optima, fontSize: '13px', fontWeight: 300, color: 'rgba(44,24,16,0.8)', lineHeight: 1.9, fontStyle: 'italic' }}>
-                  &ldquo;{r.text}&rdquo;
+                  &ldquo;
+                  {r.text.split(/\s+/).filter(Boolean).length > 150 
+                    ? r.text.split(/\s+/).filter(Boolean).slice(0, 150).join(' ') + '...' 
+                    : r.text}
+                  &rdquo;
                 </p>
                 <div className="flex items-center gap-3 mt-auto pt-4 border-t border-[#5c1a25]/8">
                   <div className="w-9 h-9 bg-[#5c1a25] flex items-center justify-center flex-shrink-0">
