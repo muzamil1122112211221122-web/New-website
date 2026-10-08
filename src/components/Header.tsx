@@ -183,7 +183,7 @@ export default function Header() {
           }`}
         >
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <div className="flex items-center justify-between py-4">
+            <div className="flex items-center justify-between py-2.5">
 
               {/* Mobile menu */}
               <button
@@ -191,12 +191,12 @@ export default function Header() {
                 onClick={() => setMobileOpen(!mobileOpen)}
                 aria-label="Toggle menu"
               >
-                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+                {mobileOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
 
               {/* Logo */}
-              <Link href="/" className={`flex items-center gap-3 group transition-transform duration-500 origin-center ${scrolled ? 'scale-90' : 'scale-100'}`}>
-                <div className="relative w-12 h-12">
+              <Link href="/" className={`flex items-center gap-2.5 group transition-transform duration-500 origin-center ${scrolled ? 'scale-95' : 'scale-100'}`}>
+                <div className="relative w-9 h-9">
                   <Image src="/logo.png" alt="IJC Logo" fill className="object-contain" priority />
                 </div>
                 <div className="hidden sm:block">
@@ -204,9 +204,8 @@ export default function Header() {
                     className="text-[#5c1a25] leading-tight tracking-[0.18em] uppercase"
                     style={{
                       fontFamily: "'Optima Nova LT Pro', Optima, var(--font-playfair), serif",
-                      fontSize: scrolled ? '13px' : '15px',
+                      fontSize: '12px',
                       fontWeight: 600,
-                      transition: 'font-size 0.4s ease',
                     }}
                   >
                     Ijaz Casting
@@ -215,7 +214,7 @@ export default function Header() {
                     className="text-[#5c1a25]/55 tracking-[0.35em] uppercase"
                     style={{
                       fontFamily: "'Optima Nova LT Pro', Optima, var(--font-cormorant), serif",
-                      fontSize: '9px',
+                      fontSize: '8px',
                       fontWeight: 300,
                       letterSpacing: '0.4em',
                     }}
