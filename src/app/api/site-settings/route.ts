@@ -3,16 +3,40 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-server';
 
 export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const key = searchParams.get('key') || 'craftsmanship_images';
-  const { data, error } = await supabaseAdmin.from('site_settings').select('value').eq('key', key).single();
-  if (error || !data) return NextResponse.json({ value: ['/p5.jpg', '/p6.jpg', '/p7.jpg'] });
-  return NextResponse.json({ value: data.value });
+  const { data, error } = await supabaseAdmin.from('featured_collections').select('*').in('id', ['craft_1', 'craft_2', 'craft_3']);
+  
+  const defaultImages = ['/p5.jpg', '/p6.jpg', '/p7.jpg'];
+  const images = [...defaultImages];
+
+  if (data && !error) {
+    data.forEach(item => {
+      if (item.id === 'craft_1' && item.image) images[0] = item.image;
+      if (item.id === 'craft_2' && item.image) images[1] = item.image;
+      if (item.id === 'craft_3' && item.image) images[2] = item.image;
+    });
+  }
+
+  return NextResponse.json({ value: images });
 }
 
 export async function POST(req: NextRequest) {
-  const { key, value } = await req.json();
-  const { data, error } = await supabaseAdmin.from('site_settings').upsert({ key, value }, { onConflict: 'key' }).select().single();
+  const { value } = await req.json(); // value should be an array of 3 images
+
+  if (!Array.isArray(value) || value.length !== 3) {
+    return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
+  }
+
+  const rows = value.map((img, idx) => ({
+    id: `craft_${idx + 1}`,
+    name: 'Craftsmanship Image',
+    count: '0',
+    desc: 'Internal',
+    image: img,
+    href: '#'
+  }));
+
+  const { error } = await supabaseAdmin.from('featured_collections').upsert(rows);
+
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json(data);
+  return NextResponse.json({ success: true });
 }

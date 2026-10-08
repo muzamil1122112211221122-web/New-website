@@ -76,7 +76,7 @@ function CraftsmanshipTab({ handleImageUpload }: { handleImageUpload: (file: Fil
 
   const handleSave = async () => {
     setSaving(true);
-    await fetch('/api/site-settings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: 'craftsmanship_images', value: images }) });
+    const res = await fetch('/api/site-settings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: 'craftsmanship_images', value: images }) }); if (!res.ok) { alert('Failed to save'); setSaving(false); return; }
     setSaving(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
