@@ -7,10 +7,24 @@ import { Phone, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
   const [form, setForm] = useState({ name: '', phone: '', subject: '', message: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSending(true);
+    try {
+      await fetch('/api/custom-orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          message: form.subject ? `[${form.subject}] ${form.message}` : form.message,
+        }),
+      });
+    } catch (_) {}
+    setSending(false);
     setSent(true);
   };
 
@@ -133,8 +147,8 @@ export default function ContactPage() {
                       <textarea required className="form-input resize-none h-32" placeholder="Your message..."
                         value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
                     </div>
-                    <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
-                      <Send size={14} /> Send Message
+                    <button type="submit" disabled={sending} className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-70">
+                      <Send size={14} /> {sending ? 'Sending...' : 'Send Message'}
                     </button>
                   </form>
                 </>
