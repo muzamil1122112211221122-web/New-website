@@ -17,15 +17,18 @@ function CollectionsContent() {
   const [sortBy, setSortBy] = useState('default');
   const [showFilters, setShowFilters] = useState(false);
   const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (catParam) {
       const match = categories.find(c => c.toLowerCase() === catParam.toLowerCase());
       if (match) setActiveCategory(match);
     }
+    setLoading(true);
     fetch('/api/products').then(res => res.json()).then(data => {
       if (Array.isArray(data)) setProducts(data);
-    }).catch(() => {});
+      setLoading(false);
+    }).catch(() => setLoading(false));
   }, [catParam]);
 
   const filtered = products
@@ -87,7 +90,17 @@ function CollectionsContent() {
           </div>
 
           {/* Products Grid */}
-          {filtered.length === 0 ? (
+          {loading ? (
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="animate-pulse">
+                  <div className="bg-[#5c1a25]/10 aspect-square w-full mb-3" />
+                  <div className="bg-[#5c1a25]/10 h-4 w-3/4 mb-2" />
+                  <div className="bg-[#5c1a25]/10 h-4 w-1/2" />
+                </div>
+              ))}
+            </div>
+          ) : filtered.length === 0 ? (
             <div className="text-center py-20">
               <p className="font-optima text-[#5c1a25]/50 text-xl">No products found in this category.</p>
             </div>
