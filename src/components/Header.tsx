@@ -133,14 +133,14 @@ export default function Header() {
       </div>
 
       {/* ── Fixed wrapper: announcement bar + main header ── */}
-      <div className="fixed top-0 left-0 right-0 z-50">
+      <div 
+        className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
+          scrolled ? '-translate-y-8' : 'translate-y-0'
+        }`}
+      >
 
-        {/* Announcement Bar — collapses on scroll */}
-        <div
-          className={`bg-[#5c1a25] text-[#EFE9E1] overflow-hidden transition-all duration-500 flex items-center ${
-            scrolled ? 'max-h-0 py-0 opacity-0' : 'max-h-10 py-2 opacity-100'
-          }`}
-        >
+        {/* Announcement Bar */}
+        <div className="h-8 bg-[#5c1a25] text-[#EFE9E1] flex items-center">
           <div className="flex items-center justify-center gap-2 text-center w-full px-2">
             <a
               href="https://wa.me/923216004630"
@@ -183,7 +183,7 @@ export default function Header() {
           }`}
         >
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <div className={`flex items-center justify-between transition-all duration-500 ${scrolled ? 'py-3' : 'py-5'}`}>
+            <div className="flex items-center justify-between py-4">
 
               {/* Mobile menu */}
               <button
@@ -195,8 +195,8 @@ export default function Header() {
               </button>
 
               {/* Logo */}
-              <Link href="/" className="flex items-center gap-3 group">
-                <div className={`relative transition-all duration-500 ${scrolled ? 'w-10 h-10' : 'w-14 h-14'}`}>
+              <Link href="/" className={`flex items-center gap-3 group transition-transform duration-500 origin-center ${scrolled ? 'scale-90' : 'scale-100'}`}>
+                <div className="relative w-12 h-12">
                   <Image src="/logo.png" alt="IJC Logo" fill className="object-contain" priority />
                 </div>
                 <div className="hidden sm:block">
