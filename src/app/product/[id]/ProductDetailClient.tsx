@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { ShoppingBag, Star, CheckCircle } from 'lucide-react';
+import { ShoppingBag, Star, StarHalf, CheckCircle } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
 export default function ProductDetailClient({ product }: { product: any }) {
@@ -104,6 +104,13 @@ export default function ProductDetailClient({ product }: { product: any }) {
     setZoomPos({ x, y });
   };
 
+  const [hoverRating, setHoverRating] = useState(0);
+  const handleRatingHover = (e: React.MouseEvent<HTMLDivElement>, starIndex: number) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const isLeftHalf = e.clientX - rect.left < rect.width / 2;
+    setHoverRating(isLeftHalf ? starIndex - 0.5 : starIndex);
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
@@ -152,9 +159,12 @@ export default function ProductDetailClient({ product }: { product: any }) {
 
           {(reviews.length > 0) && (
             <div className="flex items-center gap-1 mb-6">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} size={14} className={i < Math.floor(reviews.reduce((sum: number, r: any) => sum + r.rating, 0) / reviews.length) ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'} />
-              ))}
+              {[1, 2, 3, 4, 5].map(star => {
+                const avg = reviews.reduce((sum: number, r: any) => sum + r.rating, 0) / reviews.length;
+                if (avg >= star) return <Star key={star} size={14} className="fill-[#c9a96e] text-[#c9a96e]" />;
+                if (avg >= star - 0.5) return <StarHalf key={star} size={14} className="fill-[#c9a96e] text-[#c9a96e]" />;
+                return <Star key={star} size={14} className="text-[#c9a96e]/30" />;
+              })}
               <span className="text-[#5c1a25]/50 text-sm ml-2">({reviews.length} reviews)</span>
             </div>
           )}
@@ -212,17 +222,26 @@ export default function ProductDetailClient({ product }: { product: any }) {
               <form onSubmit={handleReviewSubmit} className="space-y-4">
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">Rating</label>
-                  <div className="flex items-center gap-1">
-                    {[1, 2, 3, 4, 5].map(num => (
-                      <button
-                        key={num}
-                        type="button"
-                        onClick={() => setNewReview({ ...newReview, rating: num })}
-                        className="p-1 focus:outline-none"
-                      >
-                        <Star size={20} className={num <= newReview.rating ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'} />
-                      </button>
-                    ))}
+                  <div className="flex items-center gap-1" onMouseLeave={() => setHoverRating(0)}>
+                    {[1, 2, 3, 4, 5].map(num => {
+                      const displayValue = hoverRating || newReview.rating;
+                      return (
+                        <div
+                          key={num}
+                          className="cursor-pointer p-1"
+                          onMouseMove={(e) => handleRatingHover(e, num)}
+                          onClick={() => setNewReview({ ...newReview, rating: hoverRating || num })}
+                        >
+                          {displayValue >= num ? (
+                            <Star size={20} className="fill-[#c9a96e] text-[#c9a96e]" />
+                          ) : displayValue >= num - 0.5 ? (
+                            <StarHalf size={20} className="fill-[#c9a96e] text-[#c9a96e]" />
+                          ) : (
+                            <Star size={20} className="text-[#c9a96e]/30" />
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
                 <div>
@@ -264,9 +283,11 @@ export default function ProductDetailClient({ product }: { product: any }) {
                 <div key={review.id} className="bg-white/40 border border-[#5c1a25]/10 p-6 flex flex-col md:flex-row gap-6">
                   <div className="flex-1">
                     <div className="flex items-center gap-1 mb-2">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} size={12} className={i < review.rating ? 'fill-[#c9a96e] text-[#c9a96e]' : 'text-[#c9a96e]/30'} />
-                      ))}
+                      {[1, 2, 3, 4, 5].map(star => {
+                        if (review.rating >= star) return <Star key={star} size={12} className="fill-[#c9a96e] text-[#c9a96e]" />;
+                        if (review.rating >= star - 0.5) return <StarHalf key={star} size={12} className="fill-[#c9a96e] text-[#c9a96e]" />;
+                        return <Star key={star} size={12} className="text-[#c9a96e]/30" />;
+                      })}
                     </div>
                     <h4 className="font-playfair text-lg text-[#5c1a25] font-medium">{review.name}</h4>
                     <p className="text-xs text-[#5c1a25]/50 mb-3">{review.city}</p>

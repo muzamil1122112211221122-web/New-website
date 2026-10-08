@@ -15,29 +15,54 @@ const fixedReviews: { id: string; name: string; city: string; rating: number; te
 
 interface Review { id: string; name: string; city: string; rating: number; text: string; initials: string; image: string | null; }
 
+import { Star, StarHalf } from 'lucide-react';
+
 function StarDisplay({ rating }: { rating: number }) {
   return (
     <div className="flex gap-0.5">
-      {[1,2,3,4,5].map(i => (
-        <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill={i <= rating ? '#c9a96e' : 'none'} stroke="#c9a96e" strokeWidth="1.5">
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-        </svg>
-      ))}
+      {[1, 2, 3, 4, 5].map(star => {
+        if (rating >= star) {
+          return <Star key={star} size={13} className="fill-[#c9a96e] text-[#c9a96e]" />;
+        } else if (rating >= star - 0.5) {
+          return <StarHalf key={star} size={13} className="fill-[#c9a96e] text-[#c9a96e]" />;
+        } else {
+          return <Star key={star} size={13} className="text-[#c9a96e]/30" />;
+        }
+      })}
     </div>
   );
 }
 
 function StarPicker({ value, onChange }: { value: number; onChange: (v: number) => void }) {
   const [hover, setHover] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, starIndex: number) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const isLeftHalf = e.clientX - rect.left < rect.width / 2;
+    setHover(isLeftHalf ? starIndex - 0.5 : starIndex);
+  };
+
   return (
-    <div className="flex gap-1">
-      {[1,2,3,4,5].map(i => (
-        <button key={i} type="button" onClick={() => onChange(i)} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(0)}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill={(hover || value) >= i ? '#c9a96e' : 'none'} stroke="#c9a96e" strokeWidth="1.5">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-          </svg>
-        </button>
-      ))}
+    <div className="flex gap-1" onMouseLeave={() => setHover(0)}>
+      {[1, 2, 3, 4, 5].map(star => {
+        const displayValue = hover || value;
+        return (
+          <div 
+            key={star} 
+            className="cursor-pointer"
+            onMouseMove={(e) => handleMouseMove(e, star)}
+            onClick={() => onChange(hover)}
+          >
+            {displayValue >= star ? (
+              <Star size={22} className="fill-[#c9a96e] text-[#c9a96e]" />
+            ) : displayValue >= star - 0.5 ? (
+              <StarHalf size={22} className="fill-[#c9a96e] text-[#c9a96e]" />
+            ) : (
+              <Star size={22} className="text-[#c9a96e]/30" />
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
