@@ -787,16 +787,16 @@ export default function AdminDashboard() {
 
       {/* ── ORDER DETAIL MODAL ── */}
       {selectedOrder && (
-        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden">
-            <div className="p-6 border-b flex justify-between items-center bg-gray-50">
+        <div className="fixed inset-0 bg-black/60 z-[200] flex items-center justify-center p-4 sm:p-6" onClick={() => setSelectedOrder(null)}>
+          <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-full" onClick={e => e.stopPropagation()}>
+            <div className="p-6 border-b flex justify-between items-center bg-gray-50 shrink-0">
               <div>
                 <h2 className="text-xl font-bold text-gray-900">{selectedOrder.orderNumber}</h2>
                 <p className="text-sm text-gray-500">{new Date(selectedOrder.createdAt).toLocaleDateString('en-PK', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' })}</p>
               </div>
               <button onClick={() => setSelectedOrder(null)} className="p-2 hover:bg-gray-200 rounded-full"><X size={20} className="text-gray-500" /></button>
             </div>
-            <div className="p-6 overflow-y-auto max-h-[70vh] space-y-6">
+            <div className="p-6 overflow-y-auto flex-1 space-y-6">
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase mb-2">Update Status</p>
                 <div className="flex flex-wrap gap-2">
