@@ -21,7 +21,7 @@ const supabase = createClient(
 );
 
 type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
-type Tab = 'dashboard' | 'orders' | 'custom-orders' | 'products' | 'featured' | 'reviews' | 'ledger';
+type Tab = 'dashboard' | 'orders' | 'custom-orders' | 'products' | 'craftsmanship' | 'reviews' | 'ledger';
 
 interface OrderItem { id: string; name: string; price: number; quantity: number; image: string; }
 interface Order { id: string; orderNumber: string; customerName: string; customerPhone: string; customerEmail: string; address: string; city: string; items: OrderItem[]; total: number; status: OrderStatus; createdAt: string; notes?: string; }
@@ -58,6 +58,65 @@ function StatCard({ icon: Icon, label, value, sub, color }: { icon: any; label: 
       </div>
       <p className="text-2xl font-bold text-gray-900">{value}</p>
       {sub && <p className="text-xs text-gray-400 mt-1">{sub}</p>}
+    </div>
+  );
+}
+
+function CraftsmanshipTab({ handleImageUpload }: { handleImageUpload: (file: File, cb: (b64: string) => void) => void }) {
+  const [images, setImages] = useState<string[]>(['/p5.jpg', '/p6.jpg', '/p7.jpg']);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/site-settings?key=craftsmanship_images')
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data.value) && data.value.length === 3) setImages(data.value); })
+      .catch(() => {});
+  }, []);
+
+  const handleSave = async () => {
+    setSaving(true);
+    await fetch('/api/site-settings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: 'craftsmanship_images', value: images }) });
+    setSaving(false);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
+
+  const labels = ['Left (Tall)', 'Right Top', 'Right Bottom'];
+
+  return (
+    <div className="max-w-4xl mx-auto space-y-6">
+      <div className="flex justify-between items-center">
+        <div>
+          <h2 className="text-2xl font-playfair text-[#5c1a25]">Craftsmanship Section Images</h2>
+          <p className="text-sm text-gray-500 mt-1">Change the 3 photos shown in the "Art of Fine Craftsmanship" section on the homepage.</p>
+        </div>
+        <button onClick={handleSave} disabled={saving} className="bg-[#5c1a25] text-white px-6 py-2 rounded text-sm font-semibold disabled:opacity-50">
+          {saving ? 'Saving...' : saved ? '✓ Saved!' : 'Save Changes'}
+        </button>
+      </div>
+      <div className="grid grid-cols-3 gap-6">
+        {images.map((img, idx) => (
+          <div key={idx} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+            <p className="text-xs font-bold text-gray-500 uppercase mb-3">{labels[idx]}</p>
+            <div className={`relative bg-gray-100 rounded-lg overflow-hidden border-2 border-dashed border-gray-200 group ${idx === 0 ? 'aspect-[3/4]' : 'aspect-square'}`}>
+              {img && <Image src={img} alt={labels[idx]} fill className="object-cover rounded-lg" sizes="300px" />}
+              <label className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity rounded-lg">
+                <ImageIcon size={24} className="mb-2" />
+                <span className="text-xs font-semibold">Click to Upload</span>
+                <input type="file" accept="image/*" className="hidden" onChange={e => {
+                  const f = e.target.files?.[0];
+                  if (f) handleImageUpload(f, b64 => {
+                    const newImgs = [...images];
+                    newImgs[idx] = b64;
+                    setImages(newImgs);
+                  });
+                }} />
+              </label>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -328,7 +387,7 @@ export default function AdminDashboard() {
     { key: 'orders', icon: ShoppingBag, label: 'ORDERS', badge: pendingOrders || undefined },
     { key: 'custom-orders', icon: MessageSquare, label: 'ENQUIRIES', badge: unreadMsgs || undefined },
     { key: 'products', icon: Package, label: 'PRODUCTS' },
-    { key: 'featured', icon: ImageIcon, label: 'SHOWPIECE' },
+    { key: 'craftsmanship', icon: ImageIcon, label: 'CRAFTSMANSHIP' },
     { key: 'reviews', icon: Star, label: 'REVIEWS' },
     { key: 'ledger', icon: BookOpen, label: 'LEDGER' },
   ];
@@ -591,36 +650,9 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* ── FEATURED TAB ── */}
-        {tab === 'featured' && (
-          <div className="max-w-6xl mx-auto space-y-6">
-            <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-playfair text-[#5c1a25]">Featured Collections</h2>
-              <button onClick={handleSaveFeatured} className="bg-[#5c1a25] text-white px-6 py-2 rounded text-sm font-semibold">Save Changes</button>
-            </div>
-            <div className="grid lg:grid-cols-2 gap-6">
-              {featured.map((col, idx) => (
-                <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex gap-6">
-                  <div className="w-32 h-40 bg-gray-100 relative rounded-lg overflow-hidden flex-shrink-0 border border-gray-200 group">
-                    {col.image && <Image src={col.image} alt={col.name} fill className="object-cover" sizes="128px" />}
-                    <label className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity">
-                      <ImageIcon size={20} className="mb-1" /><span className="text-xs">Upload</span>
-                      <input type="file" accept="image/*" className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) handleImageUpload(f, b64 => { const nF = [...featured]; nF[idx].image = b64; setFeatured(nF); }); }} />
-                    </label>
-                  </div>
-                  <div className="flex-1 space-y-3">
-                    {(['name', 'desc', 'count', 'href'] as const).map(field => (
-                      <div key={field}>
-                        <label className="text-xs font-semibold text-gray-500 uppercase">{field === 'desc' ? 'Description' : field === 'href' ? 'Link URL' : field === 'count' ? 'Item Count' : 'Title'}</label>
-                        <input type={field === 'count' ? 'number' : 'text'} className="w-full border-b border-gray-200 py-1 outline-none focus:border-[#5c1a25] text-sm"
-                          value={(col as any)[field]} onChange={e => { const nF = [...featured]; (nF[idx] as any)[field] = field === 'count' ? parseInt(e.target.value)||0 : e.target.value; setFeatured(nF); }} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* ── CRAFTSMANSHIP TAB ── */}
+        {tab === 'craftsmanship' && (
+          <CraftsmanshipTab handleImageUpload={handleImageUpload} />
         )}
 
         {/* ── REVIEWS TAB ── */}

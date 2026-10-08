@@ -1,17 +1,34 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Award, Gem, Hammer } from 'lucide-react';
 
 const optima = "'Optima Nova LT Pro', Optima, 'Gill Sans MT', sans-serif";
 
-// 5K+ customers removed as requested
 const stats = [
   { icon: Award,  label: 'Years of Excellence', value: '25+' },
   { icon: Gem,    label: 'Pieces Crafted',       value: '10K+' },
   { icon: Hammer, label: 'Expert Craftsmen',     value: '15+' },
 ];
 
+const DEFAULT_IMAGES = ['/p5.jpg', '/p6.jpg', '/p7.jpg'];
+
 export default function CraftsmanshipSection() {
+  const [images, setImages] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/site-settings?key=craftsmanship_images')
+      .then(r => r.json())
+      .then(data => {
+        setImages(Array.isArray(data.value) && data.value.length === 3 ? data.value : DEFAULT_IMAGES);
+        setLoading(false);
+      })
+      .catch(() => { setImages(DEFAULT_IMAGES); setLoading(false); });
+  }, []);
+
   return (
     <section className="py-20 bg-[#1a0a0d]">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -21,14 +38,26 @@ export default function CraftsmanshipSection() {
           <div className="relative">
             <div className="grid grid-cols-2 gap-3">
               <div className="relative aspect-[3/4]">
-                <Image src="/p5.jpg" alt="Craftsmanship" fill sizes="25vw" className="object-cover" />
+                {loading ? (
+                  <div className="w-full h-full bg-white/10 animate-pulse" />
+                ) : (
+                  <Image src={images[0]} alt="Craftsmanship" fill sizes="25vw" className="object-cover" />
+                )}
               </div>
               <div className="flex flex-col gap-3 pt-8">
                 <div className="relative aspect-square">
-                  <Image src="/p6.jpg" alt="Gold work" fill sizes="12vw" className="object-cover" />
+                  {loading ? (
+                    <div className="w-full h-full bg-white/10 animate-pulse" />
+                  ) : (
+                    <Image src={images[1]} alt="Gold work" fill sizes="12vw" className="object-cover" />
+                  )}
                 </div>
                 <div className="relative aspect-square">
-                  <Image src="/p7.jpg" alt="Detail" fill sizes="12vw" className="object-cover" />
+                  {loading ? (
+                    <div className="w-full h-full bg-white/10 animate-pulse" />
+                  ) : (
+                    <Image src={images[2]} alt="Detail" fill sizes="12vw" className="object-cover" />
+                  )}
                 </div>
               </div>
             </div>
@@ -42,9 +71,7 @@ export default function CraftsmanshipSection() {
               Our Heritage
             </p>
 
-            <h2
-              style={{ fontFamily: optima, fontSize: 'clamp(2rem, 3.5vw, 3.2rem)', fontWeight: 200, letterSpacing: '0.04em', color: '#EFE9E1', lineHeight: 1.15, marginBottom: '20px' }}
-            >
+            <h2 style={{ fontFamily: optima, fontSize: 'clamp(2rem, 3.5vw, 3.2rem)', fontWeight: 200, letterSpacing: '0.04em', color: '#EFE9E1', lineHeight: 1.15, marginBottom: '20px' }}>
               The Art of Fine<br />
               <span className="shimmer-text" style={{ fontWeight: 500 }}>Craftsmanship</span>
             </h2>
@@ -58,7 +85,6 @@ export default function CraftsmanshipSection() {
               Uncompromising attention to detail ensures every piece becomes an heirloom worthy of generations.
             </p>
 
-            {/* Stats — 3 only (5K+ removed) */}
             <div className="grid grid-cols-3 gap-6 mb-10">
               {stats.map(({ icon: Icon, label, value }) => (
                 <div key={label} className="flex items-start gap-3">
