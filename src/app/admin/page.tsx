@@ -575,7 +575,7 @@ export default function AdminDashboard() {
                     {(p.is_best_seller || p.isBestSeller) && <span className="absolute top-2 left-2 bg-[#c9a96e] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">TOP SELLER</span>}
                   </div>
                   <h3 className="font-semibold text-gray-900 truncate text-sm">{p.name}</h3>
-                  <p className="text-gray-500 text-sm mb-4">{p.price === 0 ? "Price at msg" : `Rs. ${p.price.toLocaleString()}`}</p>
+                  <p className="text-gray-500 text-sm mb-4">{p.price === 0 ? "Get info on WhatsApp" : `Rs. ${p.price.toLocaleString()}`}</p>
                   <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button onClick={() => { setEditingProduct(p); setShowProductModal(true); }} className="flex-1 bg-gray-100 text-gray-700 py-1.5 rounded text-sm hover:bg-gray-200 flex items-center justify-center gap-1"><Edit size={13} /> Edit</button>
                     <button onClick={() => handleDeleteProduct(p.id)} className="flex-1 bg-red-50 text-red-600 py-1.5 rounded text-sm hover:bg-red-100 flex items-center justify-center gap-1"><Trash2 size={13} /> Del</button>
@@ -749,7 +749,7 @@ export default function AdminDashboard() {
                   </div>
                   <div className="flex gap-3">
                     <div className="flex-1">
-                      <label className="block text-xs font-bold text-gray-500 uppercase">Price (Rs.) <span className="font-normal normal-case text-gray-400">- 0 for "Price at msg"</span></label>
+                      <label className="block text-xs font-bold text-gray-500 uppercase">Price (Rs.) <span className="font-normal normal-case text-gray-400">- 0 for "Get info on WhatsApp"</span></label>
                       <input type="number" className="w-full border rounded p-2 mt-1 text-sm" value={editingProduct.price || ''} placeholder="0" onChange={e => setEditingProduct({...editingProduct, price: parseInt(e.target.value)||0})} />
                     </div>
                     <div className="flex-1">
@@ -869,7 +869,7 @@ export default function AdminDashboard() {
                     <div key={i} className="flex gap-3 items-center p-3 rounded-lg border border-gray-100 bg-gray-50">
                       <div className="relative w-14 h-14 rounded bg-white border overflow-hidden flex-shrink-0"><Image src={item.image} alt={item.name} fill className="object-cover" sizes="56px" /></div>
                       <div className="flex-1"><p className="font-semibold text-gray-900 text-sm">{item.name}</p><p className="text-xs text-gray-500">Qty: {item.quantity}</p></div>
-                      <p className="font-bold text-sm">{item.price === 0 ? "Price at msg" : `Rs. ${(item.price * item.quantity).toLocaleString()}`}</p>
+                      <p className="font-bold text-sm">{item.price === 0 ? "Get info on WhatsApp" : `Rs. ${(item.price * item.quantity).toLocaleString()}`}</p>
                     </div>
                   ))}
                   <div className="flex justify-between items-center pt-3 border-t px-1">

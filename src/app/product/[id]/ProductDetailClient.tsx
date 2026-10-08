@@ -171,7 +171,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
 
           <div className="flex items-end gap-3 mb-8">
             <span className="font-playfair text-2xl text-[#5c1a25] font-semibold">
-              {product.price === 0 ? "Price at msg" : `Rs. ${product.price.toLocaleString()}`}
+              {product.price === 0 ? "Get info on WhatsApp" : `Rs. ${product.price.toLocaleString()}`}
             </span>
             {product.original_price && (
               <span className="text-lg text-[#5c1a25]/40 line-through mb-0.5">

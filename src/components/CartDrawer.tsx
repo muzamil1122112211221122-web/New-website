@@ -69,7 +69,7 @@ export default function CartDrawer() {
                   <div className="flex-1 min-w-0">
                     <h3 className="font-cormorant font-semibold text-[#5c1a25] text-base leading-tight mb-1">{item.name}</h3>
                     <p className="font-playfair text-[#5c1a25] text-sm font-bold">
-                      {item.price === 0 ? "Price at msg" : `Rs. ${(item.price * item.quantity).toLocaleString()}`}
+                      {item.price === 0 ? "Get info on WhatsApp" : `Rs. ${(item.price * item.quantity).toLocaleString()}`}
                     </p>
                     <div className="flex items-center gap-3 mt-2">
                       <div className="flex items-center border border-[#5c1a25]/30">

@@ -232,7 +232,7 @@ export default function CheckoutPage() {
                       <div className="flex-1">
                         <p className="font-optima text-[#5c1a25] text-sm font-semibold leading-tight">{item.name}</p>
                         <p className="font-optima text-[#5c1a25]/60 text-sm mt-0.5">
-                          {item.price === 0 ? "Price at msg" : `Rs. ${(item.price * item.quantity).toLocaleString()}`}
+                          {item.price === 0 ? "Get info on WhatsApp" : `Rs. ${(item.price * item.quantity).toLocaleString()}`}
                         </p>
                       </div>
                     </div>

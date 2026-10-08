@@ -95,7 +95,7 @@ export default function ProductCard({ product }) {
               fontWeight: 600,
             }}
           >
-            {product.price === 0 ? "Price at msg" : `Rs. ${product.price.toLocaleString()}`}
+            {product.price === 0 ? "Get info on WhatsApp" : `Rs. ${product.price.toLocaleString()}`}
           </span>
           {(product.originalPrice || product.original_price) && (
             <span
