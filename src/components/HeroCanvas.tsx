@@ -90,8 +90,7 @@ export default function HeroCanvas() {
                   marginBottom: '1.5rem',
                 }}
               >
-                Jewellery That<br />
-                Tells Your Story
+                Jewellery That<br />Tells Your Story
               </h1>
 
               {/* Subtitle */}
