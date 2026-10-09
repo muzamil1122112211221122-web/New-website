@@ -32,9 +32,9 @@ export default function HeroCanvas() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-black/10 pointer-events-none z-0" />
 
       {/* Hero text */}
-      <div className="relative z-10 h-full flex items-center">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full">
-          <div className="max-w-xl">
+      <div className="relative z-10 h-full flex items-end pb-20">
+        <div className="w-full px-6 lg:px-12">
+          <div className="max-w-2xl">
 
             {/* Label */}
             <div ref={labelRef} className="flex items-center gap-3 mb-7">
