@@ -118,7 +118,7 @@ export default function Header() {
                 {searchResults.map(p => (
                   <Link href={`/collections`} key={p.id} onClick={() => setShowSearch(false)} className="group">
                     <div className="aspect-square relative mb-3 overflow-hidden bg-white/50 border border-[#5c1a25]/10">
-                      <Image src={p.image} alt={p.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                      <Image src={p.image} alt={p.name} fill sizes="150px" className="object-cover group-hover:scale-105 transition-transform duration-700" />
                     </div>
                     <h4 className="font-optima text-[#5c1a25] text-sm uppercase tracking-wider">{p.name}</h4>
                     <p className="font-playfair text-[#c9a96e] font-semibold mt-1">Rs. {p.price.toLocaleString()}</p>

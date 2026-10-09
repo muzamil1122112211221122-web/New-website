@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
@@ -33,6 +34,10 @@ function drawCover(
 }
 
 export default function HeroCanvas() {
+  if (typeof window === 'undefined') {
+    ReactDOM.preload('/frames2/ezgif-frame-001.jpg', { as: 'image' });
+  }
+
   const canvasRef    = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef     = useRef<HTMLHeadingElement>(null);

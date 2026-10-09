@@ -144,6 +144,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
               src={activeImage} 
               alt={product.name} 
               fill 
+              sizes="(max-width: 768px) 100vw, 50vw"
               className={`object-cover transition-transform duration-200 ease-out ${isZooming ? 'scale-150' : 'scale-100'}`} 
               style={{ transformOrigin: `${zoomPos.x}% ${zoomPos.y}%` }}
               priority 
