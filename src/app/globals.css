@@ -124,7 +124,7 @@ p, span, li, label, a, input, textarea, select, button {
 
 /* ── Section heading ────────────────────────────────────────── */
 .section-heading {
-  font-family: var(--font-optima);
+  font-family: 'Argent CF', 'Optima Nova LT Pro', Georgia, serif;
   color: var(--secondary);
   font-size: clamp(1.9rem, 3.5vw, 2.9rem);
   font-weight: 400;          /* slightly lighter than 600/700 was before */

@@ -62,7 +62,7 @@ export default function FeaturedCollections() {
                 </h3>
 
                 {/* Description — on hover only */}
-                <p className="font-cormorant text-white/70 text-sm leading-relaxed mb-3 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out" style={{ fontWeight: 300 }}>
+                <p className="font-body text-white/70 text-sm leading-relaxed mb-3 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out" style={{ fontWeight: 300 }}>
                   {col.desc}
                 </p>
 
