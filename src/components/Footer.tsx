@@ -7,7 +7,7 @@ const FB_URL = 'https://www.facebook.com/share/1BeeNsuBYN/';
 const WA_URL = 'https://wa.me/923216004630';
 
 const optima: React.CSSProperties = {
-  fontFamily: "'Optima Nova LT Pro', Optima, 'Gill Sans MT', Calibri, sans-serif",
+  fontFamily: "'Poppins', 'Gill Sans MT', sans-serif",
 };
 
 export default function Footer() {

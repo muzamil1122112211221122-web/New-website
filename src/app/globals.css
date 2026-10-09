@@ -12,6 +12,36 @@
   --font-optima: 'Optima Nova LT Pro', 'Optima', 'Gill Sans MT', Calibri, sans-serif;
 }
 
+
+/* ── Local Fonts (Argent/Ante CF & Poppins) ─────────── */
+@font-face {
+  font-family: 'Argent CF';
+  src: url('/fonts/Ante Cf Serif Demo Regular.otf') format('opentype');
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Argent CF';
+  src: url('/fonts/Ante Cf Serif Demo Regular.otf') format('opentype');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Light.ttf') format('truetype');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Regular.ttf') format('truetype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Medium.ttf') format('truetype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+
+
 /* ── Optima Nova LT Pro @font-face ──────────────────────────── */
 @font-face {
   font-family: 'Optima Nova LT Pro';
@@ -78,7 +108,8 @@ p, span, li, label, a, input, textarea, select, button {
 /* ── Utility classes ────────────────────────────────────────── */
 .font-optima  { font-family: var(--font-optima), var(--font-optima), serif; }
 .font-cormorant { font-family: var(--font-cormorant), var(--font-optima), serif; }
-.font-optima    { font-family: var(--font-optima); }
+.font-heading { font-family: 'Argent CF', 'Optima Nova LT Pro', Georgia, serif; }
+.font-body { font-family: 'Poppins', sans-serif; }
 
 /* ── Scrollbar ──────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; }
