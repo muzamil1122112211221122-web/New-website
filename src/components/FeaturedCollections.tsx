@@ -6,12 +6,17 @@ import Link from 'next/link';
 
 export default function FeaturedCollections() {
   const [collections, setCollections] = useState<any[]>([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     fetch('/api/featured').then(r => r.json()).then(data => {
-      if (Array.isArray(data)) setCollections(data);
-    }).catch(() => {});
+      if (Array.isArray(data)) setCollections(data.filter((c: any) => c.image));
+      setLoaded(true);
+    }).catch(() => setLoaded(true));
   }, []);
+
+  // Don't render the section at all if no collections saved yet
+  if (!loaded || collections.length === 0) return null;
 
   return (
     <section className="py-20 px-6 lg:px-10 bg-[#ffffff]">
@@ -34,14 +39,23 @@ export default function FeaturedCollections() {
               href={col.href}
               className="group relative aspect-[4/5] rounded-md overflow-hidden block"
             >
-              {/* Image */}
-              <Image
-                src={col.image}
-                alt={col.name}
-                fill
-                sizes="(max-width: 768px) 50vw, 25vw"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
+              {/* Image — use plain img for base64 data URIs, next/image for URLs */}
+              {col.image.startsWith('data:') ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={col.image}
+                  alt={col.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+              ) : (
+                <Image
+                  src={col.image}
+                  alt={col.name}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+              )}
 
               {/* Base overlay — subtle, always */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
