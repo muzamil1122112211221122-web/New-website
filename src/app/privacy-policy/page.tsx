@@ -5,12 +5,12 @@ export default function PrivacyPolicyPage() {
   return (
     <>
       <Header />
-      <main className="pt-24 min-h-screen bg-[#EFE9E1]">
-        <div className="bg-[#5c1a25] py-14 text-center">
-          <h1 className="font-playfair text-[#EFE9E1] font-normal tracking-widest" style={{ fontSize: '2.4rem' }}>
+      <main className="min-h-screen bg-[#ffffff]">
+        <div className="bg-[#5c1a25] pt-32 pb-14 text-center">
+          <h1 className="font-playfair text-[#ffffff] font-normal tracking-widest" style={{ fontSize: '2.4rem' }}>
             Privacy Policy
           </h1>
-          <p className="font-optima text-[#EFE9E1]/45 mt-2 tracking-[0.35em] text-xs uppercase">
+          <p className="font-optima text-[#ffffff]/45 mt-2 tracking-[0.35em] text-xs uppercase">
             IC — Ijaz Casting &amp; Jewellery Centre
           </p>
         </div>

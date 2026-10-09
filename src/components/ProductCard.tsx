@@ -10,9 +10,9 @@ export default function ProductCard({ product }) {
   const { addItem } = useCart();
 
   return (
-    <div className="product-card group bg-white/40 backdrop-blur-sm border border-[#5c1a25]/10 overflow-hidden">
+    <div className="product-card group bg-white/40 backdrop-blur-sm border border-[#5c1a25]/10 overflow-hidden rounded-lg">
       {/* Image container */}
-      <div className="relative aspect-square overflow-hidden bg-[#f5f0ea]">
+      <div className="relative aspect-square overflow-hidden bg-[#ffffff]">
         <Link href={`/product/${product.id}`} className="absolute inset-0 z-0">
           <Image
             src={product.image}
@@ -26,7 +26,7 @@ export default function ProductCard({ product }) {
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
           {(product.isNew || product.is_new) && (
-            <span className="badge bg-[#5c1a25] text-[#EFE9E1]">New</span>
+            <span className="badge bg-[#5c1a25] text-[#ffffff]">New</span>
           )}
           {(product.isBestSeller || product.is_best_seller) && (
             <span className="badge bg-[#c9a96e] text-white">Best Seller</span>
@@ -38,7 +38,7 @@ export default function ProductCard({ product }) {
         <div className="absolute bottom-0 left-0 right-0 z-10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
           <button
             onClick={() => addItem({ id: product.id, name: product.name, price: product.price, image: product.image })}
-            className="w-full bg-[#5c1a25] text-[#EFE9E1] py-3.5 flex items-center justify-center gap-2 hover:bg-[#7a2535] transition-colors"
+            className="w-full bg-[#5c1a25] text-[#ffffff] py-3.5 flex items-center justify-center gap-2 hover:bg-[#7a2535] transition-colors rounded-b-sm"
             style={{
               fontFamily: "'Optima Nova LT Pro', Optima, 'Gill Sans MT', sans-serif",
               fontSize: '10px',

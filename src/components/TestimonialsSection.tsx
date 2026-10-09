@@ -178,7 +178,7 @@ export default function TestimonialsSection() {
   const allReviews: Review[] = [...customReviews, ...fixedReviews];
 
   return (
-    <section className="py-20 bg-[#EFE9E1] overflow-hidden">
+    <section className="py-20 bg-[#ffffff] overflow-hidden">
       <div className="max-w-7xl mx-auto px-14 lg:px-20">
 
         {/* Heading */}
@@ -192,7 +192,7 @@ export default function TestimonialsSection() {
             whileTap={{ scale: 0.96 }}
             onClick={() => setShowForm(!showForm)}
             style={{ fontFamily: optima, fontSize: '9px', fontWeight: 400, letterSpacing: '0.3em', textTransform: 'uppercase' }}
-            className="mt-2 inline-flex items-center gap-2 border border-[#5c1a25]/30 text-[#5c1a25] px-6 py-2.5 hover:bg-[#5c1a25] hover:text-[#EFE9E1] transition-all duration-300"
+            className="mt-2 inline-flex items-center gap-2 border border-[#5c1a25]/30 text-[#5c1a25] px-6 py-2.5 hover:bg-[#5c1a25] hover:text-[#ffffff] transition-all duration-300"
           >
             <motion.svg
               width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
@@ -228,7 +228,7 @@ export default function TestimonialsSection() {
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label style={{ fontFamily: optima, fontSize: '9px', fontWeight: 400, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#5c1a25', display: 'block', marginBottom: '6px' }}>Name *</label>
-                      <input type="text" required className="form-input" placeholder="Your name" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
+                      <input type="text" required className="form-input rounded-md" placeholder="Your name" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
                     </div>
                     <div>
                       <label style={{ fontFamily: optima, fontSize: '9px', fontWeight: 400, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#5c1a25', display: 'block', marginBottom: '6px' }}>City</label>
@@ -251,7 +251,7 @@ export default function TestimonialsSection() {
                   </div>
                   <div>
                     <label style={{ fontFamily: optima, fontSize: '9px', fontWeight: 400, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#5c1a25', display: 'block', marginBottom: '6px' }}>Photo (optional)</label>
-                    <input type="file" accept="image/*" onChange={handleImageUpload} className="w-full text-sm text-[#5c1a25]/60 file:mr-3 file:py-1.5 file:px-4 file:border-0 file:bg-[#5c1a25] file:text-[#EFE9E1] file:text-xs file:cursor-pointer cursor-pointer" style={{ fontFamily: optima, fontSize: '12px', fontWeight: 300 }} />
+                    <input type="file" accept="image/*" onChange={handleImageUpload} className="w-full text-sm text-[#5c1a25]/60 file:mr-3 file:py-1.5 file:px-4 file:border-0 file:bg-[#5c1a25] file:text-[#ffffff] file:text-xs file:cursor-pointer cursor-pointer" style={{ fontFamily: optima, fontSize: '12px', fontWeight: 300 }} />
                     {form.image && (<div className="relative w-20 h-20 mt-2"><Image src={form.image} alt="Preview" fill className="object-cover border border-[#5c1a25]/20" /></div>)}
                   </div>
                   <button type="submit" disabled={submitting} className="btn-primary w-full disabled:opacity-50">
@@ -268,7 +268,7 @@ export default function TestimonialsSection() {
           {/* Prev */}
           <button
             onClick={() => scrollByCards('left')}
-            className="absolute -left-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-[#5c1a25] text-[#EFE9E1] flex items-center justify-center shadow-xl hover:bg-[#7a2535] transition-colors"
+            className="absolute -left-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-[#5c1a25] text-[#ffffff] flex items-center justify-center shadow-xl hover:bg-[#7a2535] transition-colors"
             aria-label="Previous"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
@@ -277,7 +277,7 @@ export default function TestimonialsSection() {
           {/* Next */}
           <button
             onClick={() => scrollByCards('right')}
-            className="absolute -right-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-[#5c1a25] text-[#EFE9E1] flex items-center justify-center shadow-xl hover:bg-[#7a2535] transition-colors"
+            className="absolute -right-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-[#5c1a25] text-[#ffffff] flex items-center justify-center shadow-xl hover:bg-[#7a2535] transition-colors"
             aria-label="Next"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>

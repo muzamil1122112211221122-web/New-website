@@ -336,7 +336,7 @@ export default function AdminDashboard() {
   };
 
   if (authStep === 'login') return (
-    <div className="min-h-screen bg-[#EFE9E1] flex items-center justify-center p-6">
+    <div className="min-h-screen bg-[#ffffff] flex items-center justify-center p-6">
       <div className="bg-white max-w-md w-full p-8 rounded-xl shadow-2xl border border-[#5c1a25]/10">
         <div className="text-center mb-8">
           <h1 className="font-playfair text-3xl text-[#5c1a25] mb-2">IC Admin Panel</h1>
@@ -364,7 +364,7 @@ export default function AdminDashboard() {
   );
 
   if (authStep === 'pin') return (
-    <div className="min-h-screen bg-[#EFE9E1] flex items-center justify-center p-6">
+    <div className="min-h-screen bg-[#ffffff] flex items-center justify-center p-6">
       <div className="bg-white max-w-md w-full p-8 rounded-xl shadow-2xl border border-[#5c1a25]/10">
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4"><CheckCircle size={32} /></div>
@@ -395,7 +395,7 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row">
       {/* Sidebar */}
-      <div className="w-full md:w-64 bg-[#5c1a25] text-[#EFE9E1] flex-shrink-0 flex flex-col shadow-xl">
+      <div className="w-full md:w-64 bg-[#5c1a25] text-[#ffffff] flex-shrink-0 flex flex-col shadow-xl">
         <div className="p-6 border-b border-white/10">
           <h1 className="font-playfair text-2xl tracking-widest text-[#c9a96e]">IC ADMIN</h1>
           <p className="text-[10px] text-white/40 tracking-widest mt-1 uppercase">Ijaz Casting & Jewellery Centre</p>

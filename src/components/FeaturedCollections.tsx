@@ -14,7 +14,7 @@ export default function FeaturedCollections() {
   }, []);
 
   return (
-    <section className="py-20 px-6 lg:px-10 bg-[#EFE9E1]">
+    <section className="py-20 px-6 lg:px-10 bg-[#ffffff]">
       <div className="max-w-7xl mx-auto">
 
         {/* Heading */}

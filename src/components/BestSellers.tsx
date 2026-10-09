@@ -20,7 +20,7 @@ export default function BestSellers() {
   const bestSellers = products.filter((p) => p.isBestSeller || p.is_best_seller).slice(0, 4);
 
   return (
-    <section className="py-20 px-6 lg:px-10" style={{ background: 'linear-gradient(135deg, #f5f0ea 0%, #EFE9E1 100%)' }}>
+    <section className="py-20 px-6 lg:px-10" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #ffffff 100%)' }}>
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">

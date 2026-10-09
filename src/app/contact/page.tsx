@@ -31,11 +31,11 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main className="pt-24 min-h-screen bg-[#EFE9E1]">
+      <main className="min-h-screen bg-[#ffffff]">
         {/* Hero */}
-        <div className="bg-[#5c1a25] py-16 text-center">
+        <div className="bg-[#5c1a25] pt-32 pb-16 text-center">
           <p className="font-optima text-[#c9a96e] tracking-[0.4em] uppercase text-xs mb-3 font-light">Get In Touch</p>
-          <h1 className="text-[#EFE9E1] font-light tracking-widest" style={{ fontSize: '2.4rem' }}>Contact Us</h1>
+          <h1 className="text-[#ffffff] font-light tracking-widest" style={{ fontSize: '2.4rem' }}>Contact Us</h1>
         </div>
 
         <div className="max-w-6xl mx-auto px-6 lg:px-10 py-16">

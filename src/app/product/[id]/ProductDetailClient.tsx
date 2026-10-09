@@ -191,7 +191,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
           <button
             onClick={handleAdd}
             disabled={adding || added}
-            className="w-full bg-[#5c1a25] text-[#EFE9E1] py-4 flex items-center justify-center gap-2 hover:bg-[#7a2535] transition-all disabled:opacity-80 disabled:cursor-not-allowed"
+            className="w-full bg-[#5c1a25] text-[#ffffff] py-4 flex items-center justify-center gap-2 hover:bg-[#7a2535] transition-all disabled:opacity-80 disabled:cursor-not-allowed rounded-md"
             style={{ fontFamily: "'Optima Nova LT Pro', Optima, sans-serif", fontSize: '11px', letterSpacing: '0.2em' }}
           >
             {added ? <CheckCircle size={18} /> : <ShoppingBag size={18} />}
@@ -249,7 +249,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">Name</label>
-                  <input required type="text" value={newReview.name} onChange={e => setNewReview({ ...newReview, name: e.target.value })} className="w-full border border-[#5c1a25]/20 p-2 text-sm bg-transparent outline-none focus:border-[#c9a96e]" />
+                  <input required type="text" value={newReview.name} onChange={e => setNewReview({ ...newReview, name: e.target.value })} className="w-full border border-[#5c1a25]/20 p-2 text-sm bg-transparent outline-none focus:border-[#c9a96e] rounded-md" />
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">City</label>
@@ -257,7 +257,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">Review</label>
-                  <textarea required rows={4} value={newReview.text} onChange={e => setNewReview({ ...newReview, text: e.target.value })} className="w-full border border-[#5c1a25]/20 p-2 text-sm bg-transparent outline-none focus:border-[#c9a96e] resize-none" />
+                  <textarea required rows={4} value={newReview.text} onChange={e => setNewReview({ ...newReview, text: e.target.value })} className="w-full border border-[#5c1a25]/20 p-2 text-sm bg-transparent outline-none focus:border-[#c9a96e] resize-none rounded-md" />
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-[#5c1a25]/70 mb-1">Attach Image (Optional)</label>
@@ -268,7 +268,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
                     </div>
                   )}
                 </div>
-                <button type="submit" disabled={submittingReview} className="w-full bg-[#5c1a25] text-[#EFE9E1] py-3 text-xs tracking-[0.2em] uppercase hover:bg-[#7a2535] transition-colors disabled:opacity-50">
+                <button type="submit" disabled={submittingReview} className="w-full bg-[#5c1a25] text-[#ffffff] py-3 text-xs tracking-[0.2em] uppercase hover:bg-[#7a2535] transition-colors disabled:opacity-50 rounded-md">
                   {submittingReview ? 'Submitting...' : 'Submit Review'}
                 </button>
               </form>

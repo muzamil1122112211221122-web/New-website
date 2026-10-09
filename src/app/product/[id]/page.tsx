@@ -21,7 +21,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   return (
     <>
       <Header />
-      <main className="pt-24 min-h-screen bg-[#EFE9E1]">
+      <main className="pt-24 min-h-screen bg-[#ffffff]">
         <ProductDetailClient product={product} />
       </main>
       <Footer />

@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#EFE9E1',
+        primary: '#ffffff',
         secondary: {
           DEFAULT: '#5c1a25',
           dark: '#3e1019',
@@ -25,7 +25,7 @@ module.exports = {
         optima: ['"Optima Nova LT Pro"', 'Optima', 'Gill Sans', 'Calibri', 'sans-serif'],
       },
       animation: {
-        marquee: 'marquee 20s linear infinite',
+        marquee: 'marquee 10s linear infinite',
         'fade-in-up': 'fadeInUp 0.8s ease forwards',
         shimmer: 'shimmer 4s linear infinite',
       },

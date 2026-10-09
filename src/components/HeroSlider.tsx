@@ -113,7 +113,7 @@ export default function HeroSlider() {
             >
               <Link
                 href={slide.href}
-                className="inline-flex items-center gap-2 bg-[#5c1a25] text-[#EFE9E1] px-8 py-4 font-cormorant font-semibold text-lg tracking-widest uppercase hover:bg-[#7a2535] transition-colors"
+                className="inline-flex items-center gap-2 bg-[#5c1a25] text-[#ffffff] px-8 py-4 font-cormorant font-semibold text-lg tracking-widest uppercase hover:bg-[#7a2535] transition-colors"
               >
                 {slide.cta}
                 <ArrowRight size={18} />

@@ -69,7 +69,7 @@ export default function CheckoutPage() {
             <CheckCircle size={72} className="text-green-500 mx-auto mb-6" />
             <h1 className="font-playfair text-3xl font-bold text-[#5c1a25] mb-3">Order Placed!</h1>
             <p className="font-optima text-[#5c1a25]/70 mb-2">Thank you for your order.</p>
-            <div className="bg-[#5c1a25] text-[#EFE9E1] px-6 py-3 inline-block my-4">
+            <div className="bg-[#5c1a25] text-[#ffffff] px-6 py-3 inline-block my-4">
               <p className="font-optima text-sm tracking-widest">Order Number</p>
               <p className="font-playfair text-2xl font-bold">{orderNumber}</p>
             </div>
@@ -105,11 +105,11 @@ export default function CheckoutPage() {
   return (
     <>
       <Header />
-      <main className="pt-28 min-h-screen bg-[#EFE9E1]">
+      <main className="pt-28 min-h-screen bg-[#ffffff]">
         {/* Banner */}
         <div className="bg-[#5c1a25] py-10 px-6 text-center">
-          <h1 className="font-playfair text-[#EFE9E1] text-4xl font-bold">Checkout</h1>
-          <p className="font-optima text-[#EFE9E1]/60 mt-2 text-sm tracking-widest">Complete your order</p>
+          <h1 className="font-playfair text-[#ffffff] text-4xl font-bold">Checkout</h1>
+          <p className="font-optima text-[#ffffff]/60 mt-2 text-sm tracking-widest">Complete your order</p>
         </div>
 
         <div className="max-w-6xl mx-auto px-6 lg:px-10 py-12">
@@ -223,9 +223,9 @@ export default function CheckoutPage() {
                 <div className="space-y-4 mb-5">
                   {items.map((item) => (
                     <div key={item.id} className="flex gap-3">
-                      <div className="relative w-16 h-16 flex-shrink-0 bg-[#f5f0ea]">
+                      <div className="relative w-16 h-16 flex-shrink-0 bg-[#ffffff]">
                         <Image src={item.image} alt={item.name} fill className="object-cover" />
-                        <span className="absolute -top-2 -right-2 bg-[#5c1a25] text-[#EFE9E1] text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                        <span className="absolute -top-2 -right-2 bg-[#5c1a25] text-[#ffffff] text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
                           {item.quantity}
                         </span>
                       </div>

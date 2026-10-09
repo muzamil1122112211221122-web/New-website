@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { ShoppingBag, Menu, X, Search, ChevronDown } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import CartDrawer from './CartDrawer';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 const navLinks = [
   {
@@ -32,6 +32,7 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const { count, setIsOpen } = useCart();
   const router = useRouter();
+  const pathname = usePathname();
   const [products, setProducts] = useState<any[]>([]);
 
   const searchResults = searchQuery.trim() === '' ? [] : products.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -52,7 +53,7 @@ export default function Header() {
       
       {/* Mobile Nav Drawer */}
       <div className={`fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} onClick={() => setMobileOpen(false)} />
-      <div className={`fixed top-0 left-0 bottom-0 w-[80%] max-w-sm bg-[#EFE9E1] z-[100] shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] lg:hidden flex flex-col ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className={`fixed top-0 left-0 bottom-0 w-[80%] max-w-sm bg-[#ffffff] z-[100] shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] lg:hidden flex flex-col ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex items-center justify-between p-6 border-b border-[#5c1a25]/10">
           <span className="font-playfair text-xl text-[#5c1a25] tracking-widest">IC</span>
           <button onClick={() => setMobileOpen(false)} className="text-[#5c1a25] hover:text-[#5c1a25]/60">
@@ -91,7 +92,7 @@ export default function Header() {
       </div>
 
       {/* Search Overlay */}
-      <div className={`fixed inset-0 bg-[#EFE9E1]/95 z-[60] backdrop-blur-sm transition-all duration-500 ${showSearch ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+      <div className={`fixed inset-0 bg-[#ffffff]/95 z-[60] backdrop-blur-sm transition-all duration-300 ease-out ${showSearch ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="max-w-4xl mx-auto px-6 pt-24 h-full flex flex-col">
           <div className="flex justify-between items-center mb-8 border-b border-[#5c1a25]/20 pb-4">
             <div className="flex items-center gap-4 flex-1">
@@ -132,13 +133,13 @@ export default function Header() {
 
       {/* ── Fixed wrapper: announcement bar + main header ── */}
       <div 
-        className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-out will-change-transform ${
           scrolled ? '-translate-y-8' : 'translate-y-0'
         }`}
       >
 
         {/* Announcement Bar */}
-        <div className="h-8 bg-[#5c1a25] text-[#EFE9E1] flex items-center">
+        <div className="h-8 bg-[#5c1a25] text-[#ffffff] flex items-center">
           <div className="flex items-center justify-center gap-2 text-center w-full px-2">
             <a
               href="https://wa.me/923216004630"
@@ -161,7 +162,7 @@ export default function Header() {
             </a>
             <span className="text-[#c9a96e]/50 mx-1 sm:mx-2 shrink-0" style={{ fontSize: '10px' }}>|</span>
             <span
-              className="tracking-wider sm:tracking-[0.15em] text-[#EFE9E1]/80 font-light truncate"
+              className="tracking-wider sm:tracking-[0.15em] text-[#ffffff]/80 font-light truncate"
               style={{
                 fontFamily: "'Optima Nova LT Pro', Optima, 'Gill Sans MT', Calibri, sans-serif",
                 fontSize: '9px',
@@ -174,18 +175,16 @@ export default function Header() {
 
         {/* Main Header */}
         <header
-          className={`transition-all duration-500 ${
-            scrolled
-              ? 'bg-[#5c1a25]/95 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
-              : 'bg-transparent'
+          className={`transition-all duration-300 ease-out ${
+            scrolled ? 'bg-[#5c1a25]/95 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.3)]' : 'bg-transparent'
           }`}
         >
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <div className="flex items-center justify-between py-2.5">
+            <div className={`flex items-center justify-between transition-all duration-300 ease-out ${scrolled ? 'py-2' : 'py-5'}`}>
 
               {/* Mobile menu */}
               <button
-                className="lg:hidden text-[#EFE9E1] p-1"
+                className="lg:hidden text-[#ffffff] p-1"
                 onClick={() => setMobileOpen(!mobileOpen)}
                 aria-label="Toggle menu"
               >
@@ -199,7 +198,7 @@ export default function Header() {
                 </div>
                 <div className="hidden sm:block">
                   <div
-                    className="text-[#EFE9E1] leading-tight tracking-[0.18em] uppercase"
+                    className="text-[#ffffff] leading-tight tracking-[0.18em] uppercase"
                     style={{
                       fontFamily: "'Optima Nova LT Pro', Optima, var(--font-playfair), serif",
                       fontSize: '12px',
@@ -209,7 +208,7 @@ export default function Header() {
                     Ijaz Casting
                   </div>
                   <div
-                    className="text-[#EFE9E1]/70 tracking-[0.35em] uppercase"
+                    className="text-[#ffffff]/70 tracking-[0.35em] uppercase"
                     style={{
                       fontFamily: "'Optima Nova LT Pro', Optima, var(--font-cormorant), serif",
                       fontSize: '8px',
@@ -233,7 +232,7 @@ export default function Header() {
                   >
                     <Link
                       href={link.href}
-                      className="flex items-center gap-1 text-[#EFE9E1] hover:text-[#c9a96e] transition-colors uppercase"
+                      className="flex items-center gap-1 text-[#ffffff] hover:text-[#c9a96e] transition-colors uppercase"
                       style={{
                         fontFamily: "'Optima Nova LT Pro', Optima, 'Gill Sans MT', Calibri, sans-serif",
                         fontSize: '11px',
@@ -250,12 +249,12 @@ export default function Header() {
                     {/* Dropdown */}
                     {link.sub && activeDropdown === link.label && (
                       <div className="absolute top-full left-0 pt-4 z-50">
-                        <div className="w-44 bg-[#EFE9E1] shadow-[0_8px_40px_rgba(92,26,37,0.12)] border-t border-[#5c1a25]/20 py-2">
+                        <div className="w-44 bg-[#ffffff] shadow-[0_8px_40px_rgba(92,26,37,0.12)] border-t border-[#5c1a25]/20 py-2">
                           {link.sub.map((s) => (
                             <Link
                               key={s.label}
                               href={s.href}
-                              className="block px-5 py-2.5 text-[#5c1a25] hover:bg-[#5c1a25] hover:text-[#EFE9E1] transition-colors uppercase"
+                              className="block px-5 py-2.5 text-[#5c1a25] hover:bg-[#5c1a25] hover:text-[#ffffff] transition-colors uppercase"
                               style={{
                                 fontFamily: "'Optima Nova LT Pro', Optima, 'Gill Sans MT', Calibri, sans-serif",
                                 fontSize: '10px',
@@ -275,11 +274,11 @@ export default function Header() {
 
               {/* Icons */}
               <div className="flex items-center gap-5">
-                <button onClick={() => setShowSearch(true)} className="text-[#EFE9E1] hover:text-[#c9a96e] transition-colors" aria-label="Search">
+                <button onClick={() => setShowSearch(true)} className="text-[#ffffff] hover:text-[#c9a96e] transition-colors" aria-label="Search">
                   <Search size={18} />
                 </button>
                 <button
-                  className="relative text-[#EFE9E1] hover:text-[#c9a96e] transition-colors"
+                  className="relative text-[#ffffff] hover:text-[#c9a96e] transition-colors"
                   onClick={() => setIsOpen(true)}
                   aria-label="Cart"
                 >

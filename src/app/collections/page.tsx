@@ -45,14 +45,14 @@ function CollectionsContent() {
   return (
     <>
       <Header />
-      <main className="pt-28 min-h-screen">
+      <main className="min-h-screen">
         {/* Hero Banner */}
-        <div className="bg-[#5c1a25] py-16 px-6 text-center relative overflow-hidden">
+        <div className="bg-[#5c1a25] pt-32 pb-16 px-6 text-center relative overflow-hidden">
           <div className="absolute inset-0 opacity-5"
             style={{ backgroundImage: 'repeating-linear-gradient(45deg, #c9a96e 0, #c9a96e 1px, transparent 0, transparent 50%)', backgroundSize: '20px 20px' }} />
           <p className="font-optima text-[#c9a96e] tracking-[0.4em] uppercase text-sm mb-3 relative">IC</p>
-          <h1 className="font-playfair text-[#EFE9E1] text-4xl md:text-5xl font-bold relative">Our Collections</h1>
-          <p className="font-optima text-[#EFE9E1]/60 mt-3 text-base relative">Handcrafted excellence in every piece</p>
+          <h1 className="font-playfair text-[#ffffff] text-4xl md:text-5xl font-bold relative">Our Collections</h1>
+          <p className="font-optima text-[#ffffff]/60 mt-3 text-base relative">Handcrafted excellence in every piece</p>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
@@ -67,9 +67,9 @@ function CollectionsContent() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2 font-optima text-sm tracking-widest uppercase transition-all border ${
+                  className={`px-5 py-2 font-optima text-sm tracking-widest uppercase transition-all border rounded-md ${
                     activeCategory === cat
-                      ? 'bg-[#5c1a25] text-[#EFE9E1] border-[#5c1a25]'
+                      ? 'bg-[#5c1a25] text-[#ffffff] border-[#5c1a25]'
                       : 'bg-transparent text-[#5c1a25] border-[#5c1a25]/30 hover:border-[#5c1a25]'
                   }`}
                 >
@@ -84,7 +84,7 @@ function CollectionsContent() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="form-input w-auto py-2 text-sm cursor-pointer"
+                className="form-input w-auto py-2 text-sm cursor-pointer rounded-md"
               >
                 <option value="default">Sort By: Featured</option>
                 <option value="price-asc">Price: Low to High</option>
@@ -125,7 +125,7 @@ function CollectionsContent() {
 
 export default function CollectionsPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#EFE9E1] font-optima text-[#5c1a25] tracking-widest uppercase">Loading Collections...</div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#ffffff] font-optima text-[#5c1a25] tracking-widest uppercase">Loading Collections...</div>}>
       <CollectionsContent />
     </Suspense>
   );

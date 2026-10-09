@@ -71,7 +71,7 @@ export default function CraftsmanshipSection() {
               Our Heritage
             </p>
 
-            <h2 style={{ fontFamily: optima, fontSize: 'clamp(2rem, 3.5vw, 3.2rem)', fontWeight: 200, letterSpacing: '0.04em', color: '#EFE9E1', lineHeight: 1.15, marginBottom: '20px' }}>
+            <h2 style={{ fontFamily: optima, fontSize: 'clamp(2rem, 3.5vw, 3.2rem)', fontWeight: 200, letterSpacing: '0.04em', color: '#ffffff', lineHeight: 1.15, marginBottom: '20px' }}>
               The Art of Fine<br />
               <span className="shimmer-text" style={{ fontWeight: 500 }}>Craftsmanship</span>
             </h2>

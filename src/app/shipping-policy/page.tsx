@@ -7,9 +7,9 @@ export default function ShippingPolicyPage() {
   return (
     <>
       <Header />
-      <main className="pt-24 min-h-screen bg-[#EFE9E1]">
-        <div className="bg-[#5c1a25] py-14 text-center">
-          <h1 style={{ fontFamily: optima, fontSize: '2.5rem', fontWeight: 300, color: '#EFE9E1', letterSpacing: '0.1em' }}>Shipping Policy</h1>
+      <main className="min-h-screen bg-[#ffffff]">
+        <div className="bg-[#5c1a25] pt-32 pb-14 text-center">
+          <h1 style={{ fontFamily: optima, fontSize: '2.5rem', fontWeight: 300, color: '#ffffff', letterSpacing: '0.1em' }}>Shipping Policy</h1>
           <p style={{ fontFamily: optima, fontSize: '10px', fontWeight: 300, letterSpacing: '0.35em', color: 'rgba(239,233,225,0.5)', marginTop: '8px', textTransform: 'uppercase' }}>IC — Ijaz Casting &amp; Jewellery Centre</p>
         </div>
         <div className="max-w-3xl mx-auto px-6 py-16 space-y-8">

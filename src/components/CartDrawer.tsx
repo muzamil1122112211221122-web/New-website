@@ -28,7 +28,7 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-[#EFE9E1] z-[100] shadow-2xl flex flex-col"
+            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-[#ffffff] z-[100] shadow-2xl flex flex-col"
           >
             {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-[#5c1a25]/15">
@@ -63,7 +63,7 @@ export default function CartDrawer() {
             <div className="flex flex-col gap-4">
               {items.map((item) => (
                 <div key={item.id} className="flex gap-4 p-4 bg-white/60 border border-[#5c1a25]/10">
-                  <div className="relative w-20 h-20 flex-shrink-0">
+                  <div className="relative w-20 h-20 flex-shrink-0 rounded-md overflow-hidden">
                     <Image src={item.image} alt={item.name} fill sizes="64px" className="object-cover" />
                   </div>
                   <div className="flex-1 min-w-0">
