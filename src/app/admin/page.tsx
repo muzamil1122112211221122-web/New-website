@@ -71,7 +71,7 @@ function StatCard({ icon: Icon, label, value, sub, color, sparkline }: { icon: a
         {sparkData && (
           <div className="w-24 h-12">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={sparkData}>
+              <AreaChart tabIndex={-1} data={sparkData}>
                 <Area type="monotone" dataKey="y" stroke={strokeColor} fill={fillColor} strokeWidth={2} isAnimationActive={false} />
               </AreaChart>
             </ResponsiveContainer>
@@ -468,7 +468,7 @@ export default function AdminDashboard() {
               <div className="h-[300px] w-full">
                 {typeof window !== 'undefined' && (
                   <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={chartData} style={{ outline: 'none' }} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                    <LineChart tabIndex={-1} data={chartData} style={{ outline: 'none' }} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
                       <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#888' }} dy={10} />
                       <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#888' }} tickFormatter={(val) => `Rs. ${val.toLocaleString()}`} />

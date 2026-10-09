@@ -242,4 +242,4 @@ p, span, li, label, a, input, textarea, select, button {
 
 ::selection { background-color: #5c1a25; color: #ffffff; }
 ::-moz-selection { background-color: #5c1a25; color: #ffffff; }
-\n\n/* Disable recharts focus outlines */\n.recharts-wrapper, .recharts-wrapper *, .recharts-surface, .recharts-surface:focus { outline: none !important; }\n
+\n\n/* Disable recharts focus outlines */\n.recharts-wrapper, .recharts-wrapper *, .recharts-surface, .recharts-surface:focus { outline: none !important; }\n\n\n/* Disable recharts focus outlines AGGRESSIVELY */\n.recharts-responsive-container, .recharts-responsive-container *, .recharts-wrapper, .recharts-wrapper *, .recharts-surface, .recharts-surface:focus, svg.recharts-surface { outline: none !important; box-shadow: none !important; }\n
