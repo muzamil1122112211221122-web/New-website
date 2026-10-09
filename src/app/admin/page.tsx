@@ -12,7 +12,7 @@ import {
   Star, MessageSquare, BookOpen, BarChart2, ArrowUpRight,
   ArrowDownLeft, Eye, EyeOff, Wifi, WifiOff
 , Layers } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import {  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer , AreaChart, Area } from 'recharts';
 
 // Supabase client (anon key — only reading real-time events)
 const supabase = createClient(
@@ -47,20 +47,41 @@ function StatusBadge({ status }: { status: OrderStatus }) {
   );
 }
 
-function StatCard({ icon: Icon, label, value, sub, color }: { icon: any; label: string; value: string; sub?: string; color: string }) {
+
+function StatCard({ icon: Icon, label, value, sub, color, sparkline }: { icon: any; label: string; value: string; sub?: string; color: string; sparkline?: number[] }) {
+  const sparkData = sparkline ? sparkline.map((v, i) => ({ x: i, y: v })) : null;
+  const isPositive = sparkline && sparkline[sparkline.length - 1] >= sparkline[0];
+  const strokeColor = isPositive ? '#10b981' : '#f43f5e'; // emerald-500 or rose-500
+  const fillColor = isPositive ? '#d1fae5' : '#ffe4e6'; // emerald-100 or rose-100
+
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-      <div className="flex items-center justify-between mb-4">
-        <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">{label}</p>
-        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${color}`}>
-          <Icon size={20} />
+    <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 relative overflow-hidden flex flex-col justify-between h-36 hover:shadow-md transition-shadow">
+      <div className="flex justify-between items-start z-10">
+        <div>
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">{label}</p>
+          <p className="text-2xl font-black text-gray-800 tracking-tight">{value}</p>
+        </div>
+        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${color}`}>
+          <Icon size={18} strokeWidth={2.5} />
         </div>
       </div>
-      <p className="text-2xl font-bold text-gray-900">{value}</p>
-      {sub && <p className="text-xs text-gray-400 mt-1">{sub}</p>}
+      
+      <div className="flex justify-between items-end z-10 mt-2">
+        <p className="text-[11px] font-medium text-gray-400">{sub || ' '}</p>
+        {sparkData && (
+          <div className="w-24 h-12">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={sparkData}>
+                <Area type="monotone" dataKey="y" stroke={strokeColor} fill={fillColor} strokeWidth={2} isAnimationActive={false} />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
+
 
 function CraftsmanshipTab({ handleImageUpload }: { handleImageUpload: (file: File, cb: (b64: string) => void) => void }) {
   const [images, setImages] = useState<string[]>(['/p5.jpg', '/p6.jpg', '/p7.jpg']);
@@ -447,7 +468,7 @@ export default function AdminDashboard() {
               <div className="h-[300px] w-full">
                 {typeof window !== 'undefined' && (
                   <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                    <LineChart data={chartData} style={{ outline: 'none' }} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
                       <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#888' }} dy={10} />
                       <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#888' }} tickFormatter={(val) => `Rs. ${val.toLocaleString()}`} />
@@ -464,10 +485,10 @@ export default function AdminDashboard() {
 
             {/* Stat Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <StatCard icon={DollarSign} label="Total Revenue" value={`Rs. ${totalRevenue.toLocaleString()}`} sub="From delivered orders" color="bg-green-50 text-green-600" />
-              <StatCard icon={ShoppingBag} label="Total Sales" value={`Rs. ${totalSales.toLocaleString()}`} sub="All non-cancelled" color="bg-blue-50 text-blue-600" />
+              <StatCard icon={DollarSign} label="Total Revenue" value={`Rs. ${totalRevenue.toLocaleString()}`} sub="From delivered orders" color="bg-green-50 text-green-600" sparkline={[10, 15, 12, 20, 25, 22, 30]} />
+              <StatCard icon={ShoppingBag} label="Total Sales" value={`Rs. ${totalSales.toLocaleString()}`} sub="All non-cancelled" color="bg-blue-50 text-blue-600" sparkline={[5, 8, 12, 10, 18, 25, 28]} />
               <StatCard icon={TrendingUp} label="Net Profit" value={`Rs. ${netProfit.toLocaleString()}`} sub="Income minus expenses" color={netProfit >= 0 ? "bg-emerald-50 text-emerald-600" : "bg-red-50 text-red-600"} />
-              <StatCard icon={Package} label="Total Orders" value={orders.length.toString()} sub={`${pendingOrders} pending`} color="bg-purple-50 text-purple-600" />
+              <StatCard icon={Package} label="Total Orders" value={orders.length.toString()} sub={`${pendingOrders} pending`} color="bg-purple-50 text-purple-600" sparkline={[3, 5, 4, 7, 6, 9, 12]} />
             </div>
 
             {/* More Stats Row */}
@@ -475,7 +496,7 @@ export default function AdminDashboard() {
               <StatCard icon={CheckCircle} label="Delivered" value={orders.filter(o=>o.status==='delivered').length.toString()} color="bg-green-50 text-green-600" />
               <StatCard icon={Truck} label="Shipped" value={orders.filter(o=>o.status==='shipped').length.toString()} color="bg-purple-50 text-purple-600" />
               <StatCard icon={XCircle} label="Cancelled" value={orders.filter(o=>o.status==='cancelled').length.toString()} color="bg-red-50 text-red-600" />
-              <StatCard icon={MessageSquare} label="Enquiries" value={customOrders.length.toString()} sub={`${unreadMsgs} unread`} color="bg-amber-50 text-amber-600" />
+              <StatCard icon={MessageSquare} label="Enquiries" value={customOrders.length.toString()} sub={`${unreadMsgs} unread`} color="bg-amber-50 text-amber-600" sparkline={[2, 1, 3, 2, 5, 4, 7]} />
             </div>
 
             {/* Ledger Summary */}
