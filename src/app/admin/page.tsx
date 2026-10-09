@@ -5,13 +5,13 @@ export const dynamic = 'force-dynamic';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import { createClient } from '@supabase/supabase-js';
-import {
+import { 
   Package, Phone, Clock, CheckCircle,
   Truck, XCircle, RefreshCw, ShoppingBag, TrendingUp,
   DollarSign, X, Plus, Edit, Trash2, Image as ImageIcon,
   Star, MessageSquare, BookOpen, BarChart2, ArrowUpRight,
   ArrowDownLeft, Eye, EyeOff, Wifi, WifiOff
-} from 'lucide-react';
+, Layers } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 // Supabase client (anon key — only reading real-time events)
@@ -21,7 +21,7 @@ const supabase = createClient(
 );
 
 type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
-type Tab = 'dashboard' | 'orders' | 'custom-orders' | 'products' | 'craftsmanship' | 'reviews' | 'ledger';
+type Tab = 'dashboard' | 'orders' | 'custom-orders' | 'products' | 'craftsmanship' | 'collections' | 'reviews' | 'ledger';
 
 interface OrderItem { id: string; name: string; price: number; quantity: number; image: string; }
 interface Order { id: string; orderNumber: string; customerName: string; customerPhone: string; customerEmail: string; address: string; city: string; items: OrderItem[]; total: number; status: OrderStatus; createdAt: string; notes?: string; }
@@ -388,6 +388,7 @@ export default function AdminDashboard() {
     { key: 'custom-orders', icon: MessageSquare, label: 'ENQUIRIES', badge: unreadMsgs || undefined },
     { key: 'products', icon: Package, label: 'PRODUCTS' },
     { key: 'craftsmanship', icon: ImageIcon, label: 'CRAFTSMANSHIP' },
+    { key: 'collections', icon: Layers, label: 'COLLECTIONS' },
     { key: 'reviews', icon: Star, label: 'REVIEWS' },
     { key: 'ledger', icon: BookOpen, label: 'LEDGER' },
   ];
