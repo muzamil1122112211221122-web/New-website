@@ -41,7 +41,7 @@ export default function HeroCanvas() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-black/10 pointer-events-none z-0" />
 
       {/* Hero text */}
-      <div className="relative z-10 h-full flex items-center" style={{ paddingTop: '0', marginTop: '-8vh' }}>
+      <div className={`relative z-10 h-full flex items-center transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ paddingTop: '0', marginTop: '-8vh' }}>
         <div className="w-full px-6 lg:px-12">
           <div className="max-w-2xl">
 
@@ -58,7 +58,7 @@ export default function HeroCanvas() {
               ref={titleRef}
               style={{
                 fontFamily: headingFont,
-                fontSize: 'clamp(2.6rem, 5vw, 5rem)',
+                fontSize: 'clamp(32px, 4vw, 49px)',
                 fontWeight: 300,
                 letterSpacing: '0.05em',
                 color: 'white',
