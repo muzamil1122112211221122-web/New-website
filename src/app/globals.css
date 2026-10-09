@@ -67,7 +67,7 @@ p, span, li, label {
 }
 
 /* ── Utility classes ────────────────────────────────────────── */
-.font-playfair  { font-family: var(--font-playfair), var(--font-optima), serif; }
+.font-optima  { font-family: var(--font-optima), var(--font-optima), serif; }
 .font-cormorant { font-family: var(--font-cormorant), var(--font-optima), serif; }
 .font-optima    { font-family: var(--font-optima); }
 

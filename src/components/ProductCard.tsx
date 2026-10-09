@@ -70,7 +70,7 @@ export default function ProductCard({ product }) {
           <h3
             className="text-[#5c1a25] mb-2.5 hover:text-[#5c1a25]/65 transition-colors leading-snug"
             style={{
-              fontFamily: "'Optima Nova LT Pro', Optima, var(--font-playfair), serif",
+              fontFamily: "'Optima Nova LT Pro', Optima, var(--font-optima), serif",
               fontSize: '14px',
               fontWeight: 500,
               letterSpacing: '0.02em',
@@ -87,7 +87,7 @@ export default function ProductCard({ product }) {
           <span
             className="text-[#5c1a25]"
             style={{
-              fontFamily: "'Optima Nova LT Pro', Optima, var(--font-playfair), serif",
+              fontFamily: "'Optima Nova LT Pro', Optima, var(--font-optima), serif",
               fontSize: '16px',
               fontWeight: 600,
             }}

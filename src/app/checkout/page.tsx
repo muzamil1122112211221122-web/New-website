@@ -67,11 +67,11 @@ export default function CheckoutPage() {
         <main className="pt-28 min-h-screen flex items-center justify-center px-6">
           <div className="max-w-md w-full text-center py-16">
             <CheckCircle size={72} className="text-green-500 mx-auto mb-6" />
-            <h1 className="font-playfair text-3xl font-bold text-[#5c1a25] mb-3">Order Placed!</h1>
+            <h1 className="font-optima text-3xl font-bold text-[#5c1a25] mb-3">Order Placed!</h1>
             <p className="font-optima text-[#5c1a25]/70 mb-2">Thank you for your order.</p>
             <div className="bg-[#5c1a25] text-[#ffffff] px-6 py-3 inline-block my-4">
               <p className="font-optima text-sm tracking-widest">Order Number</p>
-              <p className="font-playfair text-2xl font-bold">{orderNumber}</p>
+              <p className="font-optima text-2xl font-bold">{orderNumber}</p>
             </div>
             <p className="font-optima text-[#5c1a25]/60 text-sm mb-8">
               Our team will contact you shortly on your provided number to confirm your order.
@@ -108,7 +108,7 @@ export default function CheckoutPage() {
       <main className="pt-28 min-h-screen bg-[#ffffff]">
         {/* Banner */}
         <div className="bg-[#5c1a25] py-10 px-6 text-center">
-          <h1 className="font-playfair text-[#ffffff] text-4xl font-bold">Checkout</h1>
+          <h1 className="font-optima text-[#ffffff] text-4xl font-bold">Checkout</h1>
           <p className="font-optima text-[#ffffff]/60 mt-2 text-sm tracking-widest">Complete your order</p>
         </div>
 
@@ -116,7 +116,7 @@ export default function CheckoutPage() {
           <div className="grid lg:grid-cols-5 gap-10">
             {/* Form — 3/5 */}
             <div className="lg:col-span-3">
-              <h2 className="font-playfair text-2xl font-bold text-[#5c1a25] mb-6">Delivery Information</h2>
+              <h2 className="font-optima text-2xl font-bold text-[#5c1a25] mb-6">Delivery Information</h2>
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Name */}
                 <div>
@@ -217,7 +217,7 @@ export default function CheckoutPage() {
             {/* Order Summary — 2/5 */}
             <div className="lg:col-span-2">
               <div className="bg-white/50 border border-[#5c1a25]/10 p-6 sticky top-28">
-                <h2 className="font-playfair text-xl font-bold text-[#5c1a25] mb-5 pb-3 border-b border-[#5c1a25]/15">
+                <h2 className="font-optima text-xl font-bold text-[#5c1a25] mb-5 pb-3 border-b border-[#5c1a25]/15">
                   Order Summary
                 </h2>
                 <div className="space-y-4 mb-5">
@@ -248,7 +248,7 @@ export default function CheckoutPage() {
                     <span className="text-green-600">{total >= 50000 ? 'FREE' : 'Rs. 250'}</span>
                   </div>
                   <div className="gold-divider my-2" />
-                  <div className="flex justify-between font-playfair font-bold text-[#5c1a25] text-lg">
+                  <div className="flex justify-between font-optima font-bold text-[#5c1a25] text-lg">
                     <span>Total</span>
                     <span>Rs. {(total + (total >= 50000 ? 0 : 250)).toLocaleString()}</span>
                   </div>

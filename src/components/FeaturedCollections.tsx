@@ -57,7 +57,7 @@ export default function FeaturedCollections() {
                 </p>
 
                 {/* Name — always visible, Playfair, weight 400 */}
-                <h3 className="font-playfair text-white font-normal text-xl mb-2 leading-tight">
+                <h3 className="font-optima text-white font-normal text-xl mb-2 leading-tight">
                   {col.name}
                 </h3>
 

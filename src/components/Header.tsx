@@ -55,7 +55,7 @@ export default function Header() {
       <div className={`fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} onClick={() => setMobileOpen(false)} />
       <div className={`fixed top-0 left-0 bottom-0 w-[80%] max-w-sm bg-[#ffffff] z-[100] shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] lg:hidden flex flex-col ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex items-center justify-between p-6 border-b border-[#5c1a25]/10">
-          <span className="font-playfair text-xl text-[#5c1a25] tracking-widest">IC</span>
+          <span className="font-optima text-xl text-[#5c1a25] tracking-widest">IC</span>
           <button onClick={() => setMobileOpen(false)} className="text-[#5c1a25] hover:text-[#5c1a25]/60">
             <X size={24} />
           </button>
@@ -66,7 +66,7 @@ export default function Header() {
               <Link
                 href={link.href}
                 className="block text-[#5c1a25] pb-2 border-b border-[#5c1a25]/10 uppercase"
-                style={{ fontFamily: "'Optima Nova LT Pro', Optima, var(--font-playfair), serif", fontSize: '14px', fontWeight: 500, letterSpacing: '0.25em' }}
+                style={{ fontFamily: "'Optima Nova LT Pro', Optima, var(--font-optima), serif", fontSize: '14px', fontWeight: 500, letterSpacing: '0.25em' }}
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
@@ -122,7 +122,7 @@ export default function Header() {
                       <Image src={p.image} alt={p.name} fill sizes="150px" className="object-cover group-hover:scale-105 transition-transform duration-700" />
                     </div>
                     <h4 className="font-optima text-[#5c1a25] text-sm uppercase tracking-wider">{p.name}</h4>
-                    <p className="font-playfair text-[#c9a96e] font-semibold mt-1">Rs. {p.price.toLocaleString()}</p>
+                    <p className="font-optima text-[#c9a96e] font-semibold mt-1">Rs. {p.price.toLocaleString()}</p>
                   </Link>
                 ))}
               </div>
@@ -200,7 +200,7 @@ export default function Header() {
                   <div
                     className="text-[#ffffff] leading-tight tracking-[0.18em] uppercase"
                     style={{
-                      fontFamily: "'Optima Nova LT Pro', Optima, var(--font-playfair), serif",
+                      fontFamily: "'Optima Nova LT Pro', Optima, var(--font-optima), serif",
                       fontSize: '12px',
                       fontWeight: 600,
                     }}
