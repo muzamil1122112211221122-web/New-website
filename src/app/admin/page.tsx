@@ -672,7 +672,76 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* ── CRAFTSMANSHIP TAB ── */}
+        
+        {tab === 'collections' && (
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 max-w-4xl">
+            <div className="mb-6">
+              <h2 className="text-2xl font-heading text-[#5c1a25]">Featured Collections (Sets)</h2>
+              <p className="text-sm text-gray-500 mt-1">Manage up to 4 featured sets shown on the home page above Best Sellers.</p>
+            </div>
+            <div className="space-y-5">
+              {featured.map((col, idx) => (
+                <div key={idx} className="flex gap-4 items-start border p-4 rounded-lg bg-gray-50 relative">
+                  <div className="w-28 h-36 bg-gray-200 rounded relative overflow-hidden flex-shrink-0 cursor-pointer">
+                    {col.image
+                      ? <Image src={col.image} alt="col" fill className="object-cover" />
+                      : <div className="flex items-center justify-center h-full text-xs text-gray-400 text-center px-2">Click to upload</div>
+                    }
+                    <input type="file" accept="image/*" className="absolute inset-0 opacity-0 cursor-pointer"
+                      onChange={(e) => {
+                        if (e.target.files?.[0]) handleImageUpload(e.target.files[0], (b64) => {
+                          const n = [...featured]; n[idx].image = b64; setFeatured(n);
+                        });
+                      }}
+                    />
+                  </div>
+                  <div className="flex-1 space-y-3">
+                    <div>
+                      <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Set Name</label>
+                      <input className="w-full border border-gray-200 p-2 rounded text-sm mt-1" placeholder="e.g. Classic Diana" value={col.name}
+                        onChange={e => { const n=[...featured]; n[idx].name=e.target.value; setFeatured(n); }} />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Description</label>
+                      <input className="w-full border border-gray-200 p-2 rounded text-sm mt-1" placeholder="Short description" value={col.desc}
+                        onChange={e => { const n=[...featured]; n[idx].desc=e.target.value; setFeatured(n); }} />
+                    </div>
+                    <div className="flex gap-3">
+                      <div className="flex-1">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Pieces</label>
+                        <input type="number" className="w-full border border-gray-200 p-2 rounded text-sm mt-1" value={col.count}
+                          onChange={e => { const n=[...featured]; n[idx].count=parseInt(e.target.value)||0; setFeatured(n); }} />
+                      </div>
+                      <div className="flex-1">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Link URL</label>
+                        <input className="w-full border border-gray-200 p-2 rounded text-sm mt-1" placeholder="/collections" value={col.href}
+                          onChange={e => { const n=[...featured]; n[idx].href=e.target.value; setFeatured(n); }} />
+                      </div>
+                    </div>
+                  </div>
+                  <button onClick={() => setFeatured(featured.filter((_, i) => i !== idx))}
+                    className="absolute top-2 right-2 text-red-400 hover:text-red-600 bg-white rounded-full p-1 shadow">
+                    <Trash2 size={15} />
+                  </button>
+                </div>
+              ))}
+              {featured.length < 4 && (
+                <button onClick={() => setFeatured([...featured, { name: 'New Set', desc: '', image: '', count: 5, href: '/collections' }])}
+                  className="w-full py-4 border-2 border-dashed border-gray-300 rounded-lg text-sm font-semibold text-gray-400 hover:text-[#5c1a25] hover:border-[#5c1a25] transition-colors">
+                  + ADD SET ({featured.length}/4)
+                </button>
+              )}
+            </div>
+            <div className="mt-6 pt-4 border-t border-gray-100">
+              <button onClick={handleSaveFeatured}
+                className="bg-[#5c1a25] text-white px-8 py-2.5 rounded font-semibold hover:bg-[#4a151e] transition-colors">
+                SAVE COLLECTIONS
+              </button>
+            </div>
+          </div>
+        )}
+
+{/* ── CRAFTSMANSHIP TAB ── */}
         {tab === 'craftsmanship' && (
           <CraftsmanshipTab handleImageUpload={handleImageUpload} />
         )}
