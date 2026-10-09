@@ -19,8 +19,13 @@ export default function HeroCanvas() {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   return (
-    <div ref={containerRef} className="relative w-full h-screen overflow-hidden bg-[#e0e0e0] animate-pulse">
+    <div ref={containerRef} className="relative w-full h-screen overflow-hidden bg-[#e0e0e0]">
       
+      {/* Skeleton Shimmer Background (only active before video loads) */}
+      {!videoLoaded && (
+        <div className="absolute inset-0 bg-[#e0e0e0] animate-pulse z-0" />
+      )}
+
       {/* Background Video */}
       <video 
         src="/upscaled-video.mp4" 
