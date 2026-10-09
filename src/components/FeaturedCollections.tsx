@@ -15,8 +15,10 @@ export default function FeaturedCollections() {
     }).catch(() => setLoaded(true));
   }, []);
 
-  // Don't render the section at all if no collections saved yet
-  if (!loaded || collections.length === 0) return null;
+  // Skeleton card — shown while loading
+  const SkeletonCard = () => (
+    <div className="relative aspect-[4/5] rounded-md overflow-hidden bg-gray-200 animate-pulse" />
+  );
 
   return (
     <section className="py-20 px-6 lg:px-10 bg-[#ffffff]">
@@ -33,7 +35,18 @@ export default function FeaturedCollections() {
 
         {/* Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-          {collections.map((col) => (
+          {!loaded ? (
+            // Skeleton placeholders while fetching
+            Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)
+          ) : collections.length === 0 ? (
+            // Empty state — 4 dimmed placeholder cards
+            Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="relative aspect-[4/5] rounded-md overflow-hidden bg-gray-100 border-2 border-dashed border-gray-200 flex items-center justify-center">
+                <p className="text-gray-300 text-xs text-center px-4">Add in<br/>Admin Panel</p>
+              </div>
+            ))
+          ) : (
+            collections.map((col) => (
             <Link
               key={col.name}
               href={col.href}
@@ -95,7 +108,8 @@ export default function FeaturedCollections() {
               <div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-[#c9a96e]/0 group-hover:border-[#c9a96e]/60 transition-all duration-500" />
               <div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-[#c9a96e]/0 group-hover:border-[#c9a96e]/60 transition-all duration-500" />
             </Link>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </section>
