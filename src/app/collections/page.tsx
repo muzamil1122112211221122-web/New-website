@@ -4,13 +4,14 @@ import { useState, useEffect, Suspense } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
-import { SlidersHorizontal, X } from 'lucide-react';
-import { useSearchParams } from 'next/navigation';
+import { SlidersHorizontal, X, ArrowLeft } from 'lucide-react';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 const categories = ['All', 'Rings', 'Necklaces', 'Earrings', 'Bangles', 'Nose Pins'];
 
 function CollectionsContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const catParam = searchParams.get('cat');
   
   const [activeCategory, setActiveCategory] = useState('All');
@@ -54,6 +55,9 @@ function CollectionsContent() {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
+          <button onClick={() => router.back()} className="flex items-center gap-2 text-[#5c1a25]/60 hover:text-[#5c1a25] transition-colors font-optima text-xs uppercase tracking-widest mb-8">
+            <ArrowLeft size={16} /> Back
+          </button>
           {/* Filters Bar */}
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8 pb-6 border-b border-[#5c1a25]/15">
             {/* Category Tabs */}

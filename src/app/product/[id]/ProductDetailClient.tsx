@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { ShoppingBag, Star, StarHalf, CheckCircle } from 'lucide-react';
+import { ShoppingBag, Star, StarHalf, CheckCircle, ArrowLeft } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useRouter } from 'next/navigation';
 
 export default function ProductDetailClient({ product }: { product: any }) {
   const { addItem } = useCart();
+  const router = useRouter();
   const [adding, setAdding] = useState(false);
   const [added, setAdded] = useState(false);
 
@@ -113,6 +115,9 @@ export default function ProductDetailClient({ product }: { product: any }) {
 
   return (
     <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
+      <button onClick={() => router.back()} className="flex items-center gap-2 text-[#5c1a25]/60 hover:text-[#5c1a25] transition-colors font-optima text-xs uppercase tracking-widest mb-8">
+        <ArrowLeft size={16} /> Back
+      </button>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
         
         {/* Left: Images */}

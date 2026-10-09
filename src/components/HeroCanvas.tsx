@@ -149,8 +149,8 @@ export default function HeroCanvas() {
 
             {/* Label */}
             <div ref={labelRef} className="flex items-center gap-3 mb-7">
-              <div className="h-px w-10 bg-[#c9a96e]" />
-              <span style={{ fontFamily: heroFont, fontSize: '9px', fontWeight: 300, letterSpacing: '0.5em', color: '#c9a96e', textTransform: 'uppercase' }}>
+              <div className="h-px w-10 bg-[#EFE9E1]" />
+              <span style={{ fontFamily: heroFont, fontSize: '9px', fontWeight: 300, letterSpacing: '0.5em', color: '#EFE9E1', textTransform: 'uppercase' }}>
                 New Collection 2026
               </span>
             </div>

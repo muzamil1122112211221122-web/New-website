@@ -176,7 +176,7 @@ export default function Header() {
         <header
           className={`transition-all duration-500 ${
             scrolled
-              ? 'bg-[#EFE9E1]/96 backdrop-blur-md shadow-[0_2px_24px_rgba(92,26,37,0.10)]'
+              ? 'bg-[#5c1a25]/95 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
               : 'bg-transparent'
           }`}
         >
@@ -185,7 +185,7 @@ export default function Header() {
 
               {/* Mobile menu */}
               <button
-                className="lg:hidden text-[#5c1a25] p-1"
+                className="lg:hidden text-[#EFE9E1] p-1"
                 onClick={() => setMobileOpen(!mobileOpen)}
                 aria-label="Toggle menu"
               >
@@ -195,11 +195,11 @@ export default function Header() {
               {/* Logo */}
               <Link href="/" className={`flex items-center gap-2.5 group transition-transform duration-500 origin-center ${scrolled ? 'scale-95' : 'scale-100'}`}>
                 <div className="relative w-9 h-9">
-                  <Image src="/logo.png" alt="IC Logo" fill className="object-contain" priority />
+                  <Image src="/logo.png" alt="IC Logo" fill className="object-contain brightness-0 invert" priority />
                 </div>
                 <div className="hidden sm:block">
                   <div
-                    className="text-[#5c1a25] leading-tight tracking-[0.18em] uppercase"
+                    className="text-[#EFE9E1] leading-tight tracking-[0.18em] uppercase"
                     style={{
                       fontFamily: "'Optima Nova LT Pro', Optima, var(--font-playfair), serif",
                       fontSize: '12px',
@@ -209,7 +209,7 @@ export default function Header() {
                     Ijaz Casting
                   </div>
                   <div
-                    className="text-[#5c1a25]/55 tracking-[0.35em] uppercase"
+                    className="text-[#EFE9E1]/70 tracking-[0.35em] uppercase"
                     style={{
                       fontFamily: "'Optima Nova LT Pro', Optima, var(--font-cormorant), serif",
                       fontSize: '8px',
@@ -233,7 +233,7 @@ export default function Header() {
                   >
                     <Link
                       href={link.href}
-                      className="flex items-center gap-1 text-[#5c1a25] hover:text-[#5c1a25]/60 transition-colors uppercase"
+                      className="flex items-center gap-1 text-[#EFE9E1] hover:text-[#c9a96e] transition-colors uppercase"
                       style={{
                         fontFamily: "'Optima Nova LT Pro', Optima, 'Gill Sans MT', Calibri, sans-serif",
                         fontSize: '11px',
@@ -275,17 +275,17 @@ export default function Header() {
 
               {/* Icons */}
               <div className="flex items-center gap-5">
-                <button onClick={() => setShowSearch(true)} className="text-[#5c1a25] hover:text-[#5c1a25]/60 transition-colors" aria-label="Search">
+                <button onClick={() => setShowSearch(true)} className="text-[#EFE9E1] hover:text-[#c9a96e] transition-colors" aria-label="Search">
                   <Search size={18} />
                 </button>
                 <button
-                  className="relative text-[#5c1a25] hover:text-[#5c1a25]/60 transition-colors"
+                  className="relative text-[#EFE9E1] hover:text-[#c9a96e] transition-colors"
                   onClick={() => setIsOpen(true)}
                   aria-label="Cart"
                 >
                   <ShoppingBag size={20} />
                   {count > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-[#5c1a25] text-[#EFE9E1] text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                    <span className="absolute -top-2 -right-2 bg-[#c9a96e] text-[#5c1a25] text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
                       {count}
                     </span>
                   )}
