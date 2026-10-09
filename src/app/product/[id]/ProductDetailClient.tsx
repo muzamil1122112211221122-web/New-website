@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ShoppingBag, Star, StarHalf, CheckCircle, ArrowLeft } from 'lucide-react';
+import { fetchWithCache } from '@/lib/fetchCache';
 import { useCart } from '@/context/CartContext';
 import { useRouter } from 'next/navigation';
 

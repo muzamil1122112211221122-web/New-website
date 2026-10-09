@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
+import { fetchWithCache } from '@/lib/fetchCache';
 import { SlidersHorizontal, X, ArrowLeft } from 'lucide-react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
@@ -26,7 +27,7 @@ function CollectionsContent() {
       if (match) setActiveCategory(match);
     }
     setLoading(true);
-    fetch('/api/products').then(res => res.json()).then(data => {
+    fetchWithCache('/api/products').then(data => {
       if (Array.isArray(data)) setProducts(data);
       setLoading(false);
     }).catch(() => setLoading(false));

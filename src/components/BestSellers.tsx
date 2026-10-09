@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { fetchWithCache } from '@/lib/fetchCache';
 import { ArrowRight } from 'lucide-react';
 import ProductCard from './ProductCard';
 
@@ -10,7 +11,7 @@ export default function BestSellers() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/products').then(r => r.json()).then(data => {
+    fetchWithCache('/api/products').then(data => {
       if (Array.isArray(data)) setProducts(data);
       setLoading(false);
     }).catch(() => setLoading(false));
