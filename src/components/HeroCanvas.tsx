@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
-const heroFont = "'Optima Nova LT Pro', 'Optima', var(--font-josefin), 'Gill Sans MT', Calibri, sans-serif";
+const headingFont = "'Argent CF', 'Optima Nova LT Pro', 'Optima', Georgia, serif";
+const bodyFont = "'Poppins', 'Gill Sans MT', sans-serif";
 
 export default function HeroCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -15,8 +16,10 @@ export default function HeroCanvas() {
 
   
 
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
   return (
-    <div ref={containerRef} className="relative w-full h-screen bg-[#1a0a0d] overflow-hidden">
+    <div ref={containerRef} className="relative w-full h-screen overflow-hidden bg-[#e0e0e0] animate-pulse">
       
       {/* Background Video */}
       <video 
@@ -25,7 +28,8 @@ export default function HeroCanvas() {
         loop 
         muted 
         playsInline 
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        onCanPlay={() => setVideoLoaded(true)}
+        className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-700 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
       />
       
       {/* Dark overlay for text readability */}
@@ -39,7 +43,7 @@ export default function HeroCanvas() {
             {/* Label */}
             <div ref={labelRef} className="flex items-center gap-3 mb-7">
               <div className="h-px w-10 bg-[#ffffff]" />
-              <span style={{ fontFamily: heroFont, fontSize: '9px', fontWeight: 300, letterSpacing: '0.5em', color: '#ffffff', textTransform: 'uppercase' }}>
+              <span style={{ fontFamily: bodyFont, fontSize: '9px', fontWeight: 300, letterSpacing: '0.5em', color: '#ffffff', textTransform: 'uppercase' }}>
                 New Collection 2026
               </span>
             </div>
@@ -48,7 +52,7 @@ export default function HeroCanvas() {
             <h1
               ref={titleRef}
               style={{
-                fontFamily: heroFont,
+                fontFamily: headingFont,
                 fontSize: 'clamp(2.6rem, 5vw, 5rem)',
                 fontWeight: 300,
                 letterSpacing: '0.05em',
@@ -65,7 +69,7 @@ export default function HeroCanvas() {
             <p
               ref={subtitleRef}
               style={{
-                fontFamily: heroFont,
+                fontFamily: bodyFont,
                 fontSize: 'clamp(0.85rem, 1.6vw, 1.05rem)',
                 fontWeight: 300,
                 letterSpacing: '0.08em',
@@ -82,14 +86,14 @@ export default function HeroCanvas() {
               <Link
                 href="/collections"
                 className="inline-flex items-center gap-3 bg-[#5c1a25] text-[#ffffff] hover:bg-[#7a2535] transition-colors rounded-md"
-                style={{ fontFamily: heroFont, fontSize: '9px', fontWeight: 400, letterSpacing: '0.35em', textTransform: 'uppercase', padding: '14px 32px', whiteSpace: 'nowrap' }}
+                style={{ fontFamily: bodyFont, fontSize: '9px', fontWeight: 400, letterSpacing: '0.35em', textTransform: 'uppercase', padding: '14px 32px', whiteSpace: 'nowrap' }}
               >
                 Shop Collection <ArrowRight size={13} />
               </Link>
               <Link
                 href="/contact"
                 className="inline-flex items-center border border-white/45 text-white hover:bg-white/10 transition-colors rounded-md"
-                style={{ fontFamily: heroFont, fontSize: '9px', fontWeight: 400, letterSpacing: '0.35em', textTransform: 'uppercase', padding: '14px 32px', whiteSpace: 'nowrap' }}
+                style={{ fontFamily: bodyFont, fontSize: '9px', fontWeight: 400, letterSpacing: '0.35em', textTransform: 'uppercase', padding: '14px 32px', whiteSpace: 'nowrap' }}
               >
                 Custom Order
               </Link>
