@@ -67,13 +67,13 @@ export default function CheckoutPage() {
         <main className="pt-28 min-h-screen flex items-center justify-center px-6">
           <div className="max-w-md w-full text-center py-16">
             <CheckCircle size={72} className="text-green-500 mx-auto mb-6" />
-            <h1 className="font-optima text-3xl font-bold text-[#5c1a25] mb-3">Order Placed!</h1>
-            <p className="font-optima text-[#5c1a25]/70 mb-2">Thank you for your order.</p>
+            <h1 className="font-heading text-3xl font-bold text-[#5c1a25] mb-3">Order Placed!</h1>
+            <p className="font-heading text-[#5c1a25]/70 mb-2">Thank you for your order.</p>
             <div className="bg-[#5c1a25] text-[#ffffff] px-6 py-3 inline-block my-4">
-              <p className="font-optima text-sm tracking-widest">Order Number</p>
-              <p className="font-optima text-2xl font-bold">{orderNumber}</p>
+              <p className="font-heading text-sm tracking-widest">Order Number</p>
+              <p className="font-heading text-2xl font-bold">{orderNumber}</p>
             </div>
-            <p className="font-optima text-[#5c1a25]/60 text-sm mb-8">
+            <p className="font-heading text-[#5c1a25]/60 text-sm mb-8">
               Our team will contact you shortly on your provided number to confirm your order.
             </p>
             <button onClick={() => router.push('/')} className="btn-primary">
@@ -93,7 +93,7 @@ export default function CheckoutPage() {
         <main className="pt-28 min-h-screen flex items-center justify-center">
           <div className="text-center">
             <ShoppingBag size={60} className="text-[#5c1a25]/20 mx-auto mb-4" />
-            <p className="font-optima text-[#5c1a25]/60 text-xl mb-4">Your cart is empty</p>
+            <p className="font-heading text-[#5c1a25]/60 text-xl mb-4">Your cart is empty</p>
             <button onClick={() => router.push('/collections')} className="btn-primary">Browse Collections</button>
           </div>
         </main>
@@ -108,19 +108,19 @@ export default function CheckoutPage() {
       <main className="pt-28 min-h-screen bg-[#ffffff]">
         {/* Banner */}
         <div className="bg-[#5c1a25] py-10 px-6 text-center">
-          <h1 className="font-optima text-[#ffffff] text-4xl font-bold">Checkout</h1>
-          <p className="font-optima text-[#ffffff]/60 mt-2 text-sm tracking-widest">Complete your order</p>
+          <h1 className="font-heading text-[#ffffff] text-4xl font-bold">Checkout</h1>
+          <p className="font-heading text-[#ffffff]/60 mt-2 text-sm tracking-widest">Complete your order</p>
         </div>
 
         <div className="max-w-6xl mx-auto px-6 lg:px-10 py-12">
           <div className="grid lg:grid-cols-5 gap-10">
             {/* Form — 3/5 */}
             <div className="lg:col-span-3">
-              <h2 className="font-optima text-2xl font-bold text-[#5c1a25] mb-6">Delivery Information</h2>
+              <h2 className="font-heading text-2xl font-bold text-[#5c1a25] mb-6">Delivery Information</h2>
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Name */}
                 <div>
-                  <label className="flex items-center gap-2 font-optima text-[#5c1a25] text-sm tracking-wide mb-1.5">
+                  <label className="flex items-center gap-2 font-heading text-[#5c1a25] text-sm tracking-wide mb-1.5">
                     <User size={14} /> Full Name *
                   </label>
                   <input
@@ -130,12 +130,12 @@ export default function CheckoutPage() {
                     value={form.customerName}
                     onChange={(e) => setForm({ ...form, customerName: e.target.value })}
                   />
-                  {errors.customerName && <p className="text-red-500 text-xs mt-1 font-optima">{errors.customerName}</p>}
+                  {errors.customerName && <p className="text-red-500 text-xs mt-1 font-heading">{errors.customerName}</p>}
                 </div>
 
                 {/* Phone */}
                 <div>
-                  <label className="flex items-center gap-2 font-optima text-[#5c1a25] text-sm tracking-wide mb-1.5">
+                  <label className="flex items-center gap-2 font-heading text-[#5c1a25] text-sm tracking-wide mb-1.5">
                     <Phone size={14} /> Phone Number *
                   </label>
                   <input
@@ -145,12 +145,12 @@ export default function CheckoutPage() {
                     value={form.customerPhone}
                     onChange={(e) => setForm({ ...form, customerPhone: e.target.value })}
                   />
-                  {errors.customerPhone && <p className="text-red-500 text-xs mt-1 font-optima">{errors.customerPhone}</p>}
+                  {errors.customerPhone && <p className="text-red-500 text-xs mt-1 font-heading">{errors.customerPhone}</p>}
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="flex items-center gap-2 font-optima text-[#5c1a25] text-sm tracking-wide mb-1.5">
+                  <label className="flex items-center gap-2 font-heading text-[#5c1a25] text-sm tracking-wide mb-1.5">
                     <Mail size={14} /> Email (Optional)
                   </label>
                   <input
@@ -164,7 +164,7 @@ export default function CheckoutPage() {
 
                 {/* Address */}
                 <div>
-                  <label className="flex items-center gap-2 font-optima text-[#5c1a25] text-sm tracking-wide mb-1.5">
+                  <label className="flex items-center gap-2 font-heading text-[#5c1a25] text-sm tracking-wide mb-1.5">
                     <MapPin size={14} /> Delivery Address *
                   </label>
                   <textarea
@@ -173,12 +173,12 @@ export default function CheckoutPage() {
                     value={form.address}
                     onChange={(e) => setForm({ ...form, address: e.target.value })}
                   />
-                  {errors.address && <p className="text-red-500 text-xs mt-1 font-optima">{errors.address}</p>}
+                  {errors.address && <p className="text-red-500 text-xs mt-1 font-heading">{errors.address}</p>}
                 </div>
 
                 {/* City */}
                 <div>
-                  <label className="flex items-center gap-2 font-optima text-[#5c1a25] text-sm tracking-wide mb-1.5">
+                  <label className="flex items-center gap-2 font-heading text-[#5c1a25] text-sm tracking-wide mb-1.5">
                     <MapPin size={14} /> City *
                   </label>
                   <input
@@ -188,12 +188,12 @@ export default function CheckoutPage() {
                     value={form.city}
                     onChange={(e) => setForm({ ...form, city: e.target.value })}
                   />
-                  {errors.city && <p className="text-red-500 text-xs mt-1 font-optima">{errors.city}</p>}
+                  {errors.city && <p className="text-red-500 text-xs mt-1 font-heading">{errors.city}</p>}
                 </div>
 
                 {/* Notes */}
                 <div>
-                  <label className="flex items-center gap-2 font-optima text-[#5c1a25] text-sm tracking-wide mb-1.5">
+                  <label className="flex items-center gap-2 font-heading text-[#5c1a25] text-sm tracking-wide mb-1.5">
                     <FileText size={14} /> Order Notes (Optional)
                   </label>
                   <textarea
@@ -217,7 +217,7 @@ export default function CheckoutPage() {
             {/* Order Summary — 2/5 */}
             <div className="lg:col-span-2">
               <div className="bg-white/50 border border-[#5c1a25]/10 p-6 sticky top-28">
-                <h2 className="font-optima text-xl font-bold text-[#5c1a25] mb-5 pb-3 border-b border-[#5c1a25]/15">
+                <h2 className="font-heading text-xl font-bold text-[#5c1a25] mb-5 pb-3 border-b border-[#5c1a25]/15">
                   Order Summary
                 </h2>
                 <div className="space-y-4 mb-5">
@@ -230,8 +230,8 @@ export default function CheckoutPage() {
                         </span>
                       </div>
                       <div className="flex-1">
-                        <p className="font-optima text-[#5c1a25] text-sm font-semibold leading-tight">{item.name}</p>
-                        <p className="font-optima text-[#5c1a25]/60 text-sm mt-0.5">
+                        <p className="font-heading text-[#5c1a25] text-sm font-semibold leading-tight">{item.name}</p>
+                        <p className="font-heading text-[#5c1a25]/60 text-sm mt-0.5">
                           {item.price === 0 ? "Get info on WhatsApp" : `Rs. ${(item.price * item.quantity).toLocaleString()}`}
                         </p>
                       </div>
@@ -239,22 +239,22 @@ export default function CheckoutPage() {
                   ))}
                 </div>
                 <div className="border-t border-[#5c1a25]/15 pt-4 space-y-2">
-                  <div className="flex justify-between font-optima text-sm text-[#5c1a25]/70">
+                  <div className="flex justify-between font-heading text-sm text-[#5c1a25]/70">
                     <span>Subtotal</span>
                     <span>Rs. {total.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between font-optima text-sm text-[#5c1a25]/70">
+                  <div className="flex justify-between font-heading text-sm text-[#5c1a25]/70">
                     <span>Delivery</span>
                     <span className="text-green-600">{total >= 50000 ? 'FREE' : 'Rs. 250'}</span>
                   </div>
                   <div className="gold-divider my-2" />
-                  <div className="flex justify-between font-optima font-bold text-[#5c1a25] text-lg">
+                  <div className="flex justify-between font-heading font-bold text-[#5c1a25] text-lg">
                     <span>Total</span>
                     <span>Rs. {(total + (total >= 50000 ? 0 : 250)).toLocaleString()}</span>
                   </div>
                 </div>
                 <div className="mt-5 p-3 bg-[#5c1a25]/5 border border-[#5c1a25]/10">
-                  <p className="font-optima text-[#5c1a25]/70 text-xs leading-relaxed">
+                  <p className="font-heading text-[#5c1a25]/70 text-xs leading-relaxed">
                     💬 Our team will call you to confirm your order before dispatch. Cash on Delivery available.
                   </p>
                 </div>

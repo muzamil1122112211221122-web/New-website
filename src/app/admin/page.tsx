@@ -88,7 +88,7 @@ function CraftsmanshipTab({ handleImageUpload }: { handleImageUpload: (file: Fil
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-optima text-[#5c1a25]">Craftsmanship Section Images</h2>
+          <h2 className="text-2xl font-heading text-[#5c1a25]">Craftsmanship Section Images</h2>
           <p className="text-sm text-gray-500 mt-1">Change the 3 photos shown in the "Art of Fine Craftsmanship" section on the homepage.</p>
         </div>
         <button onClick={handleSave} disabled={saving} className="bg-[#5c1a25] text-white px-6 py-2 rounded text-sm font-semibold disabled:opacity-50">
@@ -339,7 +339,7 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-[#ffffff] flex items-center justify-center p-6">
       <div className="bg-white max-w-md w-full p-8 rounded-xl shadow-2xl border border-[#5c1a25]/10">
         <div className="text-center mb-8">
-          <h1 className="font-optima text-3xl text-[#5c1a25] mb-2">IC Admin Panel</h1>
+          <h1 className="font-heading text-3xl text-[#5c1a25] mb-2">IC Admin Panel</h1>
           <p className="text-sm text-gray-500 tracking-widest uppercase">Secure Login</p>
         </div>
         <form onSubmit={handleLogin} className="space-y-5">
@@ -368,7 +368,7 @@ export default function AdminDashboard() {
       <div className="bg-white max-w-md w-full p-8 rounded-xl shadow-2xl border border-[#5c1a25]/10">
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4"><CheckCircle size={32} /></div>
-          <h1 className="font-optima text-2xl text-[#5c1a25] mb-2">2-Step Verification</h1>
+          <h1 className="font-heading text-2xl text-[#5c1a25] mb-2">2-Step Verification</h1>
           <p className="text-sm text-gray-500">Enter your 4-digit PIN to continue.</p>
         </div>
         <form onSubmit={handlePin} className="space-y-5">
@@ -397,7 +397,7 @@ export default function AdminDashboard() {
       {/* Sidebar */}
       <div className="w-full md:w-64 bg-[#5c1a25] text-[#ffffff] flex-shrink-0 flex flex-col shadow-xl">
         <div className="p-6 border-b border-white/10">
-          <h1 className="font-optima text-2xl tracking-widest text-[#c9a96e]">IC ADMIN</h1>
+          <h1 className="font-heading text-2xl tracking-widest text-[#c9a96e]">IC ADMIN</h1>
           <p className="text-[10px] text-white/40 tracking-widest mt-1 uppercase">Ijaz Casting & Jewellery Centre</p>
         </div>
         <div className="flex-1 py-4 flex flex-col gap-0.5">
@@ -434,7 +434,7 @@ export default function AdminDashboard() {
         {tab === 'dashboard' && (
           <div className="max-w-6xl mx-auto space-y-8">
             <div>
-              <h2 className="text-2xl font-optima text-[#5c1a25] mb-1">Business Dashboard</h2>
+              <h2 className="text-2xl font-heading text-[#5c1a25] mb-1">Business Dashboard</h2>
               <p className="text-sm text-gray-400">Real-time overview of your business</p>
             </div>
 
@@ -547,7 +547,7 @@ export default function AdminDashboard() {
         {/* ── ORDERS TAB ── */}
         {tab === 'orders' && (
           <div className="max-w-6xl mx-auto space-y-6">
-            <h2 className="text-2xl font-optima text-[#5c1a25]">Orders</h2>
+            <h2 className="text-2xl font-heading text-[#5c1a25]">Orders</h2>
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
               <table className="w-full text-left border-collapse">
                 <thead>
@@ -583,7 +583,7 @@ export default function AdminDashboard() {
           <div className="max-w-6xl mx-auto space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-optima text-[#5c1a25]">Customer Enquiries</h2>
+                <h2 className="text-2xl font-heading text-[#5c1a25]">Customer Enquiries</h2>
                 <p className="text-sm text-gray-400 mt-1">Custom order requests & messages from customers</p>
               </div>
               {unreadMsgs > 0 && <span className="bg-red-100 text-red-600 font-bold px-3 py-1 rounded-full text-sm">{unreadMsgs} Unread</span>}
@@ -626,7 +626,7 @@ export default function AdminDashboard() {
         {tab === 'products' && (
           <div className="max-w-6xl mx-auto space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-optima text-[#5c1a25]">Product Management</h2>
+              <h2 className="text-2xl font-heading text-[#5c1a25]">Product Management</h2>
               <button onClick={() => { setEditingProduct({ id: 'p-'+Date.now(), name: '', category: 'rings', price: 0, originalPrice: null, image: '', images: [], description: '', material: '21k Gold', isBestSeller: false, is_best_seller: false, rating: 5, reviews: 0 }); setShowProductModal(true); }} className="bg-[#5c1a25] text-white px-4 py-2 rounded flex items-center gap-2 text-sm">
                 <Plus size={16} /> Add Product
               </button>
@@ -658,7 +658,7 @@ export default function AdminDashboard() {
         {/* ── REVIEWS TAB ── */}
         {tab === 'reviews' && (
           <div className="max-w-6xl mx-auto space-y-6">
-            <h2 className="text-2xl font-optima text-[#5c1a25]">Customer Reviews</h2>
+            <h2 className="text-2xl font-heading text-[#5c1a25]">Customer Reviews</h2>
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
               {reviews.length === 0 ? (
                 <div className="p-8 text-center text-gray-400">No reviews yet.</div>
@@ -692,7 +692,7 @@ export default function AdminDashboard() {
           <div className="max-w-6xl mx-auto space-y-6">
             <div className="flex justify-between items-center">
               <div>
-                <h2 className="text-2xl font-optima text-[#5c1a25]">Business Ledger</h2>
+                <h2 className="text-2xl font-heading text-[#5c1a25]">Business Ledger</h2>
                 <p className="text-sm text-gray-400 mt-1">Track all income and expenses</p>
               </div>
               <button onClick={() => setShowLedgerModal(true)} className="bg-[#5c1a25] text-white px-4 py-2 rounded flex items-center gap-2 text-sm">

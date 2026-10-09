@@ -8,7 +8,7 @@ export default function ReturnPolicyPage() {
       <main className="min-h-screen bg-[#ffffff]">
         <div className="bg-[#5c1a25] pt-32 pb-14 text-center">
           <h1 className="text-[#ffffff] font-light tracking-widest" style={{ fontSize: '2.4rem' }}>Return &amp; Exchange Policy</h1>
-          <p className="text-[#ffffff]/45 mt-2 tracking-[0.35em] text-xs uppercase font-optima font-light">IC — Ijaz Casting &amp; Jewellery Centre</p>
+          <p className="text-[#ffffff]/45 mt-2 tracking-[0.35em] text-xs uppercase font-heading font-light">IC — Ijaz Casting &amp; Jewellery Centre</p>
         </div>
         <div className="max-w-3xl mx-auto px-6 py-16 space-y-8">
           {[
@@ -42,7 +42,7 @@ export default function ReturnPolicyPage() {
             },
           ].map(({ title, body }) => (
             <div key={title} className="pb-6 border-b border-[#5c1a25]/10 last:border-0">
-              <h2 className="font-optima font-normal text-[#5c1a25] tracking-wide mb-3" style={{ fontSize: '14px', letterSpacing: '0.12em' }}>
+              <h2 className="font-heading font-normal text-[#5c1a25] tracking-wide mb-3" style={{ fontSize: '14px', letterSpacing: '0.12em' }}>
                 {title}
               </h2>
               <p className="text-[#2c1810]/65 leading-relaxed" style={{ fontSize: '14px', fontWeight: 300, lineHeight: 1.9 }}>

@@ -20,6 +20,8 @@ module.exports = {
         },
       },
       fontFamily: {
+        heading: ['"Argent CF"', '"Optima Nova LT Pro"', 'Georgia', 'serif'],
+        body: ['Poppins', 'sans-serif'],
         playfair: ['var(--font-playfair)', 'serif'],
         cormorant: ['var(--font-cormorant)', 'serif'],
         optima: ['"Optima Nova LT Pro"', 'Optima', 'Gill Sans', 'Calibri', 'sans-serif'],

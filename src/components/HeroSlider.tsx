@@ -90,7 +90,7 @@ export default function HeroSlider() {
             {/* Title */}
             <h1
               key={`title-${current}`}
-              className="font-optima text-white text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-fade-in-up whitespace-pre-line"
+              className="font-heading text-white text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-fade-in-up whitespace-pre-line"
               style={{ animationDelay: '0.1s' }}
             >
               {slide.title}

@@ -50,13 +50,13 @@ function CollectionsContent() {
         <div className="bg-[#5c1a25] pt-32 pb-16 px-6 text-center relative overflow-hidden">
           <div className="absolute inset-0 opacity-5"
             style={{ backgroundImage: 'repeating-linear-gradient(45deg, #c9a96e 0, #c9a96e 1px, transparent 0, transparent 50%)', backgroundSize: '20px 20px' }} />
-          <p className="font-optima text-[#c9a96e] tracking-[0.4em] uppercase text-sm mb-3 relative">IC</p>
-          <h1 className="font-optima text-[#ffffff] text-4xl md:text-5xl font-bold relative">Our Collections</h1>
-          <p className="font-optima text-[#ffffff]/60 mt-3 text-base relative">Handcrafted excellence in every piece</p>
+          <p className="font-heading text-[#c9a96e] tracking-[0.4em] uppercase text-sm mb-3 relative">IC</p>
+          <h1 className="font-heading text-[#ffffff] text-4xl md:text-5xl font-bold relative">Our Collections</h1>
+          <p className="font-heading text-[#ffffff]/60 mt-3 text-base relative">Handcrafted excellence in every piece</p>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
-          <button onClick={() => router.back()} className="flex items-center gap-2 text-[#5c1a25]/60 hover:text-[#5c1a25] transition-colors font-optima text-xs uppercase tracking-widest mb-8">
+          <button onClick={() => router.back()} className="flex items-center gap-2 text-[#5c1a25]/60 hover:text-[#5c1a25] transition-colors font-heading text-xs uppercase tracking-widest mb-8">
             <ArrowLeft size={16} /> Back
           </button>
           {/* Filters Bar */}
@@ -67,7 +67,7 @@ function CollectionsContent() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2 font-optima text-sm tracking-widest uppercase transition-all border rounded-md ${
+                  className={`px-5 py-2 font-heading text-sm tracking-widest uppercase transition-all border rounded-md ${
                     activeCategory === cat
                       ? 'bg-[#5c1a25] text-[#ffffff] border-[#5c1a25]'
                       : 'bg-transparent text-[#5c1a25] border-[#5c1a25]/30 hover:border-[#5c1a25]'
@@ -80,7 +80,7 @@ function CollectionsContent() {
 
             {/* Sort + Count */}
             <div className="flex items-center gap-4">
-              <span className="font-optima text-[#5c1a25]/50 text-sm">{filtered.length} pieces</span>
+              <span className="font-heading text-[#5c1a25]/50 text-sm">{filtered.length} pieces</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
@@ -107,7 +107,7 @@ function CollectionsContent() {
             </div>
           ) : filtered.length === 0 ? (
             <div className="text-center py-20">
-              <p className="font-optima text-[#5c1a25]/50 text-xl">No products found in this category.</p>
+              <p className="font-heading text-[#5c1a25]/50 text-xl">No products found in this category.</p>
             </div>
           ) : (
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
@@ -125,7 +125,7 @@ function CollectionsContent() {
 
 export default function CollectionsPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#ffffff] font-optima text-[#5c1a25] tracking-widest uppercase">Loading Collections...</div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#ffffff] font-heading text-[#5c1a25] tracking-widest uppercase">Loading Collections...</div>}>
       <CollectionsContent />
     </Suspense>
   );

@@ -116,7 +116,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
 
   return (
     <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
-      <button onClick={() => router.back()} className="flex items-center gap-2 text-[#5c1a25]/60 hover:text-[#5c1a25] transition-colors font-optima text-xs uppercase tracking-widest mb-8">
+      <button onClick={() => router.back()} className="flex items-center gap-2 text-[#5c1a25]/60 hover:text-[#5c1a25] transition-colors font-heading text-xs uppercase tracking-widest mb-8">
         <ArrowLeft size={16} /> Back
       </button>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
@@ -157,10 +157,10 @@ export default function ProductDetailClient({ product }: { product: any }) {
 
         {/* Right: Info */}
         <div className="flex flex-col justify-center">
-          <p className="font-optima text-[#c9a96e] tracking-[0.3em] uppercase text-xs mb-2">
+          <p className="font-heading text-[#c9a96e] tracking-[0.3em] uppercase text-xs mb-2">
             {product.category || 'Jewellery'}
           </p>
-          <h1 className="font-optima text-3xl md:text-4xl text-[#5c1a25] font-medium mb-4">
+          <h1 className="font-heading text-3xl md:text-4xl text-[#5c1a25] font-medium mb-4">
             {product.name}
           </h1>
 
@@ -177,7 +177,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
           )}
 
           <div className="flex items-end gap-3 mb-8">
-            <span className="font-optima text-2xl text-[#5c1a25] font-semibold">
+            <span className="font-heading text-2xl text-[#5c1a25] font-semibold">
               {product.price === 0 ? "Get info on WhatsApp" : `Rs. ${product.price.toLocaleString()}`}
             </span>
             
@@ -192,7 +192,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
             onClick={handleAdd}
             disabled={adding || added}
             className="w-full bg-[#5c1a25] text-[#ffffff] py-4 flex items-center justify-center gap-2 hover:bg-[#7a2535] transition-all disabled:opacity-80 disabled:cursor-not-allowed rounded-md"
-            style={{ fontFamily: "'Optima Nova LT Pro', Optima, sans-serif", fontSize: '11px', letterSpacing: '0.2em' }}
+            style={{ fontFamily: "'Poppins', 'Gill Sans MT', sans-serif", fontSize: '11px', letterSpacing: '0.2em' }}
           >
             {added ? <CheckCircle size={18} /> : <ShoppingBag size={18} />}
             {added ? 'ADDED TO CART' : adding ? 'ADDING...' : 'ADD TO CART'}
@@ -213,12 +213,12 @@ export default function ProductDetailClient({ product }: { product: any }) {
 
       {/* Reviews Section */}
       <div className="mt-20 border-t border-[#5c1a25]/10 pt-12">
-        <h2 className="font-optima text-2xl text-[#5c1a25] mb-8">Customer Reviews</h2>
+        <h2 className="font-heading text-2xl text-[#5c1a25] mb-8">Customer Reviews</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Add Review Form (Left) */}
           <div className="lg:col-span-1 bg-white/60 p-6 border border-[#5c1a25]/10 h-fit">
-            <h3 className="font-optima text-xl text-[#5c1a25] mb-6">Write a Review</h3>
+            <h3 className="font-heading text-xl text-[#5c1a25] mb-6">Write a Review</h3>
             {reviewSubmitted ? (
               <p className="text-green-600 font-medium">Thank you for your review!</p>
             ) : (
@@ -292,7 +292,7 @@ export default function ProductDetailClient({ product }: { product: any }) {
                         return <Star key={star} size={12} className="text-[#c9a96e]/30" />;
                       })}
                     </div>
-                    <h4 className="font-optima text-lg text-[#5c1a25] font-medium">{review.name}</h4>
+                    <h4 className="font-heading text-lg text-[#5c1a25] font-medium">{review.name}</h4>
                     <p className="text-xs text-[#5c1a25]/50 mb-3">{review.city}</p>
                     <p className="font-cormorant text-[#5c1a25]/80">{review.text}</p>
                   </div>

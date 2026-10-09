@@ -34,7 +34,7 @@ export default function CartDrawer() {
         <div className="flex items-center justify-between px-6 py-5 border-b border-[#5c1a25]/15">
           <div className="flex items-center gap-3">
             <ShoppingBag className="text-[#5c1a25]" size={22} />
-            <h2 className="font-optima text-xl font-bold text-[#5c1a25]">
+            <h2 className="font-heading text-xl font-bold text-[#5c1a25]">
               Your Cart ({count})
             </h2>
           </div>
@@ -68,7 +68,7 @@ export default function CartDrawer() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-cormorant font-semibold text-[#5c1a25] text-base leading-tight mb-1">{item.name}</h3>
-                    <p className="font-optima text-[#5c1a25] text-sm font-bold">
+                    <p className="font-heading text-[#5c1a25] text-sm font-bold">
                       {item.price === 0 ? "Get info on WhatsApp" : `Rs. ${(item.price * item.quantity).toLocaleString()}`}
                     </p>
                     <div className="flex items-center gap-3 mt-2">
@@ -106,7 +106,7 @@ export default function CartDrawer() {
           <div className="border-t border-[#5c1a25]/15 px-6 py-6 space-y-4">
             <div className="flex justify-between items-center">
               <span className="font-cormorant text-lg text-[#5c1a25]">Subtotal</span>
-              <span className="font-optima font-bold text-[#5c1a25] text-xl">
+              <span className="font-heading font-bold text-[#5c1a25] text-xl">
                 Rs. {total.toLocaleString()}
               </span>
             </div>

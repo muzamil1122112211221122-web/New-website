@@ -91,7 +91,7 @@ export default function LoadingScreen() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
               style={{
-                fontFamily: "'Poppins', 'Gill Sans MT', sans-serif"Gill Sans MT', Calibri, sans-serif",
+                fontFamily: "'Poppins', 'Gill Sans MT', sans-serif",
                 fontSize: '10px',
                 letterSpacing: '0.55em',
                 color: '#5c1a25',
@@ -108,7 +108,7 @@ export default function LoadingScreen() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
               style={{
-                fontFamily: "'Poppins', 'Gill Sans MT', sans-serif"Gill Sans MT', Calibri, sans-serif",
+                fontFamily: "'Poppins', 'Gill Sans MT', sans-serif",
                 fontSize: '8px',
                 letterSpacing: '0.35em',
                 color: '#c9a96e',

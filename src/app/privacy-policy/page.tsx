@@ -7,10 +7,10 @@ export default function PrivacyPolicyPage() {
       <Header />
       <main className="min-h-screen bg-[#ffffff]">
         <div className="bg-[#5c1a25] pt-32 pb-14 text-center">
-          <h1 className="font-optima text-[#ffffff] font-normal tracking-widest" style={{ fontSize: '2.4rem' }}>
+          <h1 className="font-heading text-[#ffffff] font-normal tracking-widest" style={{ fontSize: '2.4rem' }}>
             Privacy Policy
           </h1>
-          <p className="font-optima text-[#ffffff]/45 mt-2 tracking-[0.35em] text-xs uppercase">
+          <p className="font-heading text-[#ffffff]/45 mt-2 tracking-[0.35em] text-xs uppercase">
             IC — Ijaz Casting &amp; Jewellery Centre
           </p>
         </div>
@@ -50,7 +50,7 @@ export default function PrivacyPolicyPage() {
             },
           ].map(({ title, body }) => (
             <div key={title} className="pb-6 border-b border-[#5c1a25]/10 last:border-0">
-              <h2 className="font-optima font-normal text-[#5c1a25] tracking-wide mb-3" style={{ fontSize: '1rem' }}>
+              <h2 className="font-heading font-normal text-[#5c1a25] tracking-wide mb-3" style={{ fontSize: '1rem' }}>
                 {title}
               </h2>
               <p className="font-cormorant text-[#2c1810]/65 leading-relaxed" style={{ fontSize: '1rem', fontWeight: 300 }}>

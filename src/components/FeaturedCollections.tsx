@@ -19,7 +19,7 @@ export default function FeaturedCollections() {
 
         {/* Heading */}
         <div className="text-center mb-14">
-          <p className="font-optima text-[#c9a96e] tracking-[0.4em] uppercase text-xs mb-3 font-light">
+          <p className="font-heading text-[#c9a96e] tracking-[0.4em] uppercase text-xs mb-3 font-light">
             Explore Our World
           </p>
           <h2 className="section-heading mb-4">Featured Collections</h2>
@@ -52,12 +52,12 @@ export default function FeaturedCollections() {
               <div className="absolute bottom-0 left-0 right-0 p-5">
 
                 {/* Count — always visible */}
-                <p className="font-optima text-[#c9a96e] text-[8px] tracking-[0.4em] uppercase mb-1.5 font-light">
+                <p className="font-heading text-[#c9a96e] text-[8px] tracking-[0.4em] uppercase mb-1.5 font-light">
                   {col.count}+ pieces
                 </p>
 
                 {/* Name — always visible, Playfair, weight 400 */}
-                <h3 className="font-optima text-white font-normal text-xl mb-2 leading-tight">
+                <h3 className="font-heading text-white font-normal text-xl mb-2 leading-tight">
                   {col.name}
                 </h3>
 
@@ -68,7 +68,7 @@ export default function FeaturedCollections() {
 
                 {/* CTA — on hover only */}
                 <div className="flex items-center gap-2 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out delay-[50ms]">
-                  <span className="font-optima text-[#c9a96e] text-[9px] tracking-[0.3em] uppercase font-normal">
+                  <span className="font-heading text-[#c9a96e] text-[9px] tracking-[0.3em] uppercase font-normal">
                     Shop Now
                   </span>
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" strokeWidth="1.5">

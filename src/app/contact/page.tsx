@@ -34,7 +34,7 @@ export default function ContactPage() {
       <main className="min-h-screen bg-[#ffffff]">
         {/* Hero */}
         <div className="bg-[#5c1a25] pt-32 pb-16 text-center">
-          <p className="font-optima text-[#c9a96e] tracking-[0.4em] uppercase text-xs mb-3 font-light">Get In Touch</p>
+          <p className="font-heading text-[#c9a96e] tracking-[0.4em] uppercase text-xs mb-3 font-light">Get In Touch</p>
           <h1 className="text-[#ffffff] font-light tracking-widest" style={{ fontSize: '2.4rem' }}>Contact Us</h1>
         </div>
 
@@ -43,7 +43,7 @@ export default function ContactPage() {
 
             {/* Info */}
             <div>
-              <p className="font-optima text-[#c9a96e] tracking-[0.35em] uppercase text-xs mb-3 font-light">Our Details</p>
+              <p className="font-heading text-[#c9a96e] tracking-[0.35em] uppercase text-xs mb-3 font-light">Our Details</p>
               <h2 className="section-heading mb-6">We&apos;d Love to Hear<br />From You</h2>
               <div className="gold-divider mb-10" />
 
@@ -54,7 +54,7 @@ export default function ContactPage() {
                     <MapPin size={16} className="text-[#c9a96e]" />
                   </div>
                   <div>
-                    <h3 className="font-optima font-normal text-[#5c1a25] text-xs uppercase tracking-[0.25em] mb-1.5">Visit Us</h3>
+                    <h3 className="font-heading font-normal text-[#5c1a25] text-xs uppercase tracking-[0.25em] mb-1.5">Visit Us</h3>
                     <p className="text-[#5c1a25]/65 leading-relaxed" style={{ fontSize: '14px', fontWeight: 300 }}>
                       Amin Bazar, 4 Block<br />
                       Watch Market<br />
@@ -69,7 +69,7 @@ export default function ContactPage() {
                     <Phone size={16} className="text-[#c9a96e]" />
                   </div>
                   <div>
-                    <h3 className="font-optima font-normal text-[#5c1a25] text-xs uppercase tracking-[0.25em] mb-1.5">Call / WhatsApp</h3>
+                    <h3 className="font-heading font-normal text-[#5c1a25] text-xs uppercase tracking-[0.25em] mb-1.5">Call / WhatsApp</h3>
                     <div className="space-y-1">
                       <a href="https://wa.me/923216004630" className="block text-[#5c1a25]/65 hover:text-[#5c1a25] transition-colors" style={{ fontSize: '14px', fontWeight: 300 }}>
                         03216004630
@@ -87,7 +87,7 @@ export default function ContactPage() {
                     <Clock size={16} className="text-[#c9a96e]" />
                   </div>
                   <div>
-                    <h3 className="font-optima font-normal text-[#5c1a25] text-xs uppercase tracking-[0.25em] mb-1.5">Working Hours</h3>
+                    <h3 className="font-heading font-normal text-[#5c1a25] text-xs uppercase tracking-[0.25em] mb-1.5">Working Hours</h3>
                     <p className="text-[#5c1a25]/65 leading-relaxed" style={{ fontSize: '14px', fontWeight: 300 }}>
                       Monday – Saturday: 10 AM – 8 PM<br />
                       Sunday: 12 PM – 6 PM
@@ -127,23 +127,23 @@ export default function ContactPage() {
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="font-optima text-[#5c1a25] text-xs tracking-[0.22em] uppercase mb-1.5 block font-normal">Name *</label>
+                        <label className="font-heading text-[#5c1a25] text-xs tracking-[0.22em] uppercase mb-1.5 block font-normal">Name *</label>
                         <input type="text" required className="form-input" placeholder="Your name"
                           value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
                       </div>
                       <div>
-                        <label className="font-optima text-[#5c1a25] text-xs tracking-[0.22em] uppercase mb-1.5 block font-normal">Phone *</label>
+                        <label className="font-heading text-[#5c1a25] text-xs tracking-[0.22em] uppercase mb-1.5 block font-normal">Phone *</label>
                         <input type="tel" required className="form-input" placeholder="03XX-XXXXXXX"
                           value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
                       </div>
                     </div>
                     <div>
-                      <label className="font-optima text-[#5c1a25] text-xs tracking-[0.22em] uppercase mb-1.5 block font-normal">Subject</label>
+                      <label className="font-heading text-[#5c1a25] text-xs tracking-[0.22em] uppercase mb-1.5 block font-normal">Subject</label>
                       <input type="text" className="form-input" placeholder="e.g. Custom Ring Inquiry"
                         value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} />
                     </div>
                     <div>
-                      <label className="font-optima text-[#5c1a25] text-xs tracking-[0.22em] uppercase mb-1.5 block font-normal">Message *</label>
+                      <label className="font-heading text-[#5c1a25] text-xs tracking-[0.22em] uppercase mb-1.5 block font-normal">Message *</label>
                       <textarea required className="form-input resize-none h-32" placeholder="Your message..."
                         value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
                     </div>
