@@ -2,6 +2,15 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-server';
 
+// Simple UUID v4 generator (no external dependency)
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
 export async function GET() {
   const { data, error } = await supabaseAdmin
     .from('featured_collections')
@@ -31,18 +40,15 @@ export async function POST(req: NextRequest) {
   }
 
   if (collections.length > 0) {
-    const rows = collections.map((c: any, i: number) => {
-      const payload: any = {
-        name: c.name || '',
-        desc: c.desc || '',
-        image: c.image || '',
-        count: String(c.count ?? '0'),
-        href: c.href || '/collections',
-        sort_order: i,
-      };
-      // Don't include id — let Supabase generate UUID
-      return payload;
-    });
+    const rows = collections.map((c: any, i: number) => ({
+      id: uuidv4(),           // Always generate a fresh UUID
+      name: c.name || '',
+      desc: c.desc || '',
+      image: c.image || '',
+      count: String(c.count ?? '0'),
+      href: c.href || '/collections',
+      sort_order: i,
+    }));
 
     const { error: insertError } = await supabaseAdmin
       .from('featured_collections')
