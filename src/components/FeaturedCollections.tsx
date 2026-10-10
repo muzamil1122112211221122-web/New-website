@@ -50,63 +50,61 @@ export default function FeaturedCollections() {
             <Link
               key={col.name}
               href={col.href}
-              className="group relative aspect-[4/5] rounded-md overflow-hidden block"
+              className="group flex flex-col block"
             >
-              {/* Image — use plain img for base64 data URIs, next/image for URLs */}
-              {col.image.startsWith('data:') ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={col.image}
-                  alt={col.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-              ) : (
-                <Image
-                  src={col.image}
-                  alt={col.name}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-              )}
+              {/* Image Container */}
+              <div className="relative aspect-[4/5] rounded-md overflow-hidden mb-4">
+                {col.image.startsWith('data:') ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={col.image}
+                    alt={col.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                ) : (
+                  <Image
+                    src={col.image}
+                    alt={col.name}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                )}
+                
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Base overlay — subtle, always */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              {/* Hover overlay — deeper maroon tint */}
-              <div className="absolute inset-0 bg-[#5c1a25]/0 group-hover:bg-[#5c1a25]/40 transition-all duration-500" />
+                {/* Hover content */}
+                <div className="absolute inset-0 p-6 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-all duration-400 ease-out">
+                  <div className="overflow-y-auto scrollbar-thin text-white/90 text-sm leading-relaxed" style={{ fontWeight: 300, maxHeight: '80%' }}>
+                    {col.desc}
+                  </div>
+                  
+                  {/* CTA */}
+                  <div className="flex items-center justify-center gap-2 mt-4">
+                    <span className="font-heading text-[#c9a96e] text-[9px] tracking-[0.3em] uppercase font-normal">
+                      Shop Now
+                    </span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" strokeWidth="1.5">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </div>
+                </div>
 
-              {/* Bottom content */}
-              <div className="absolute bottom-0 left-0 right-0 p-5 flex flex-col items-center text-center">
+                {/* Corner accents */}
+                <div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-[#c9a96e]/0 group-hover:border-[#c9a96e]/60 transition-all duration-500 pointer-events-none" />
+                <div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-[#c9a96e]/0 group-hover:border-[#c9a96e]/60 transition-all duration-500 pointer-events-none" />
+              </div>
 
-                {/* Count — always visible */}
+              {/* Text Below */}
+              <div className="text-center mt-2 flex-1 flex flex-col justify-center">
                 <p className="font-heading text-[#c9a96e] text-[10px] tracking-[0.4em] uppercase mb-1.5 font-light">
                   {col.count}+ pieces
                 </p>
-
-                {/* Name — always visible, Playfair, weight 400 */}
-                <h3 className="font-heading text-white font-normal text-2xl mb-2 leading-tight">
+                <h3 className="font-heading text-[#5c1a25] font-normal text-xl lg:text-2xl leading-tight">
                   {col.name}
                 </h3>
-
-                {/* Description — on hover only */}
-                <p className="font-body text-white/70 text-sm leading-relaxed mb-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out" style={{ fontWeight: 300 }}>
-                  {col.desc}
-                </p>
-
-                {/* CTA — on hover only */}
-                <div className="flex items-center justify-center gap-2 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out delay-[50ms]">
-                  <span className="font-heading text-[#c9a96e] text-[9px] tracking-[0.3em] uppercase font-normal">
-                    Shop Now
-                  </span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" strokeWidth="1.5">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
-                </div>
               </div>
-
-              {/* Corner accents on hover */}
-              <div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-[#c9a96e]/0 group-hover:border-[#c9a96e]/60 transition-all duration-500" />
-              <div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-[#c9a96e]/0 group-hover:border-[#c9a96e]/60 transition-all duration-500" />
             </Link>
             ))
           )}
