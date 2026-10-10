@@ -181,7 +181,10 @@ export default function AdminDashboard() {
       ]);
       if (resO) setOrders((await resO.json()).orders || []);
       if (resP) setProducts(await resP.json());
-      if (resF) setFeatured(await resF.json());
+      if (resF && resF.ok) {
+          const fdata = await resF.json();
+          if (Array.isArray(fdata)) setFeatured(fdata.map((c) => ({ ...c, count: Number(c.count) || 0 })));
+        }
       if (resR) setReviews(await resR.json());
       if (resCO && resCO.ok) setCustomOrders(await resCO.json());
       if (resL && resL.ok) setLedger(await resL.json());
@@ -304,8 +307,18 @@ export default function AdminDashboard() {
   };
 
   const handleSaveFeatured = async () => {
-    await fetch('/api/featured', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(featured) });
-    alert('Featured Collections Saved!');
+    try {
+      const res = await fetch('/api/featured', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(featured.map(c => ({ ...c, count: String(c.count) }))),
+      });
+      const result = await res.json();
+      if (!res.ok) { alert('Save failed: ' + (result.error || 'Unknown error')); return; }
+      alert('Collections saved successfully!');
+    } catch (e) {
+      alert('Network error saving collections');
+    }
   };
 
   const handleImageUpload = (file: File, callback: (b64: string) => void) => {
