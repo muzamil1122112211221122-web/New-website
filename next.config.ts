@@ -9,7 +9,11 @@ const nextConfig: NextConfig = {
     unoptimized: false,
   },
   devIndicators: false,
-  experimental: {},
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '20mb',
+    },
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

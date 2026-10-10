@@ -1,4 +1,5 @@
 export const dynamic = 'force-dynamic';
+export const config = { api: { bodyParser: { sizeLimit: '20mb' } } };
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-server';
 

@@ -322,9 +322,22 @@ export default function AdminDashboard() {
   };
 
   const handleImageUpload = (file: File, callback: (b64: string) => void) => {
-    const reader = new FileReader();
-    reader.onload = (e) => callback(e.target?.result as string);
-    reader.readAsDataURL(file);
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d')!;
+    const img = new window.Image();
+    img.onload = () => {
+      const MAX = 800;
+      let { width, height } = img;
+      if (width > MAX || height > MAX) {
+        if (width > height) { height = Math.round(height * MAX / width); width = MAX; }
+        else { width = Math.round(width * MAX / height); height = MAX; }
+      }
+      canvas.width = width;
+      canvas.height = height;
+      ctx.drawImage(img, 0, 0, width, height);
+      callback(canvas.toDataURL('image/jpeg', 0.7));
+    };
+    img.src = URL.createObjectURL(file);
   };
 
   const handleDeleteReview = async (id: string) => {
